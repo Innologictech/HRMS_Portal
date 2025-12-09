@@ -1,0 +1,263 @@
+<div class="attendance-page">
+
+  <!-- ===== Attendance Stats ===== -->
+  <div class="section-header">
+    <div class="title-group">
+      <h2>Attendance Stats</h2>
+      <span class="info-icon">i</span>
+    </div>  
+  </div>
+
+  <div class="stats-row"> 
+    <div class="stats-card">
+      <div class="card-header">Me</div>
+      <p class="value">{{ meStats.avg }}</p>
+      <p class="label">{{ meStats.avgLabel }}</p>
+      <p class="value-small">{{ meStats.arrival }}</p>
+      <p class="label">{{ meStats.arrivalLabel  }}</p>
+
+      <!-- mini graph line -->
+      <div class="mini-graph">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="stats-card">
+      <div class="card-header">My Team</div>
+      <p class="value">{{ teamStats.avg }}</p>
+      <p class="label">{{ teamStats.avgLabel }}</p>
+      <p class="value-small">{{ teamStats.arrival }}</p>
+      <p class="label">{{ teamStats.arrivalLabel }}</p>
+
+      <div class="mini-graph">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Timings & Actions ===== -->
+  <div class="middle-row">
+
+    <!-- Timings -->
+    <div class="timing-card">
+      <div class="title-group">
+        <h3>Timings</h3>
+        <span class="info-icon">i</span>
+      </div>
+
+      <div class="week-days">
+        <button
+          *ngFor="let d of weekDays; let i = index"
+          class="day-pill"
+          [class.active]="i === activeWeekIndex">
+          {{ d }}
+        </button>
+      </div>
+
+      <div class="today">
+        <p class="today-label">{{ todayTiming }}</p>
+        <div class="bar">
+          <div class="progress"></div>
+        </div>
+        <p class="duration">{{ duration }}</p>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="action-card">
+      <div class="title-group">
+        <h3>Actions</h3>
+        <span class="info-icon">i</span>
+      </div>
+
+      <p class="action-time">{{ clockTime }}</p>
+      <p class="last-login">{{ lastLogin }}</p>
+
+      <div class="action-links">
+        <a href="javascript:void(0)">Partial Day Request</a>
+        <a href="javascript:void(0)">Attendance Policy</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== Logs & Requests ===== -->
+  <div class="logs-card">
+    <div class="section-header logs-header">
+      <div class="title-group">
+        <h2>Logs & Requests</h2>
+        <span class="info-icon">i</span>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="log-tabs">
+      <button
+        [class.active]="activeLogTab === 'log'"
+        (click)="setActiveTab('log')">
+        Attendance Log
+      </button>
+      <button
+        [class.active]="activeLogTab === 'calendar'"
+        (click)="setActiveTab('calendar')">
+        Calendar
+      </button>
+      <button
+        [class.active]="activeLogTab === 'requests'"
+        (click)="setActiveTab('requests')">
+        Attendance Requests
+      </button>
+    </div>
+
+    <!-- TAB: Attendance Log (placeholder) -->
+    <div *ngIf="activeLogTab === 'log'" class="placeholder">
+      Attendance log view will come here.
+    </div>
+
+    <!-- TAB: Calendar -->
+    <div *ngIf="activeLogTab === 'calendar'" class="calendar-wrapper">
+      <div class="calendar-header">
+        <div class="month-label">{{ calendarMonthName }} {{ calendarYear }}</div>
+      </div>
+
+      <table class="calendar">
+        <thead>
+          <tr>
+            <th>Sun</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let week of calendarWeeks">
+            <td *ngFor="let day of week"
+                [class.today]="day.isToday"
+                [class.outside]="!day.isCurrentMonth">
+              <span *ngIf="day.date">{{ day.date }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TAB: Attendance Requests (table) -->
+    <div *ngIf="activeLogTab === 'requests'">
+
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Note</th>
+            <th>Status</th>
+            <th>Last Action By</th>
+            <th>Next Approver</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of pagedRequests">
+            <td>{{ item.date }}</td>
+            <td>{{ item.note }}</td>
+            <td class="status" [class.pending]="item.status === 'Pending'">
+              {{ item.status }}
+            </td>
+            <td>{{ item.actionBy }}</td>
+            <td>{{ item.next }}</td>
+            <td><button class="action-btn">⋮</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination bottom right -->
+      <div class="pagination">
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">
+          ‹
+        </button>
+        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">
+          ›
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== Partial Day ===== -->
+  <div class="partial-card">
+    <div class="partial-header">
+      <h3>Partial Day Requests</h3>
+      <span class="info-icon">i</span>
+    </div>
+    <div class="empty-row">
+      No Partial Day Requests Available.
+    </div>
+  </div>
+
+  <div class="text-end mb-3">
+  <button class="btn btn-primary-custom" (click)="openRequest()">
+    Request Leave
+  </button>
+</div>
+<!-- Request Leave Drawer -->
+<div class="drawer-overlay" *ngIf="showRequest" (click)="closeRequest()"></div>
+
+<div class="drawer" [class.open]="showRequest">
+  <div class="drawer-header">
+    <h5>Request Leave</h5>
+    <button class="close-btn" (click)="closeRequest()">&times;</button>
+  </div>
+
+  <div class="drawer-body">
+    <!-- Date range -->
+    <div class="d-flex justify-content-between gap-2 mb-4">
+      <div class="date-box">
+        <label>From</label>
+        <input type="date" [(ngModel)]="leave.from">
+      </div>
+
+      <div class="date-days">{{ leave.days }} days</div>
+
+      <div class="date-box">
+        <label>To</label>
+        <input type="date" [(ngModel)]="leave.to">
+      </div>
+    </div>
+
+    <!-- Type of Leave -->
+    <label class="fw-semibold">Select type of leave you want to apply</label>
+    <select class="form-select mb-3" [(ngModel)]="leave.type">
+      <option value="">Select</option>
+      <option value="CL">Casual Leave</option>
+      <option value="EL">Earned Leave</option>
+      <option value="SL">Sick Leave</option>
+    </select>
+
+    <!-- Note -->
+    <label class="fw-semibold">Note</label>
+    <textarea class="form-control mb-3" rows="3"
+              placeholder="Type here"
+              [(ngModel)]="leave.note"></textarea>
+
+    <!-- Notify -->
+    <label class="fw-semibold">Notify</label>
+    <input type="text" class="form-control"
+           placeholder="Search employee"
+           [(ngModel)]="leave.notify">
+
+  </div>
+
+  <div class="drawer-footer">
+    <button class="btn btn-light" (click)="closeRequest()">Cancel</button>
+    <button class="btn btn-primary-custom" (click)="submitRequest()">Request</button>
+  </div>
+</div>
+
+
+
+</div>
+ 
