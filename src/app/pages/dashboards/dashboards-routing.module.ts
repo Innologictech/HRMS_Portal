@@ -35,6 +35,7 @@ const routes: Routes = [
     path: 'up-coming-events',
     component: UpComingEventsComponent
   }
+  
 
 
 ];

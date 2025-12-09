@@ -9,6 +9,7 @@ export const MENU: MenuItem[] = [
         isTitle: true
     },
 
+
     // ========== DASHBOARD (ONLY ACTIVE) ==========
     {
         id: 2,
@@ -50,10 +51,30 @@ export const MENU: MenuItem[] = [
                 label: 'upComingEvents',
                 link: '/up-coming-events',
                 parentId: 2
-            }
-
+            },
+            
         ]
+
+        // ========== ME ==========
+
+
     },
+
+
+    // ========== ME ==========
+{
+  id: 9,
+  label: 'Me',
+  icon: 'ph-user',
+  subItems: [
+    { id: 10, label: 'Attendance', link: '/me/attendance', parentId: 9 },
+    { id: 11, label: 'Leave', link: '/me/leave', parentId: 9 },
+    { id: 12, label: 'Performance', link: '/me/performance', parentId: 9 },
+    { id: 13, label: 'Expenses', link: '/me/expenses', parentId: 9 },
+    { id: 14, label: 'Apps', link: '/me/apps', parentId: 9 }
+  ]
+}
+
 
     // ============================================================
     //                ALL BELOW MENUS COMMENTED

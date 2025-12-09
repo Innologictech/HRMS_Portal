@@ -129,7 +129,7 @@ export class SidebarComponent {
         event.target.nextElementSibling.classList.toggle("show");
       }
     }
-  };
+  }; 
 
   // Click wise Parent active class add
   toggleParentItem(event: any, item: any) {
