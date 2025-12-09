@@ -37,14 +37,14 @@ import { CrmComponent } from './crm/crm.component';
 import { IndexComponent } from './index/index.component';
 import { LearningComponent } from './learning/learning.component';
 import { RealEstateComponent } from './real-estate/real-estate.component';
-
 @NgModule({
   declarations: [
     AnalyticsComponent,
     CrmComponent,
     IndexComponent,
     LearningComponent,
-    RealEstateComponent
+    RealEstateComponent,
+  
   ],
   imports: [
     CommonModule,

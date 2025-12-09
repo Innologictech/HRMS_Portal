@@ -1,0 +1,389 @@
+<div class="container mt-3">
+
+    <!-- Top Tabs -->
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'salary'" (click)="activeTab = 'salary'">
+                My Salary
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'payslips'" (click)="activeTab = 'payslips'">
+                Pay Slips
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'income'" (click)="activeTab = 'income'">
+                Income Tax
+            </a>
+        </li>
+    </ul>
+
+
+
+
+    <!--      MY SALARY TAB       -->
+    <div *ngIf="activeTab === 'salary'">
+
+        <!-- Top Cards Row -->
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="card p-3 shadow-sm h-100">
+                    <h6 class="text-muted mb-1">CURRENT COMPENSATION</h6>
+                    <h6>INR 6,00,000 / Annum</h6>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card p-3 shadow-sm h-100">
+                    <h6 class="text-muted mb-1">Payroll</h6>
+                    <h6>Monthly</h6>
+                </div>
+            </div>
+        </div>
+
+        <h6 class="mt-4">Salary Timeline</h6>
+
+        <!-- Yellow Alert -->
+        <div class="alert alert-warning mt-2">
+            Your Income and tax liability is being computed as per Old Tax Regime.
+            <a href="#">Click Here</a>.
+        </div>
+
+        <!-- Salary Revision Card 1 -->
+        <div class="card shadow-sm p-3 mt-3">
+            <div class="d-flex align-items-center mb-2">
+                <span class="me-2 bg-light border rounded-circle d-flex justify-content-center 
+                      align-items-center" style="width:32px;height:32px;">🔵</span>
+                <div>Salary Revision</div>
+                <div class="text-muted ms-2 small">Effective Aug 01, 2025</div>
+                <span class="badge bg-info text-dark ms-2">CURRENT</span>
+            </div>
+
+            <div class="row mt-3 small">
+                <div class="col-md-2 text-muted">REGULAR SALARY</div>
+                <div class="col-md-4">INR 6,00,000</div>
+
+                <div class="col-md-2 text-muted">TOTAL</div>
+                <div class="col-md-4">INR 6,00,000</div>
+            </div>
+        </div>
+
+        <!-- Salary Revision Card 2 -->
+        <div class="card shadow-sm p-3 mt-3 mb-5">
+            <div class="d-flex align-items-center mb-2">
+                <span class="me-2 bg-light border rounded-circle d-flex justify-content-center 
+                      align-items-center" style="width:32px;height:32px;">🔵</span>
+                <div>Salary Revision</div>
+                <div class="text-muted ms-2 small">Effective Jan 16, 2025</div>
+            </div>
+
+            <div class="row mt-3 small">
+                <div class="col-md-2 text-muted">REGULAR SALARY</div>
+                <div class="col-md-4">INR 5,50,000</div>
+
+                <div class="col-md-2 text-muted">TOTAL</div>
+                <div class="col-md-4">INR 5,50,000</div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <!--      PAYSLIPS TAB        -->
+    <div *ngIf="activeTab === 'payslips'">
+
+        <h5 class="d-flex align-items-center gap-2">
+            Pay Slips
+            <button class="btn btn-light border rounded-circle p-1">
+                <i class="bi bi-download"></i>
+            </button>
+        </h5>
+
+        <p class="text-muted small">Here you can manage all generated payslips for applicable years.</p>
+
+        <select class="form-select w-25 mb-3">
+            <option>Year 2025</option>
+        </select>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="list-group small">
+                    <a class="list-group-item list-group-item-action active">October 2025</a>
+                    <a class="list-group-item list-group-item-action">September 2025</a>
+                    <a class="list-group-item list-group-item-action">August 2025</a>
+                    <a class="list-group-item list-group-item-action">July 2025</a>
+                    <a class="list-group-item list-group-item-action">June 2025</a>
+                    <a class="list-group-item list-group-item-action">April 2025</a>
+                    <a class="list-group-item list-group-item-action">March 2025</a>
+                    <a class="list-group-item list-group-item-action">February 2025</a>
+                    <a class="list-group-item list-group-item-action">January 2025</a>
+                </div>
+            </div>
+
+            <div class="col-md-9 d-flex flex-column justify-content-center align-items-center 
+                        text-center border rounded p-5">
+                <img src="https://cdn-icons-png.flaticon.com/512/4522/4522344.png" width="80" class="opacity-50 mb-3" />
+                <h6 class="text-secondary">Payslip not released yet</h6>
+                <p class="text-muted small">Reach out to your admin for your payslip</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <!--     INCOME TAX TAB       -->
+    <div *ngIf="activeTab === 'income'">
+
+        <h5 class="fw-semibold">Income Tax</h5>
+
+        <div class="mt-4">
+
+            <h5 class="fw-semibold">
+                Income Tax Computation <i class="bi bi-download ms-2"></i>
+            </h5>
+
+            <p class="text-muted small">
+                View complete breakup of payments, deductions and declarations.
+            </p>
+
+            <div class="alert alert-warning small">
+                <strong>Important!</strong>
+                <ul class="mb-0">
+                    <li>Income tax calculation considers DECLARED amounts.</li>
+                    <li>Your Income and tax liability is computed as per <b>Old Tax Regime</b>.</li>
+                </ul>
+            </div>
+
+            <!-- SUMMARY -->
+            <div class="row text-center mb-4 small g-3 summary-box">
+                <div class="col-6 col-md-2">
+                    <p class="text-muted mb-0">NET TAXABLE INCOME</p>
+                    <p class="fw-semibold">₹ 4,85,300</p>
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <p class="text-muted mb-0">GROSS INCOME TAX</p>
+                    <p class="fw-semibold">₹ 0</p>
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <p class="text-muted mb-0">TOTAL SURCHARGE & CESS</p>
+                    <p class="fw-semibold">₹ 0</p>
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <p class="text-muted mb-0">NET TAX PAYABLE</p>
+                    <p class="fw-semibold">₹ 0</p>
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <p class="text-muted mb-0">TAX PAID TILL NOW</p>
+                    <p class="fw-semibold">₹ 0</p>
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <p class="text-muted mb-0">REMAINING TAX</p>
+                    <p class="fw-semibold">₹ 0</p>
+                </div>
+            </div>
+
+            <!-- WRAPPER CARD -->
+            <div class="card shadow-sm p-0">
+
+                <div class="card-header bg-white px-3 pt-3 pb-1">
+                    <h6 class="fw-semibold mb-0">A. Gross Earnings from Employment</h6>
+                </div>
+
+                <div class="px-3 pb-3">
+
+                    <!-- TABLE 1 -->
+                    <div class="table-responsive-custom mb-4">
+                        <table class="table table-bordered table-sm small">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>SALARY BREAKUP</th>
+                                    <th>Total</th>
+                                    <th>Apr 25</th>
+                                    <th>Jun 25</th>
+                                    <th>Jul 25</th>
+                                    <th>Aug 25</th>
+                                    <th>Sep 25</th>
+                                    <th>Oct 25</th>
+                                    <th>Nov 25</th>
+                                    <th>Dec 25</th>
+                                    <th>Jan 26</th>
+                                    <th>Feb 26</th>
+                                    <th>Mar 26</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Basic</td>
+                                    <td>1,57,500</td>
+                                    <td>13,750</td>
+                                    <td>13,750</td>
+                                    <td>13,750</td>
+                                    <td>13,750</td>
+                                    <td>13,750</td>
+                                    <td>13,750</td>
+                                    <td>15,000</td>
+                                    <td>15,000</td>
+                                    <td>15,000</td>
+                                    <td>15,000</td>
+                                    <td>15,000</td>
+                                </tr>
+
+                                <tr>
+                                    <td>HRA</td>
+                                    <td>63,000</td>
+                                    <td>5,500</td>
+                                    <td>5,500</td>
+                                    <td>5,500</td>
+                                    <td>5,500</td>
+                                    <td>5,500</td>
+                                    <td>5,500</td>
+                                    <td>6,000</td>
+                                    <td>6,000</td>
+                                    <td>6,000</td>
+                                    <td>6,000</td>
+                                    <td>6,000</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Special Allowance</td>
+                                    <td>3,04,500</td>
+                                    <td>26,583</td>
+                                    <td>26,583</td>
+                                    <td>26,583</td>
+                                    <td>26,583</td>
+                                    <td>26,583</td>
+                                    <td>26,583</td>
+                                    <td>29,000</td>
+                                    <td>29,000</td>
+                                    <td>29,000</td>
+                                    <td>29,000</td>
+                                    <td>29,000</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Arrears</td>
+                                    <td>12,500</td>
+                                    <td colspan="6"></td>
+                                    <td>12,500</td>
+                                    <td colspan="4"></td>
+                                </tr>
+
+                                <tr class="fw-semibold">
+                                    <td>Total Earnings</td>
+                                    <td>5,37,500</td>
+                                    <td>45,833</td>
+                                    <td>45,833</td>
+                                    <td>45,833</td>
+                                    <td>45,833</td>
+                                    <td>45,833</td>
+                                    <td>45,833</td>
+                                    <td>62,500</td>
+                                    <td>50,000</td>
+                                    <td>50,000</td>
+                                    <td>50,000</td>
+                                    <td>50,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- TABLE 2 -->
+                    <h6 class="fw-semibold mb-2">B. Taxable Income from All Heads</h6>
+                    <div class="table-responsive-custom mb-4">
+                        <table class="table table-bordered table-sm small">
+                            <tbody>
+                                <tr>
+                                    <td>Total Salary Received</td>
+                                    <td>₹ 5,37,500</td>
+                                </tr>
+                                <tr class="fw-semibold">
+                                    <td>Total</td>
+                                    <td>₹ 5,37,500</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- TABLE 3 -->
+                    <h6 class="fw-semibold mb-2">Less: Section 16 Tax Exemptions</h6>
+                    <div class="table-responsive-custom mb-4">
+                        <table class="table table-bordered table-sm small">
+                            <tbody>
+                                <tr>
+                                    <td>16(iii) Professional/Employment Tax</td>
+                                    <td>₹ 2,200</td>
+                                </tr>
+                                <tr>
+                                    <td>16(ia) Standard Deduction</td>
+                                    <td>₹ 50,000</td>
+                                </tr>
+                                <tr class="fw-semibold">
+                                    <td>Total</td>
+                                    <td>₹ 52,200</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- TABLE 4 -->
+                    <div class="table-responsive-custom mb-4">
+                        <table class="table table-bordered table-sm small">
+                            <tr class="fw-semibold">
+                                <td>Taxable Amount under Salaries</td>
+                                <td>₹ 4,85,300</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- TABLE 5 -->
+                    <h6 class="fw-semibold mb-2">P. Tax Calculation</h6>
+                    <div class="table-responsive-custom">
+                        <table class="table table-bordered table-sm small mb-2">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>TAXABLE INCOME SLABS</th>
+                                    <th>TAX AMOUNT</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>0% Tax on income up to ₹ 2,50,000</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>5% Tax on income between ₹ 2,50,001 and ₹ 5,00,000</td>
+                                    <td>₹ 11,765</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div> <!-- outer container -->
