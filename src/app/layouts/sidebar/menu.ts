@@ -69,13 +69,13 @@ export const MENU: MenuItem[] = [
                 id: 8,
                 label: 'Dashboard',
                 link: '/dashboard',
-                parentId: 2
+                parentId: 9
             },
             {
                 id: 8,
                 label: 'Welcome',
                 link: '/welcome',
-                parentId: 2
+                parentId: 9
             },
         ]
     },
@@ -90,13 +90,13 @@ export const MENU: MenuItem[] = [
                 id: 8,
                 label: 'Summary',
                 link: '/summary',
-                parentId: 2
+                parentId: 12
             },
             {
                 id: 8,
                 label: 'Leave',
                 link: '/leave',
-                parentId: 2
+                parentId: 12
             },
         ]
     },
@@ -111,19 +111,19 @@ export const MENU: MenuItem[] = [
                 id: 8,
                 label: 'PayRollSummary',
                 link: '/payRollSummary',
-                parentId: 2
+                parentId: 15
             },
             {
                 id: 8,
                 label: 'Mypay',
                 link: '/myPay',
-                parentId: 2
+                parentId: 15
             },
             {
-                id: 8,
+                id: 18,
                 label: 'Managetask',
                 link: '/manageTask',
-                parentId: 2
+                parentId: 15
             },
 
         ]
@@ -139,25 +139,25 @@ export const MENU: MenuItem[] = [
                 id: 8,
                 label: 'Employee',
                 link: '/employee',
-                parentId: 2
+                parentId: 19
             },
             {
                 id: 8,
                 label: 'Documents',
                 link: '/documents',
-                parentId: 2
+                parentId: 19
             },
             {
-                id: 8,
+                id: 22,
                 label: 'Engage',
                 link: '/engage',
-                parentId: 2
+                parentId: 19
             },
             {
                 id: 8,
                 label: 'HelpDesk',
                 link: '/helpDesk',
-                parentId: 2
+                parentId: 19
             },
 
         ]
