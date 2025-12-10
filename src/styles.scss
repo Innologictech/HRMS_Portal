@@ -252,7 +252,6 @@ ngx-dropzone-preview {
 .space .slick-slide {
   margin: 25px;
 }
-
 //
 
 // .nav-pills {
@@ -270,6 +269,14 @@ ngx-dropzone-preview {
 //     background-color:  !important;
 //   }
 // }
+
+.placeholder {
+  padding: 16px;
+  color: #f0eded;
+  font-style: italic;
+}
+
+
 
 [data-bs-theme="dark"] {
   .ng-select .ng-select-container {
@@ -425,6 +432,41 @@ bs-dropdown-container {
 /* ================================
       A T T E N D A N C E
 =================================== */
+
+
+
+
+
+
+
+
+
+
+
+.attendance-page {
+  padding: 24px;
+  background: #fafbff;
+}
+.title-group {
+  display: flex;
+  align-items: center;
+}
+
+.info-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #e4e1e3;
+  color: #5865f2;
+  cursor: pointer;
+}
+
+
 
 .attendance-page {
   padding: 24px 32px;

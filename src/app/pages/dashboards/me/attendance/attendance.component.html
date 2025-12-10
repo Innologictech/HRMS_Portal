@@ -1,0 +1,272 @@
+
+<div class="attendance-page container-fluid">
+
+  <!-- ================= HEADER ================= -->
+ <div class="row mb-4">
+  <div class="col-auto">
+    <div class="title-group d-flex align-items-center gap-2">
+      <h4 class="title mb-0">Attendance Stats</h4>
+      <span class="info-icon">i</span>
+    </div>
+  </div>
+</div>
+
+
+  <!-- ================= STATS (Row 1) ================= -->
+  <div class="row g-4">
+
+    <!-- Me -->
+    <div class="col-xl-6 col-lg-6 col-md-12">
+      <div class="card stat-card h-100">
+        <div class="card-header">Me</div>
+        <p class="value">{{ meStats.avg }}</p>
+        <p class="label">{{ meStats.avgLabel }}</p>
+        <p class="value-small">{{ meStats.arrival }}</p>
+        <p class="label">{{ meStats.arrivalLabel }}</p>
+
+        <div class="mini-graph mt-2">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- My Team -->
+    <div class="col-xl-6 col-lg-6 col-md-12">
+      <div class="card stat-card h-100">
+        <div class="card-header">My Team</div>
+        <p class="value">{{ teamStats.avg }}</p>
+        <p class="label">{{ teamStats.avgLabel }}</p>
+        <p class="value-small">{{ teamStats.arrival }}</p>
+        <p class="label">{{ teamStats.arrivalLabel }}</p>
+
+        <div class="mini-graph mt-2">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ================= TIMINGS & ACTIONS (Row 2) ================= -->
+  <div class="row g-4 mt-2">
+
+    <!-- Timings -->
+    <div class="col-xl-8 col-lg-8 col-md-12">
+      <div class="card timing-card h-100">
+
+        <div class="title-group">
+          <h3>Timings</h3>
+          <span class="info-icon">i</span>
+        </div>
+
+        <div class="week-days mt-2">
+          <button *ngFor="let d of weekDays; let i = index"
+              class="day-pill"
+              [class.active]="i === activeWeekIndex">
+              {{ d }}
+          </button>
+        </div>
+
+        <div class="today mt-3">
+          <p class="today-label">{{ todayTiming }}</p>
+
+          <div class="bar">
+            <div class="progress"></div>
+          </div>
+
+          <p class="duration">{{ duration }}</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="col-xl-4 col-lg-4 col-md-12">
+      <div class="card action-card h-100">
+
+        <div class="title-group">
+          <h3>Actions</h3>
+          <span class="info-icon">i</span>
+        </div>
+
+        <p class="action-time">{{ clockTime }}</p>
+        <p class="last-login">{{ lastLogin }}</p>
+
+        <div class="action-links mt-3">
+          <a>Partial Day Request</a>
+          <a>Attendance Policy</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  </div> 
+
+
+  <!-- ===== Logs & Requests ===== -->
+  <div class="logs-card">
+    <div class="section-header logs-header">
+      <div class="title-group">
+        <h2>Logs & Requests</h2>
+        <span class="info-icon">i</span>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="log-tabs">
+      <button
+        [class.active]="activeLogTab === 'log'"
+        (click)="setActiveTab('log')">
+        Attendance Log
+      </button>
+      <button
+        [class.active]="activeLogTab === 'calendar'"
+        (click)="setActiveTab('calendar')">
+        Calendar
+      </button>
+      <button
+        [class.active]="activeLogTab === 'requests'"
+        (click)="setActiveTab('requests')">
+        Attendance Requests
+      </button>
+    </div>
+
+    <!-- TAB: Attendance Log (placeholder) -->
+    <div *ngIf="activeLogTab === 'log'" class="placeholder">
+    <h6> Attendance log view will come here</h6>
+    </div>
+
+  
+
+    <div class="calendar-wrapper">
+  <!-- Calendar -->
+ <div *ngIf="activeLogTab === 'calendar'" class="calendar-wrapper">
+
+  <!-- Top Navigation -->
+  <div class="calendar-nav">
+    <button class="nav-btn" (click)="prevMonth()">‹</button>
+    <div class="month-label">{{ calendarMonthName }} {{ calendarYear }}</div>
+    <button class="nav-btn" (click)="nextMonth()">›</button>
+  </div>
+
+  <!-- Calendar -->
+  <table class="calendar-table">
+    <thead>
+      <tr>
+        <th *ngFor="let h of calendarDaysHeader">{{ h }}</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let week of calendarWeeks">
+        <!-- <td *ngFor="let day of week">
+          
+          <div *ngIf="day.date" class="cell">
+            
+            
+            <div *ngIf="day.isToday" class="triangle"></div>
+
+            
+            <div class="date">{{ day.date }}</div>
+
+           
+            <div class="timing" *ngIf="day.timing">{{ day.timing }}</div>
+
+            <div class="off" *ngIf="day.isOff">OFF</div>
+
+          </div>
+
+        </td> -->
+     
+     <td *ngFor="let day of week" class="day-cell">
+
+  <div class="cell">
+
+    <!-- Today Triangle -->
+    <div *ngIf="day.isToday" class="triangle"></div>
+
+    <!-- Date -->
+    <div class="date" *ngIf="day.date">{{ day.date }}</div>
+
+    <!-- Spacer -->
+    <div class="spacer"></div>
+
+    <!-- Timing -->
+    <div class="timing" *ngIf="day.timing">{{ day.timing }}</div>
+
+    <!-- OFF -->
+    <div class="off" *ngIf="day.isOff">OFF</div>
+
+  </div>
+
+</td>
+
+
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+
+
+    <!-- TAB: Attendance Requests (table) -->
+    <div *ngIf="activeLogTab === 'requests'">
+
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Note</th>
+            <th>Status</th>
+            <th>Last Action By</th>
+            <th>Next Approver</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of pagedRequests">
+            <td>{{ item.date }}</td>
+            <td>{{ item.note }}</td>
+            <td class="status" [class.pending]="item.status === 'Pending'">
+              {{ item.status }}
+            </td>
+            <td>{{ item.actionBy }}</td>
+            <td>{{ item.next }}</td>
+            <td><button class="action-btn">⋮</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination bottom right -->
+      <div class="pagination">
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">
+          ‹
+        </button>
+        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">
+          ›
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="partial-card">
+    <div class="partial-header">
+      <h3>Partial Day Requests</h3>
+      <span class="info-icon">i</span>
+    </div>
+    <div class="empty-row">
+      No Partial Day Requests Available.
+    </div>
+  </div>
+
+
+</div>
+ 

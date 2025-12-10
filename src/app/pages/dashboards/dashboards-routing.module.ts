@@ -23,6 +23,12 @@ import { InboxComponent } from './inbox/inbox.component';
 import { TakeactionsComponent } from './inbox/takeactions/takeactions.component';
 import { NotificationsComponent } from './inbox/notifications/notifications.component';
 import { ArchiveComponent } from './inbox/archive/archive.component';
+import { AttendanceComponent } from './me/attendance/attendance.component';
+import { AppsComponent } from './me/apps/apps.component';
+import { ExpensesComponent } from './me/expenses/expenses.component';
+import { PerformanceComponent } from './me/performance/performance.component';
+import { EmployeeLeavesComponent } from './me/employee-leaves/employee-leaves.component';
+
 
 
 const routes: Routes = [
@@ -51,52 +57,61 @@ const routes: Routes = [
     path: 'up-coming-events',
     component: UpComingEventsComponent
   },
-   {
+  {
     path: 'dashboard',
     component: DashboardComponent
   },
   {
-  path: 'welcome',
+    path: 'welcome',
     component: WelcomeComponent
   },
-   {
-  path: 'summary',
+  {
+    path: 'summary',
     component: SummaryComponent
   },
-   {
-  path: 'leave',
+  {
+    path: 'leave',
     component: LeaveComponent
   },
   {
     path: 'payRollSummary',
     component: PayRollSummaryComponent
   },
-    {
+  {
     path: 'myPay',
     component: MyPayComponent
   },
-    {
+  {
     path: 'manageTask',
     component: ManageTaskComponent
   },
-   {
+  {
     path: 'employee',
     component: EmployeesComponent
   },
-   {
+  {
     path: 'documents',
     component: DocumentsComponent
   },
-    {
+  {
     path: 'engage',
     component: EngageComponent
   },
-   { path: 'inbox', component: InboxComponent} ,
-     { path: 'takeactions', component: TakeactionsComponent},
-    { path: 'notifications', component: NotificationsComponent },
-    { path: 'archive', component: ArchiveComponent },
+  { path: 'inbox', component: InboxComponent },
+  { path: 'takeactions', component: TakeactionsComponent },
+  { path: 'notifications', component: NotificationsComponent },
+  { path: 'archive', component: ArchiveComponent },
 
-   
+
+  
+  { path: 'attendance', component:AttendanceComponent },
+  { path: 'performance', component:PerformanceComponent },
+  { path: 'leave1', component:EmployeeLeavesComponent },
+  {path:'expenses',component:ExpensesComponent},
+  {path:'apps',component:AppsComponent}
+
+
+ 
 
 ];
 

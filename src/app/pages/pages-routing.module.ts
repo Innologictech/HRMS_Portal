@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MeComponent } from './me/me.component';
-import { AttendanceComponent } from './me/attendance/attendance.component';
-// import { LeaveComponent } from './me/leave/leave.component';
-// import { PerformanceComponent } from './me/performance/performance.component';
-// import { ExpensesComponent } from './me/expenses/expenses.component';
-import { AppsComponent } from './me/apps/apps.component';
+import { LayoutComponent } from '../layouts/layout.component';
+
+
 
 const routes: Routes = [
   {
@@ -56,43 +53,16 @@ const routes: Routes = [
   {
     path: 'pages', loadChildren: () => import('./extrapages/extrapages.module').then(m => m.ExtrapagesModule)
   },
-
   
-
   {
-  path: 'me',
-  loadComponent: () => import('./me/me.component').then(c => c.MeComponent),
-  children: [
-    {
-      path: 'attendance',
-      loadComponent: () => import('./me/attendance/attendance.component')
-        .then(c => c.AttendanceComponent)
-    },
-    // {
-    //   path: 'leave',
-    //   loadComponent: () => import('./me/leave/leave.component')
-    //     .then(c => c.LeaveComponent)
-    // },
-    // {
-    //   path: 'performance',
-    //   loadComponent: () => import('./me/performance/performance.component')
-    //     .then(c => c.PerformanceComponent)
-    // },
-    // {
-    //   path: 'expenses',
-    //   loadComponent: () => import('./me/expenses/expenses.component')
-    //     .then(c => c.ExpensesComponent)
-    // },
-    {
-      path: 'apps',
-      loadComponent: () => import('./me/apps/apps.component')
-        .then(c => c.AppsComponent)
-    },
-    { path: '', redirectTo: 'attendance', pathMatch: 'full' }
-  ]
-}
-
-
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./dashboards/dashboards.module')
+                               .then(m => m.DashboardsModule)
+      }]}
 
 ];
 
