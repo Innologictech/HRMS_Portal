@@ -19,6 +19,10 @@ import { PayRollSummaryComponent } from './home/dashboard/my-finances/pay-roll-s
 import { EmployeesComponent } from './home/dashboard/org/employees/employees.component';
 import { DocumentsComponent } from './home/dashboard/org/documents/documents.component';
 import { EngageComponent } from './home/dashboard/org/engage/engage.component';
+import { InboxComponent } from './inbox/inbox.component';
+import { TakeactionsComponent } from './inbox/takeactions/takeactions.component';
+import { NotificationsComponent } from './inbox/notifications/notifications.component';
+import { ArchiveComponent } from './inbox/archive/archive.component';
 
 
 const routes: Routes = [
@@ -86,7 +90,11 @@ const routes: Routes = [
     path: 'engage',
     component: EngageComponent
   },
-     
+   { path: 'inbox', component: InboxComponent} ,
+     { path: 'takeactions', component: TakeactionsComponent},
+    { path: 'notifications', component: NotificationsComponent },
+    { path: 'archive', component: ArchiveComponent },
+
    
 
 ];

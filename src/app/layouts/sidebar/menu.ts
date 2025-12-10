@@ -161,8 +161,26 @@ export const MENU: MenuItem[] = [
 
   ]
 }
+,  {
+    label: 'Inbox',
+    icon: 'bx bx-envelope',
+    link: '/inbox',
+    subItems: [
+        {
+            label: 'takeactions',
+            link: '/takeactions'
+        },
+        {
+            label: 'notifications',
+            link: '/notifications'
+        },
+        {
+            label: 'archive',
+            link: '/archive'
+        }
+    ]
 
-
+}
 
 
 
