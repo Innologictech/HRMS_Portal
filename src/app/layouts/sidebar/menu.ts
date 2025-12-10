@@ -65,98 +65,98 @@ export const MENU: MenuItem[] = [
   icon: 'ph-house',
   subItems:[
      {
-                id: 8,
+                id: 10,
                 label: 'Dashboard',
                 link: '/dashboard',
-                parentId: 2
+                parentId: 9
             },
                {
-                id: 8,
+                id: 11,
                 label: 'Welcome',
                 link: '/welcome',
-                parentId: 2
+                parentId: 9
             },
   ]
 },
 {
-  id: 10,
+  id: 12,
   label: 'Myteam',
   link: '/myteam',
   parentId: 2,
   icon: 'ph-users',
   subItems:[
      {
-                id: 8,
+                id: 13,
                 label: 'Summary',
                 link: '/summary',
-                parentId: 2
+                parentId: 12
             },
                {
-                id: 8,
+                id: 14,
                 label: 'Leave',
                 link: '/leave',
-                parentId: 2
+                parentId: 12
             },
   ]
 },
 {
-  id: 10,
+  id: 15,
   label: 'Myfinances',
   link: '/myfinances',
-  parentId: 2,
+ 
   icon:  'ph-currency-inr',
   subItems:[
      {
-                id: 8,
+                id: 16,
                 label: 'PayRollSummary',
                 link: '/payRollSummary',
-                parentId: 2
+                parentId: 15
             },
                {
-                id: 8,
+                id: 17,
                 label: 'Mypay',
                 link: '/myPay',
-                parentId: 2
+                parentId: 15
             },
             {
-                id: 8,
+                id: 18,
                 label: 'Managetask',
                 link: '/manageTask',
-                parentId: 2
+                parentId: 15
             },
 
   ]
 },
 {
-  id: 10,
+  id: 19,
   label: 'Org',
   link: '/org',
-  parentId: 2,
+ 
   icon: 'ph-buildings',
   subItems:[
      {
-                id: 8,
+                id: 20,
                 label: 'Employee',
                 link: '/employee',
-                parentId: 2
+                parentId: 19
             },
                {
-                id: 8,
+                id: 21,
                 label: 'Documents',
                 link: '/documents',
-                parentId: 2
+                parentId: 19
             },
             {
-                id: 8,
+                id: 22,
                 label: 'Engage',
                 link: '/engage',
-                parentId: 2
+                parentId: 19
             },
              {
-                id: 8,
+                id: 23,
                 label: 'HelpDesk',
                 link: '/helpDesk',
-                parentId: 2
+                parentId: 19
             },
 
   ]
@@ -174,7 +174,7 @@ export const MENU: MenuItem[] = [
 //   ]
 // }
 
-,  {
+  {
     label: 'Inbox',
     icon: 'bx bx-envelope',
     link: '/inbox',
