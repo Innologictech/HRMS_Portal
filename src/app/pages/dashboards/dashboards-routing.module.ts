@@ -42,6 +42,7 @@ const routes: Routes = [
     path: "real-estate",
     component: RealEstateComponent
   },
+
   {
     path: 'up-coming-events',
     component: UpComingEventsComponent
