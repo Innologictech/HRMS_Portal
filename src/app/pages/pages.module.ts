@@ -7,9 +7,9 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { MeComponent } from './me/me.component';
 import { AttendanceComponent } from './me/attendance/attendance.component';
-import { LeaveComponent } from './me/leave/leave.component';
-import { PerformanceComponent } from './me/performance/performance.component';
-import { ExpensesComponent } from './me/expenses/expenses.component';
+// import { LeaveComponent } from './me/leave/leave.component';
+// import { PerformanceComponent } from './me/performance/performance.component';
+// import { ExpensesComponent } from './me/expenses/expenses.component';
 import { AppsComponent } from './me/apps/apps.component';
 import { RouterModule } from '@angular/router';
 
@@ -24,9 +24,9 @@ import { RouterModule } from '@angular/router';
     SharedModule,
     MeComponent,
     AttendanceComponent,
-    LeaveComponent,
-    PerformanceComponent,
-    ExpensesComponent,
+    // LeaveComponent,
+    // PerformanceComponent,
+    // ExpensesComponent,
     AppsComponent
   ]
 })

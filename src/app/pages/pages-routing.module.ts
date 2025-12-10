@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MeComponent } from './me/me.component';
 import { AttendanceComponent } from './me/attendance/attendance.component';
-import { LeaveComponent } from './me/leave/leave.component';
-import { PerformanceComponent } from './me/performance/performance.component';
-import { ExpensesComponent } from './me/expenses/expenses.component';
+// import { LeaveComponent } from './me/leave/leave.component';
+// import { PerformanceComponent } from './me/performance/performance.component';
+// import { ExpensesComponent } from './me/expenses/expenses.component';
 import { AppsComponent } from './me/apps/apps.component';
 
 const routes: Routes = [
@@ -68,21 +68,21 @@ const routes: Routes = [
       loadComponent: () => import('./me/attendance/attendance.component')
         .then(c => c.AttendanceComponent)
     },
-    {
-      path: 'leave',
-      loadComponent: () => import('./me/leave/leave.component')
-        .then(c => c.LeaveComponent)
-    },
-    {
-      path: 'performance',
-      loadComponent: () => import('./me/performance/performance.component')
-        .then(c => c.PerformanceComponent)
-    },
-    {
-      path: 'expenses',
-      loadComponent: () => import('./me/expenses/expenses.component')
-        .then(c => c.ExpensesComponent)
-    },
+    // {
+    //   path: 'leave',
+    //   loadComponent: () => import('./me/leave/leave.component')
+    //     .then(c => c.LeaveComponent)
+    // },
+    // {
+    //   path: 'performance',
+    //   loadComponent: () => import('./me/performance/performance.component')
+    //     .then(c => c.PerformanceComponent)
+    // },
+    // {
+    //   path: 'expenses',
+    //   loadComponent: () => import('./me/expenses/expenses.component')
+    //     .then(c => c.ExpensesComponent)
+    // },
     {
       path: 'apps',
       loadComponent: () => import('./me/apps/apps.component')

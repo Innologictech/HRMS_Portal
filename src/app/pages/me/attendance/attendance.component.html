@@ -111,38 +111,86 @@
 
     <!-- TAB: Attendance Log (placeholder) -->
     <div *ngIf="activeLogTab === 'log'" class="placeholder">
-      Attendance log view will come here.
+    <h6> Attendance log view will come here</h6>
     </div>
 
-    <!-- TAB: Calendar -->
-    <div *ngIf="activeLogTab === 'calendar'" class="calendar-wrapper">
-      <div class="calendar-header">
-        <div class="month-label">{{ calendarMonthName }} {{ calendarYear }}</div>
-      </div>
+  
 
-      <table class="calendar">
-        <thead>
-          <tr>
-            <th>Sun</th>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let week of calendarWeeks">
-            <td *ngFor="let day of week"
-                [class.today]="day.isToday"
-                [class.outside]="!day.isCurrentMonth">
-              <span *ngIf="day.date">{{ day.date }}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="calendar-wrapper">
+
+
+
+  <!-- Calendar -->
+ <div *ngIf="activeLogTab === 'calendar'" class="calendar-wrapper">
+
+  <!-- Top Navigation -->
+  <div class="calendar-nav">
+    <button class="nav-btn" (click)="prevMonth()">‹</button>
+    <div class="month-label">{{ calendarMonthName }} {{ calendarYear }}</div>
+    <button class="nav-btn" (click)="nextMonth()">›</button>
+  </div>
+
+  <!-- Calendar -->
+  <table class="calendar-table">
+    <thead>
+      <tr>
+        <th *ngFor="let h of calendarDaysHeader">{{ h }}</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let week of calendarWeeks">
+        <!-- <td *ngFor="let day of week">
+          
+          <div *ngIf="day.date" class="cell">
+            
+            
+            <div *ngIf="day.isToday" class="triangle"></div>
+
+            
+            <div class="date">{{ day.date }}</div>
+
+           
+            <div class="timing" *ngIf="day.timing">{{ day.timing }}</div>
+
+            <div class="off" *ngIf="day.isOff">OFF</div>
+
+          </div>
+
+        </td> -->
+     
+     <td *ngFor="let day of week" class="day-cell">
+
+  <div class="cell">
+
+    <!-- Today Triangle -->
+    <div *ngIf="day.isToday" class="triangle"></div>
+
+    <!-- Date -->
+    <div class="date" *ngIf="day.date">{{ day.date }}</div>
+
+    <!-- Spacer -->
+    <div class="spacer"></div>
+
+    <!-- Timing -->
+    <div class="timing" *ngIf="day.timing">{{ day.timing }}</div>
+
+    <!-- OFF -->
+    <div class="off" *ngIf="day.isOff">OFF</div>
+
+  </div>
+
+</td>
+
+
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+
 
     <!-- TAB: Attendance Requests (table) -->
     <div *ngIf="activeLogTab === 'requests'">
@@ -197,66 +245,6 @@
       No Partial Day Requests Available.
     </div>
   </div>
-
-  <div class="text-end mb-3">
-  <button class="btn btn-primary-custom" (click)="openRequest()">
-    Request Leave
-  </button>
-</div>
-<!-- Request Leave Drawer -->
-<div class="drawer-overlay" *ngIf="showRequest" (click)="closeRequest()"></div>
-
-<div class="drawer" [class.open]="showRequest">
-  <div class="drawer-header">
-    <h5>Request Leave</h5>
-    <button class="close-btn" (click)="closeRequest()">&times;</button>
-  </div>
-
-  <div class="drawer-body">
-    <!-- Date range -->
-    <div class="d-flex justify-content-between gap-2 mb-4">
-      <div class="date-box">
-        <label>From</label>
-        <input type="date" [(ngModel)]="leave.from">
-      </div>
-
-      <div class="date-days">{{ leave.days }} days</div>
-
-      <div class="date-box">
-        <label>To</label>
-        <input type="date" [(ngModel)]="leave.to">
-      </div>
-    </div>
-
-    <!-- Type of Leave -->
-    <label class="fw-semibold">Select type of leave you want to apply</label>
-    <select class="form-select mb-3" [(ngModel)]="leave.type">
-      <option value="">Select</option>
-      <option value="CL">Casual Leave</option>
-      <option value="EL">Earned Leave</option>
-      <option value="SL">Sick Leave</option>
-    </select>
-
-    <!-- Note -->
-    <label class="fw-semibold">Note</label>
-    <textarea class="form-control mb-3" rows="3"
-              placeholder="Type here"
-              [(ngModel)]="leave.note"></textarea>
-
-    <!-- Notify -->
-    <label class="fw-semibold">Notify</label>
-    <input type="text" class="form-control"
-           placeholder="Search employee"
-           [(ngModel)]="leave.notify">
-
-  </div>
-
-  <div class="drawer-footer">
-    <button class="btn btn-light" (click)="closeRequest()">Cancel</button>
-    <button class="btn btn-primary-custom" (click)="submitRequest()">Request</button>
-  </div>
-</div>
-
 
 
 </div>
