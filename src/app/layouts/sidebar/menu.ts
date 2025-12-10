@@ -160,7 +160,20 @@ export const MENU: MenuItem[] = [
             },
 
   ]
-}
+},
+// {
+//   id: 9,
+//   label: 'Me',
+//   icon: 'ph-user',
+//   subItems: [
+//     { id: 10, label: 'Attendance', link: '/me/attendance', parentId: 9 },
+//     { id: 11, label: 'Leave', link: '/me/leave', parentId: 9 },
+//     { id: 12, label: 'Performance', link: '/me/performance', parentId: 9 },
+//     // { id: 13, label: 'Expenses', link: '/me/expenses', parentId: 9 },
+//     { id: 14, label: 'Apps', link: '/me/apps', parentId: 9 }
+//   ]
+// }
+
 
 
 
