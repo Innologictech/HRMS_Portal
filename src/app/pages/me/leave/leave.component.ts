@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 interface LeaveBalance {
@@ -16,7 +17,7 @@ interface LeaveBalance {
 @Component({
   selector: 'app-leave',
   standalone: true,
-  imports: [ CommonModule],
+  imports: [ CommonModule,FormsModule],
   templateUrl: './leave.component.html',
   styleUrls: ['./leave.component.scss']
 })
@@ -73,6 +74,35 @@ export class LeaveComponent implements OnInit {
     // You can add your logic here, e.g., open a dialog or navigate to a page
     // alert('Clicked view details for ' + balance.type); 
   }
+
+
+showRequest = false;
+
+leave = {
+  from: '',
+  to: '',
+  days: 0,
+  type: '',
+  note: '',
+  notify: ''
+};
+
+openRequest() {
+  this.showRequest = true;
+}
+
+closeRequest() {
+  this.showRequest = false;
+}
+
+submitRequest() {
+  // TODO: API
+  console.log("Request Leave:", this.leave);
+   alert("Clicked");
+  this.closeRequest();
+}
+
+
 
 
 }
