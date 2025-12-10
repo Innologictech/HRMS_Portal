@@ -1,0 +1,30 @@
+.profile-header {
+    height: 170px;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 20px;
+    color: white;
+
+    /* Gradient + image texture just like your screenshot */
+    background-image: 
+        linear-gradient(135deg, #1b1d5e, #5b2ea3, #0a2a4f);
+
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+
+    display: flex;
+}
+
+.avatar-circle {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #6ab7d6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+}

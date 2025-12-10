@@ -1,0 +1,81 @@
+.nav-tabs .nav-link {
+    font-weight: 500;
+    color: #555;
+}
+
+.nav-tabs .nav-link.active {
+    font-weight: 600;
+    color: #000;
+    border-bottom: 3px solid #0d6efd;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.alert {
+    border-radius: 8px;
+}
+
+
+/* Table Wrapper */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+//   font-size: 12px;
+}
+
+/* Header */
+table thead tr {
+  background: #f5f7fb !important;  /* Light bluish grey like your image */
+  color: #4a4a4a;
+}
+
+table thead th {
+  padding: 10px 12px;
+//   font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Body rows */
+table tbody td {
+  padding: 10px 12px;
+  color: #444;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Remove strong borders from table-bordered */
+.table-bordered > :not(caption) > * > * {
+  border: 1px solid #e6e6e6 !important;
+}
+
+/* Row hover */
+table tbody tr:hover {
+  background: #fafafa;
+}
+
+/* Total rows bold */
+table tbody tr.fw-semibold {
+  background: #f9fbff !important;
+//   font-weight: 600;
+}
+
+/* Reduce table spacing */
+.table-sm > :not(caption) > * > * {
+  padding: 10px 12px !important;
+}
+.table-responsive-custom {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive-custom table {
+    min-width: 700px; /* prevent squeezing */
+}
+
+@media (max-width: 576px) {
+    .summary-box p {
+        font-size: 12px;
+    }
+}

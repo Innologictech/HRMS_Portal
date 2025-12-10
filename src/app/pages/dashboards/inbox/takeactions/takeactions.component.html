@@ -1,0 +1,344 @@
+ <div class="container-fluid p-0">
+  <div class="row g-0">
+    <div class="col-12 col-lg-12">
+      <div class="row g-0">
+
+    <!-- LEFT COLUMN -->
+    <div class="col-12 col-md-2  col-lg-2 p-3 border-end bg-white">
+      <h6 class="fw-bold text-uppercase small mb-3">Pending Tasks</h6>
+
+      <div class="list-group">
+        <a *ngFor="let task of pendingTasks"
+           class="list-group-item list-group-item-action pending-item"
+           [class.active]="selectedTask?.id === task.id"
+           (click)="openTask(task)">
+          {{ task.Name }} ({{ task.count }})
+        </a>
+      </div>
+    </div>
+<!-- MIDDLE COLUMN -->
+<div class="col-12 col-md-4 col-lg-3 p-3 border-end bg-white" *ngIf="selectedTask">
+
+  <!-- Show Assets section -->
+  <ng-container *ngIf="selectedTask.Name === 'Assets'">
+    <h6 class="fw-bold text-uppercase small mb-2">Assets</h6>
+
+  <select class="form-select form-select-sm w-auto mb-3"
+          (change)="changeSort($event)">
+    <option>Newest</option>
+    <option>Oldest</option>
+  </select>
+
+    <div class="list-group asset-list">
+      <a *ngFor="let asset of assets"
+         class="list-group-item list-group-item-action asset-item"
+         [class.active]="selectedAsset?.id === asset.id"
+         (click)="openAsset(asset)">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex align-items-center">
+            <div class="circle-icon">{{ asset.initials }}</div>
+            <div class="ms-2">
+              <h6 class="mb-0 small fw-semibold">{{ asset.name }}</h6>
+              <span class="small text-muted">{{ asset.assetTitle }}</span>
+            </div>
+          </div>
+          <small class="text-muted">{{ asset.time }}</small>
+        </div>
+        <div class="mt-1 small text-muted">{{ asset.desc }}</div>
+      </a>
+    </div>
+  </ng-container>
+
+
+  <!-- IT SUPPORT SECTION (same design as Assets) -->
+<ng-container *ngIf="selectedTask.Name === 'IT Support'">
+
+  <div class="sticky-top bg-white pb-2" style="z-index: 10;">
+    <h6 class="fw-bold text-uppercase small mb-2">IT Support</h6>
+
+    <select class="form-select form-select-sm w-auto mb-3">
+      <option>Newest</option>
+      <option>Oldest</option>
+    </select>
+  </div>
+
+  <div class="list-group asset-list">
+    <a *ngFor="let item of itSupport"
+       class="list-group-item list-group-item-action asset-item"
+       [class.active]="selectedAsset?.id === item.id"
+       (click)="openAsset(item)">
+
+      <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+          <div class="circle-icon">{{ item.initials }}</div>
+
+          <div class="ms-2">
+            <h6 class="mb-0 small fw-semibold">{{ item.name }}</h6>
+            <span class="small text-muted">{{ item.title }}</span>
+          </div>
+        </div>
+
+        <small class="text-muted">{{ item.time }}</small>
+      </div>
+
+      <div class="mt-1 small text-muted">{{ item.desc }}</div>
+    </a>
+  </div>
+
+</ng-container>
+
+
+
+<ng-container *ngIf="selectedTask.Name === 'HR Requests'">
+  <h6 class="fw-bold text-uppercase small mb-2">HR Requests</h6>
+
+  <!-- Static Dropdown -->
+  <select class="form-select form-select-sm w-auto mb-3">
+    <option>Newest</option>
+    <option>Oldest</option>
+  </select>
+
+  <div class="list-group asset-list">
+    <a *ngFor="let hr of hrRequests"
+       class="list-group-item list-group-item-action"
+       [class.active]="selectedAsset?.id === hr.id"
+       (click)="openAsset(hr)">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+          <div class="circle-icon">{{ hr.initials }}</div>
+          <div class="ms-2">
+            <h6 class="mb-0 small fw-semibold">{{ hr.name }}</h6>
+            <span class="small text-muted">{{ hr.title }}</span>
+          </div>
+        </div>
+        <small>{{ hr.time }}</small>
+      </div>
+      <div class="mt-1 small text-muted">{{ hr.desc }}</div>
+    </a>
+  </div>
+</ng-container>
+
+
+
+
+<ng-container *ngIf="selectedTask.Name === 'Finance Approvals'">
+  <h6 class="fw-bold text-uppercase small mb-2">Finance Approvals</h6>
+
+  <select class="form-select form-select-sm w-auto mb-3">
+    <option>Newest</option>
+    <option>Oldest</option>
+  </select>
+
+  <div class="list-group asset-list">
+    <a *ngFor="let fin of financeApprovals"
+       class="list-group-item list-group-item-action"
+       [class.active]="selectedAsset?.id === fin.id"
+       (click)="openAsset(fin)">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+          <div class="circle-icon">{{ fin.initials }}</div>
+          <div class="ms-2">
+            <h6 class="mb-0 small fw-semibold">{{ fin.name }}</h6>
+            <span class="small text-muted">{{ fin.title }}</span>
+          </div>
+        </div>
+        <small>{{ fin.time }}</small>
+      </div>
+      <div class="mt-1 small text-muted">{{ fin.desc }}</div>
+    </a>
+  </div>
+</ng-container>
+
+
+</div>
+
+
+    <div class="col-12 col-md-5 col-lg-7 p-4 bg-white"  *ngIf="selectedTask?.Name === 'Assets' && selectedAsset">
+        <div class="d-flex align-items-center mb-3">
+            <div class="circle-icon-large">{{selectedAsset.initials}}</div>
+            <div class="ms-3">
+                <h6 class="mb-0 fw-semibold">{{selectedAsset.name}}</h6>
+                <small class="text-muted">Raised on {{selectedAsset.details.raisedOn}}</small>
+            </div>
+        </div>
+        <h5>{{selectedAsset.assetTitle}}
+            <span class="badge bg-light text-dark border ms-2">Acknowledgement Request</span>
+        </h5>
+        <div class="row mt-4 g-3">
+        <div class="col-md-6"><div class="label">Asset Name</div><div class="value">{{ selectedAsset.details.assetName }}</div></div>
+        <div class="col-md-6"><div class="label">Asset ID</div><div class="value">{{ selectedAsset.details.assetId }}</div></div>
+        <div class="col-md-6"><div class="label">Location</div><div class="value">{{ selectedAsset.details.location }}</div></div>
+        <div class="col-md-6"><div class="label">Type</div><div class="value">{{ selectedAsset.details.type }}</div></div>
+        <div class="col-md-6"><div class="label">Category</div><div class="value">{{ selectedAsset.details.category }}</div></div>
+        <div class="col-md-6"><div class="label">Condition</div><div class="value">{{ selectedAsset.details.condition }}</div></div>
+      </div>
+      <hr>
+
+<h6>Comments</h6>
+
+  <div class="border rounded p-3 mb-2" style="height: 200px; overflow-y: auto;">
+      <div *ngFor="let c of selectedAsset.comments">
+        <strong>{{ c.time }}</strong>
+        <p class="mb-2">{{ c.text }}</p>
+        <hr>
+      </div>
+
+      <div *ngIf="!selectedAsset.comments.length" class="text-muted">
+        No comments found.
+      </div>
+  </div>
+
+  <textarea class="form-control mb-2" rows="3"
+            [(ngModel)]="newComment"
+            placeholder="Write a comment..."></textarea>
+
+  <button class="btn btn-primary btn-sm" (click)="addComment()">Add Comment</button>
+
+    </div>
+    <!-- RIGHT COLUMN – IT SUPPORT DETAILS -->
+<div class="col-12 col-md-5 col-lg-7 p-4 bg-white"
+     *ngIf="selectedTask?.Name === 'IT Support' && selectedAsset">
+
+  <div class="d-flex align-items-center mb-3">
+      <div class="circle-icon-large">{{ selectedAsset.initials }}</div>
+      <div class="ms-3">
+          <h6 class="mb-0 fw-semibold">{{ selectedAsset.name }}</h6>
+          <small class="text-muted">Raised on {{ selectedAsset.details.raisedOn }}</small>
+      </div>
+  </div>
+
+  <h5>
+    {{ selectedAsset.title }}
+    <span class="badge bg-warning text-dark ms-2">{{ selectedAsset.details.priority }}</span>
+  </h5>
+
+  <div class="row mt-4 g-3">
+      <div class="col-md-6"><div class="label">Issue Type</div><div class="value">{{ selectedAsset.details.issueType }}</div></div>
+      <div class="col-md-6"><div class="label">Priority</div><div class="value">{{ selectedAsset.details.priority }}</div></div>
+      <div class="col-md-6"><div class="label">Assigned To</div><div class="value">{{ selectedAsset.details.assignedTo }}</div></div>
+
+      <div class="col-md-12">
+          <div class="label">Description</div>
+          <div class="value">{{ selectedAsset.details.description }}</div>
+      </div>
+  </div>
+
+  <hr>
+
+  <h6>Comments</h6>
+
+  <div class="border rounded p-3 mb-2" style="height: 200px; overflow-y: auto;">
+      <div *ngFor="let c of selectedAsset.comments">
+        <strong>{{ c.time }}</strong>
+        <p class="mb-2">{{ c.text }}</p>
+        <hr>
+      </div>
+
+      <div *ngIf="!selectedAsset.comments.length" class="text-muted">
+        No comments found.
+      </div>
+  </div>
+
+  <textarea class="form-control mb-2" rows="3"
+            [(ngModel)]="newComment"
+            placeholder="Write a comment..."></textarea>
+
+  <button class="btn btn-primary btn-sm" (click)="addComment()">Add Comment</button>
+</div>
+
+
+<div class="col-12 col-md-5 col-lg-7 p-4 bg-white"
+     *ngIf="selectedTask?.Name === 'HR Requests' && selectedAsset">
+
+  <div class="d-flex align-items-center mb-3">
+    <div class="circle-icon-large">{{ selectedAsset.initials }}</div>
+    <div class="ms-3">
+      <h6 class="mb-0 fw-semibold">{{ selectedAsset.name }}</h6>
+      <small class="text-muted">Raised on {{ selectedAsset.details.raisedOn }}</small>
+    </div>
+  </div>
+
+  <h5>{{ selectedAsset.title }}
+    <span class="badge bg-info text-dark ms-2">{{ selectedAsset.details.status }}</span>
+  </h5>
+
+  <div class="row mt-4 g-3">
+
+    <div class="col-md-6"><div class="label">Type</div>
+      <div class="value">{{ selectedAsset.details.leaveType || 'N/A' }}</div></div>
+
+    <div class="col-md-6"><div class="label">Days</div>
+      <div class="value">{{ selectedAsset.details.days || 'N/A' }}</div></div>
+
+    <div class="col-md-6"><div class="label">From</div>
+      <div class="value">{{ selectedAsset.details.from || 'N/A' }}</div></div>
+
+    <div class="col-md-6"><div class="label">To</div>
+      <div class="value">{{ selectedAsset.details.to || 'N/A' }}</div></div>
+
+    <div class="col-md-12"><div class="label">Reason</div>
+      <div class="value">{{ selectedAsset.details.reason || 'N/A' }}</div></div>
+
+  </div>
+
+  <hr>
+  <h6>Comments</h6>
+
+  <div class="border rounded p-3 mb-2" style="height:200px;overflow-y:auto">
+    <div *ngFor="let c of selectedAsset.comments">
+      <strong>{{ c.time }}</strong>
+      <p>{{ c.text }}</p>
+      <hr>
+    </div>
+    <div *ngIf="!selectedAsset.comments.length" class="text-muted">No comments found.</div>
+  </div>
+
+  <textarea class="form-control mb-2" rows="3" [(ngModel)]="newComment"></textarea>
+  <button class="btn btn-primary btn-sm" (click)="addComment()">Add Comment</button>
+
+</div>
+<div class="col-12 col-md-5 col-lg-7 p-4 bg-white"
+     *ngIf="selectedTask?.Name === 'Finance Approvals' && selectedAsset">
+
+  <div class="d-flex align-items-center mb-3">
+    <div class="circle-icon-large">{{ selectedAsset.initials }}</div>
+    <div class="ms-3">
+      <h6 class="mb-0 fw-semibold">{{ selectedAsset.name }}</h6>
+      <small class="text-muted">Raised on {{ selectedAsset.details.raisedOn }}</small>
+    </div>
+  </div>
+
+  <h5>{{ selectedAsset.title }}
+    <span class="badge bg-warning text-dark ms-2">{{ selectedAsset.details.status }}</span>
+  </h5>
+
+  <div class="row mt-4 g-3">
+    <div class="col-md-6"><div class="label">Amount</div>
+      <div class="value">₹{{ selectedAsset.details.amount }}</div></div>
+
+    <div class="col-md-6"><div class="label">Purpose</div>
+      <div class="value">{{ selectedAsset.details.purpose }}</div></div>
+  </div>
+
+  <hr>
+
+  <h6>Comments</h6>
+  <div class="border rounded p-3 mb-2" style="height:200px;overflow-y:auto">
+    <div *ngFor="let c of selectedAsset.comments">
+      <strong>{{ c.time }}</strong>
+      <p>{{ c.text }}</p>
+      <hr>
+    </div>
+    <div *ngIf="!selectedAsset.comments.length" class="text-muted">No comments found.</div>
+  </div>
+
+  <textarea class="form-control mb-2" rows="3" [(ngModel)]="newComment"></textarea>
+  <button class="btn btn-primary btn-sm" (click)="addComment()">Add Comment</button>
+</div>
+
+    
+
+  </div>
+    </div>
+    </div>
+   </div>

@@ -52,28 +52,119 @@ export const MENU: MenuItem[] = [
                 link: '/up-coming-events',
                 parentId: 2
             },
-            
-        ]
 
-        // ========== ME ==========
+        ]
 
 
     },
-
-
-    // ========== ME ==========
-{
+   {
   id: 9,
-  label: 'Me',
-  icon: 'ph-user',
-  subItems: [
-    { id: 10, label: 'Attendance', link: '/attendance', parentId: 9 },
-    { id: 11, label: 'Leave', link: '/leave', parentId: 9 },
-    { id: 12, label: 'Performance', link: '/performance', parentId: 9 },
-    { id: 13, label: 'Expenses', link: '/expenses', parentId: 9 },
-    { id: 14, label: 'Apps', link: '/apps', parentId: 9 }
+  label: 'Home',
+  link: '/home',
+  parentId: 2,
+  icon: 'ph-house',
+  subItems:[
+     {
+                id: 8,
+                label: 'Dashboard',
+                link: '/dashboard',
+                parentId: 2
+            },
+               {
+                id: 8,
+                label: 'Welcome',
+                link: '/welcome',
+                parentId: 2
+            },
+  ]
+},
+{
+  id: 10,
+  label: 'Myteam',
+  link: '/myteam',
+  parentId: 2,
+  icon: 'ph-users',
+  subItems:[
+     {
+                id: 8,
+                label: 'Summary',
+                link: '/summary',
+                parentId: 2
+            },
+               {
+                id: 8,
+                label: 'Leave',
+                link: '/leave',
+                parentId: 2
+            },
+  ]
+},
+{
+  id: 10,
+  label: 'Myfinances',
+  link: '/myfinances',
+  parentId: 2,
+  icon:  'ph-currency-inr',
+  subItems:[
+     {
+                id: 8,
+                label: 'PayRollSummary',
+                link: '/payRollSummary',
+                parentId: 2
+            },
+               {
+                id: 8,
+                label: 'Mypay',
+                link: '/myPay',
+                parentId: 2
+            },
+            {
+                id: 8,
+                label: 'Managetask',
+                link: '/manageTask',
+                parentId: 2
+            },
+
+  ]
+},
+{
+  id: 10,
+  label: 'Org',
+  link: '/org',
+  parentId: 2,
+  icon: 'ph-buildings',
+  subItems:[
+     {
+                id: 8,
+                label: 'Employee',
+                link: '/employee',
+                parentId: 2
+            },
+               {
+                id: 8,
+                label: 'Documents',
+                link: '/documents',
+                parentId: 2
+            },
+            {
+                id: 8,
+                label: 'Engage',
+                link: '/engage',
+                parentId: 2
+            },
+             {
+                id: 8,
+                label: 'HelpDesk',
+                link: '/helpDesk',
+                parentId: 2
+            },
+
   ]
 }
+
+
+
+
 
 
     // ============================================================
