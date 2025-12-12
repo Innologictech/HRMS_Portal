@@ -1,6 +1,6 @@
-<div class="container mt-4">
+<!-- <div class="container mt-4">
 
-  <!-- ================= FILTER BAR ================= -->
+  ================= FILTER BAR =================
   <div class="row gx-3 gy-2 mb-4">
       
       <div class="col-md-2">
@@ -44,10 +44,10 @@
       </div>
   </div>
 
-  <!-- ================= EMPLOYEE CARDS ================= -->
+  ================= EMPLOYEE CARDS =================
   <div class="row g-4">
 
-      <!-- CARD #1 -->
+      CARD #1
       <div class="col-md-4">
           <div class="card shadow-sm border-0 p-3">
               <div class="d-flex align-items-center mb-2">
@@ -62,11 +62,11 @@
 
               <p class="mb-1"><strong>Department:</strong> Technical → Technical - WEB</p>
               <p class="mb-1"><strong>Location:</strong> Hyderabad</p>
-              <!-- <p class="mb-0"><strong>Email:</strong> pradeep.p@sharvininfotech.com</p> -->
+              <p class="mb-0"><strong>Email:</strong> pradeep.p@sharvininfotech.com</p>
           </div>
       </div>
 
-      <!-- CARD #2 -->
+      CARD #2
       <div class="col-md-4">
           <div class="card shadow-sm border-0 p-3">
               <div class="d-flex align-items-center mb-2">
@@ -81,11 +81,11 @@
 
               <p class="mb-1"><strong>Department:</strong> Technical → Technical - WEB</p>
               <p class="mb-1"><strong>Location:</strong> Hyderabad</p>
-              <!-- <p class="mb-0"><strong>Email:</strong> prasad.kvvk@sharvininfotech.com</p> -->
+              <p class="mb-0"><strong>Email:</strong> prasad.kvvk@sharvininfotech.com</p>
           </div>
       </div>
 
-      <!-- CARD #3 -->
+      CARD #3
       <div class="col-md-4">
           <div class="card shadow-sm border-0 p-3">
               <div class="d-flex align-items-center mb-2">
@@ -100,9 +100,78 @@
 
               <p class="mb-1"><strong>Department:</strong> Technical → Technical - WEB</p>
               <p class="mb-1"><strong>Location:</strong> Hyderabad</p>
-              <!-- <p class="mb-0"><strong>Email:</strong> sunilkumar@sharvininfotech.com</p> -->
+              <p class="mb-0"><strong>Email:</strong> sunilkumar@sharvininfotech.com</p>
           </div>
       </div>
 
   </div>
-</div>
+</div> -->
+
+
+<div class="container mt-3">
+
+    <!-- Top Tabs -->
+    <ul class="nav nav-tabs mb-2">
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'directory'" (click)="activeTab = 'directory'">
+                Employee Directory
+            </a>
+        </li>
+
+                <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'organization'" (click)="activeTab = 'organization'">
+                Oganization Tee
+            </a>
+        </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'Salary'" (click)="activeTab = 'Salary'">
+                Salary
+            </a>
+        </li>
+
+ <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'Asserts'" (click)="activeTab = 'Asserts'">
+                Asserts
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'Letters'" (click)="activeTab = 'Letters'">
+                Letters
+            </a>
+        </li>
+    </ul>
+
+
+
+<!-- ActiveTab Content -->
+
+<div class="mt-2 p-3 " *ngIf="activeTab === 'directory'">
+        <h5>Employee Directory</h5>
+        <p>This section helps you explore all employees in the company.</p>
+    </div>
+
+    <div class="mt-2 p-3 " *ngIf="activeTab === 'organization'">
+        <h5>Organization Tree</h5>
+        <p>View the company's reporting structure.</p>
+    </div>
+
+    <div class="mt-2 p-3 " *ngIf="activeTab === 'Salary'">
+        <h5>Salary Information</h5>
+        <p>Access your salary details, slips, and financial breakdowns.</p>
+    </div>
+
+    <div class="mt-2 p-3 " *ngIf="activeTab === 'Asserts'">
+        <h5>Asserts</h5>
+        <p>View company assets assigned to you.</p>
+    </div>
+
+    <div class="mt-2 p-3 " *ngIf="activeTab === 'Letters'">
+        <h5>Letters</h5>
+        <p>Download HR letters such as offer letter, experience letter, etc.</p>
+    </div>
+
+
+<div>
