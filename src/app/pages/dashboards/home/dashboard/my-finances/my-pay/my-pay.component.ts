@@ -10,4 +10,5 @@ import { CommonModule } from '@angular/common';
 })
 export class MyPayComponent {
   activeTab: string = 'salary';
+  activeSubTab: string = 'waiting';
 }
