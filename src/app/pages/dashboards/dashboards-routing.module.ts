@@ -28,6 +28,7 @@ import { AppsComponent } from './me/apps/apps.component';
 import { ExpensesComponent } from './me/expenses/expenses.component';
 import { PerformanceComponent } from './me/performance/performance.component';
 import { EmployeeLeavesComponent } from './me/employee-leaves/employee-leaves.component';
+import { OnBoardingComponent } from './home/dashboard/org/on-boarding/on-boarding.component';
 
 
 
@@ -88,6 +89,10 @@ const routes: Routes = [
   {
     path: 'employee',
     component: EmployeesComponent
+  },
+   {
+    path: 'onBoarding',
+    component: OnBoardingComponent
   },
   {
     path: 'documents',
