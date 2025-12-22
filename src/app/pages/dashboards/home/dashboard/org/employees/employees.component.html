@@ -108,7 +108,7 @@
 </div> -->
 
 
-<div class="container mt-3">
+<div class="container mt-3" style="cursor:pointer" >
 
     <!-- Top Tabs -->
     <ul class="nav nav-tabs mb-2">
@@ -151,6 +151,111 @@
 <div class="mt-2 p-3 " *ngIf="activeTab === 'directory'">
         <h5>Employee Directory</h5>
         <p>This section helps you explore all employees in the company.</p>
+        <div class="container mt-4">
+
+
+  <div class="row gx-3 gy-2 mb-4">
+      
+      <div class="col-md-2">
+          <label class="form-label small mb-1">Business Unit</label>
+          <select class="form-select">
+              <option>Select</option>
+          </select>
+      </div>
+
+      <div class="col-md-2">
+          <label class="form-label small mb-1">Department</label>
+          <select class="form-select">
+              <option>Technical - WEB</option>
+          </select>
+      </div>
+
+      <div class="col-md-2">
+          <label class="form-label small mb-1">Location</label>
+          <select class="form-select">
+              <option>Select</option>
+          </select>
+      </div>
+
+      <div class="col-md-2">
+          <label class="form-label small mb-1">Cost Center</label>
+          <select class="form-select">
+              <option>Select</option>
+          </select>
+      </div>
+
+      <div class="col-md-2">
+          <label class="form-label small mb-1">Legal Entity</label>
+          <select class="form-select">
+              <option>Select</option>
+          </select>
+      </div>
+
+      <div class="col-md-2">
+          <label class="form-label small mb-1">Search</label>
+          <input class="form-control" placeholder="Search">
+      </div>
+  </div>
+
+  <div class="row g-4">
+
+            <div class="col-md-4">
+          <div class="card shadow-sm border-0 p-3">
+              <div class="d-flex align-items-center mb-2">
+                  <div class="rounded-circle bg-success text-white d-flex justify-content-center align-items-center" style="width:60px; height:60px; font-size:20px; font-weight:600;">
+                      PP
+                  </div>
+                  <div class="ms-3">
+                      <h6 class="mb-0">Srikar</h6>
+                      <small class="text-muted">Software Engineer Intern</small>
+                  </div>
+              </div>
+
+              <p class="mb-1"><strong>Department:</strong> Technical → Technical - WEB</p>
+              <p class="mb-1"><strong>Location:</strong> Hyderabad</p>
+              <!-- <p class="mb-0"><strong>Email:</strong> pradeep.p@sharvininfotech.com</p> -->
+          </div>
+      </div>
+
+      <div class="col-md-4">
+          <div class="card shadow-sm border-0 p-3">
+              <div class="d-flex align-items-center mb-2">
+                  <div class="rounded-circle bg-success text-white d-flex justify-content-center align-items-center" style="width:60px; height:60px; font-size:20px; font-weight:600;">
+                      PK
+                  </div>
+                  <div class="ms-3">
+                      <h6 class="mb-0">Durga Prasad</h6>
+                      <small class="text-muted">Software Engineer Intern</small>
+                  </div>
+              </div>
+
+              <p class="mb-1"><strong>Department:</strong> Technical → Technical - WEB</p>
+              <p class="mb-1"><strong>Location:</strong> Hyderabad</p>
+              <!-- <p class="mb-0"><strong>Email:</strong> prasad.kvvk@sharvininfotech.com</p> -->
+          </div>
+      </div>
+
+
+      <div class="col-md-4">
+          <div class="card shadow-sm border-0 p-3">
+              <div class="d-flex align-items-center mb-2">
+                  <div class="rounded-circle bg-info text-white d-flex justify-content-center align-items-center" style="width:60px; height:60px; font-size:20px; font-weight:600;">
+                      SK
+                  </div>
+                  <div class="ms-3">
+                      <h6 class="mb-0">Sunil</h6>
+                      <small class="text-muted">Associate Consultant</small>
+                  </div>
+              </div>
+
+              <p class="mb-1"><strong>Department:</strong> Technical → Technical - WEB</p>
+              <p class="mb-1"><strong>Location:</strong> Hyderabad</p>
+              <!-- <p class="mb-0"><strong>Email:</strong> sunilkumar@sharvininfotech.com</p> -->
+          </div>
+      </div>
+
+  </div>
+</div>
     </div>
 
     <div class="mt-2 p-3 " *ngIf="activeTab === 'organization'">
@@ -165,13 +270,787 @@
 
     <div class="mt-2 p-3 " *ngIf="activeTab === 'Asserts'">
         <h5>Asserts</h5>
-        <p>View company assets assigned to you.</p>
+        <div class="row mb-3 align-items-center">
+            <div class="col">
+                <!-- <h5 class="m-0">(1)Asset Found</h5> -->
+            </div>
+            <div class="col-auto d-flex gap-2">
+                <button class="btn btn-light rounded-circle" data-bs-toggle="modal" data-bs-target="#filterAssetModal">
+                    <i class="bi bi-funnel"></i>
+                </button>
+                <!-- <button class="btn btn-light rounded-circle">
+                <i class="bi bi-gear"></i>
+            </button> -->
+
+            <button class="btn btn-outline-primary">
+                <i class="bi bi-file-earmark-text"></i> CSV
+            </button>
+
+            <button class="btn btn-outline-primary"  data-bs-toggle="modal" data-bs-target="#addAssetModal">
+                <i class="bi bi-plus-lg"></i> Add Asset
+            </button>
+            </div>
+        </div>
+        <!-- Table -->
+         <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th><input type="checkbox"></th>
+                        <th >Asset ID</th>
+                        <th>Category</th>
+                        <th>Serial Number</th>
+                        <th>Model</th>
+                        <th>Status</th>
+                        <th>Assigned Employee</th>
+                        <th>Assigned On</th>
+                        <th>Warrenty Ends</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>Asset-001</td>
+                        <td>Lenovo</td>
+                         <td>87963496</td>
+                          <td>bhvur789</td>
+                           <td>In-stock</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>2027-12-31</td>
+                            <td class="text-end">
+                                              <button class="btn btn-outline-primary btn-sm rounded-circle me-1" data-bs-toggle="modal" 
+        data-bs-target="#editAssetModal">
+                    <i class="bi bi-pencil"></i>
+                </button>
+                                 <button class="btn btn-outline-primary btn-sm rounded-circle me-1">
+                    <i class="bi bi-trash"></i>
+                </button>
+                            </td>
+                    </tr>
+                </tbody>
+               
+
+            </table>
+            <!-- Edit Asset Modal -->
+<div class="modal fade" id="editAssetModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Header Tabs -->
+      <div class="modal-header border-0 pb-0">
+        <ul class="nav nav-tabs w-100">
+          <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="tab" href="#assetDetailsTab">Asset Details</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#assignmentHistoryTab">Assignment History</a>
+          </li>
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="tab-content">
+
+          <!-- ========== TAB 1: ASSET DETAILS ========== -->
+<div class="tab-pane fade show active" id="assetDetailsTab">
+
+  <form>
+    <div class="row g-4">
+
+      <!-- EVERYTHING in 3-column layout -->
+      <div class="col-md-4">
+        <label class="form-label">Status</label>
+        <select class="form-select" [(ngModel)]="editAsset.status" name="status">
+          <option value="assign">Assign</option>
+          <option value="in-stock">In-Stock</option>
+          <option value="in-use">In-Use</option>
+          <option value="damaged">Damaged</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Employee</label>
+        <input type="text" class="form-control" [(ngModel)]="editAsset.employee" name="employee">
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">From</label>
+        <input
+    type="text"
+    class="form-control"
+    bsDatepicker
+    
+    [(ngModel)]="editAsset.fromDate"
+    name="fromDate"
+  />
+        <!-- <input type="date" class="form-control" [(ngModel)]="editAsset.fromDate" name="fromDate"> -->
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Asset ID</label>
+        <input type="text" class="form-control" [(ngModel)]="editAsset.assetId" name="assetId">
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Serial Number</label>
+        <input type="text" class="form-control" [(ngModel)]="editAsset.serialNumber" name="serialNumber">
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Brand</label>
+        <input type="text" class="form-control" [(ngModel)]="editAsset.brand" name="brand">
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Vendor</label>
+        <input type="text" class="form-control" [(ngModel)]="editAsset.vendor" name="vendor">
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Model</label>
+        <input type="text" class="form-control" [(ngModel)]="editAsset.model" name="model">
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Category</label>
+        <input type="text" class="form-control" [(ngModel)]="editAsset.category" name="category">
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Location</label>
+        <input type="text" class="form-control" [(ngModel)]="editAsset.location" name="location">
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Acquired</label>
+        <input
+    type="text"
+    class="form-control"
+    bsDatepicker
+    
+    [(ngModel)]="editAsset.acquiredOn"
+    name="acquiredOn"
+  />
+        <!-- <input type="date" class="form-control" [(ngModel)]="editAsset.acquiredOn" name="acquiredOn"> -->
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Warranty Starts</label>
+         <input
+    type="text"
+    class="form-control"
+    bsDatepicker
+    [(ngModel)]="editAsset.warrantyStart"
+    name="warrantyStart"
+  />
+        <!-- <input type="date" class="form-control" [(ngModel)]="editAsset.warrantyStart" name="warrantyStart"> -->
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Warranty Ends</label>
+         <input
+    type="text"
+    class="form-control"
+    bsDatepicker
+    [(ngModel)]="editAsset.warrantyEnd"
+    name="warrantyEnd"
+  />
+        <!-- <input type="date" class="form-control" [(ngModel)]="editAsset.warrantyEnd" name="warrantyEnd"> -->
+      </div>
+
+      <!-- Image upload inside grid now -->
+      <div class="col-md-4">
+        <label class="form-label">Asset Image</label>
+        <input type="file" class="form-control" (change)="onAddImageSelect($event)">
+      </div>
+
+      <!-- Description: full width -->
+      <div class="col-md-12">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" rows="3" [(ngModel)]="editAsset.description" name="description"></textarea>
+      </div>
+
+      <!-- Attachment: full width -->
+      <div class="col-md-12">
+        <label class="form-label">Attachment</label>
+        <input type="file" class="form-control" (change)="onAttachmentSelect($event)">
+      </div>
+
     </div>
+  </form>
+
+</div>
+
+
+          <!-- ========== TAB 2: ASSIGNMENT HISTORY ========== -->
+          <div class="tab-pane fade" id="assignmentHistoryTab">
+            <p>No assignment history available.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-success" (click)="saveAsset()">Save</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+         </div>
+
+
+    </div>
+
+    
 
     <div class="mt-2 p-3 " *ngIf="activeTab === 'Letters'">
         <h5>Letters</h5>
         <p>Download HR letters such as offer letter, experience letter, etc.</p>
     </div>
 
+
+<!-- Add Asset Modal -->
+<div class="modal fade" id="addAssetModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">Add Asset</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+
+        <form>
+          <div class="row g-3">
+
+            <div class="col-md-6">
+              <label class="form-label">Asset ID</label>
+              <input type="text" class="form-control" [(ngModel)]="addAsset.assetId" name="addAssetId">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Serial Number</label>
+              <input type="text" class="form-control" [(ngModel)]="addAsset.serialNumber" name="addSerialNumber">
+            </div>
+
+            <div class="col-md-12">
+              <label class="form-label">Asset Image</label>
+              <input type="file" class="form-control" (change)="onAddImageSelect($event)">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Brand</label>
+              <input type="text" class="form-control" [(ngModel)]="addAsset.brand" name="addBrand">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Vendor</label>
+              <input type="text" class="form-control" [(ngModel)]="addAsset.vendor" name="addVendor">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Model</label>
+              <input type="text" class="form-control" [(ngModel)]="addAsset.model" name="addModel">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Category</label>
+              <input type="text" class="form-control" [(ngModel)]="addAsset.category" name="addCategory">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Location</label>
+              <input type="text" class="form-control" [(ngModel)]="addAsset.location" name="addLocation">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Acquired On</label>
+              <!-- <input type="text" placeholder=" "  [(ngModel)]="addAsset.acquiredOn" name="addAcquiredOn"/> -->
+              <!-- <input type="date" class="form-control" [(ngModel)]="addAsset.acquiredOn" name="addAcquiredOn"> -->
+               <input
+    type="text"
+    class="form-control"
+    bsDatepicker
+    
+    [(ngModel)]="addAsset.acquiredOn"
+    name="addAcquiredOn"
+  />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Warranty Start</label>
+              <!-- <input type="date" class="form-control" [(ngModel)]="addAsset.warrantyStart" name="addWarrantyStart"> -->
+                <input
+    type="text"
+    class="form-control"
+    bsDatepicker
+   
+    [(ngModel)]="addAsset.warrantyStart"
+    name="addWarrantyStart"
+  />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Warranty End</label>
+              <!-- <input type="date" class="form-control" [(ngModel)]="addAsset.warrantyEnd" name="addWarrantyEnd"> -->
+                <input
+    type="text"
+    class="form-control"
+    bsDatepicker
+    
+    [(ngModel)]="addAsset.warrantyEnd"
+    name="addWarrantyEnd"
+  />
+            </div>
+
+            <div class="col-md-12">
+              <label class="form-label">Description</label>
+              <textarea class="form-control" rows="3" [(ngModel)]="addAsset.description" name="addDescription"></textarea>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" (click)="saveNewAsset()">Save</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+     <!-- Filter Asset Modal -->
+<div class="modal fade" id="filterAssetModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">Filter Assets</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+
+        <form>
+          <div class="row g-3">
+
+            <!-- Asset ID -->
+            <div class="col-md-6">
+              <label class="form-label">Asset ID</label>
+              <input type="text" class="form-control" name="filterAssetId" [(ngModel)]="filter.assetId">
+            </div>
+
+            <!-- Serial Number -->
+            <div class="col-md-6">
+              <label class="form-label">Serial Number</label>
+              <input type="text" class="form-control" name="filterSerialNumber" [(ngModel)]="filter.serialNumber">
+            </div>
+
+            <!-- Location -->
+            <div class="col-md-6">
+              <label class="form-label">Location</label>
+              <input type="text" class="form-control" name="filterLocation" [(ngModel)]="filter.location">
+            </div>
+
+            <!-- Status Dropdown -->
+            <div class="col-md-6">
+              <label class="form-label">Status</label>
+              <select class="form-select" name="filterStatus" [(ngModel)]="filter.status">
+                <option value="">-- Select Status --</option>
+                <option value="in-stock">In-stock</option>
+                <option value="in-use">In-use</option>
+                <option value="decommissioned">Decommissioned</option>
+                <option value="stolen">Stolen</option>
+              </select>
+            </div>
+
+            <!-- Model -->
+            <div class="col-md-6">
+              <label class="form-label">Model</label>
+              <input type="text" class="form-control" name="filterModel" [(ngModel)]="filter.model">
+            </div>
+
+            <!-- Category -->
+            <div class="col-md-6">
+              <label class="form-label">Category</label>
+              <input type="text" class="form-control" name="filterCategory" [(ngModel)]="filter.category">
+            </div>
+
+
+            <!-- Sub Heading -->
+            <div class="col-12 mt-3">
+              <h6 class="fw-bold text-secondary">Assigned To</h6>
+            </div>
+
+            <!-- Subordinate Of -->
+            <div class="col-md-6">
+              <label class="form-label">Subordinate Of</label>
+              <input type="text" class="form-control" name="filterSubordinateOf" [(ngModel)]="filter.subordinateOf">
+            </div>
+
+            <!-- Employee -->
+            <div class="col-md-6">
+              <label class="form-label">Employee</label>
+              <input type="text" class="form-control" name="filterEmployee" [(ngModel)]="filter.employee">
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+
+      
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" (click)="applyFilters()">Apply Filters</button>
+      </div>
+
+      
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+    <div class="mt-2 p-3" *ngIf="activeTab === 'organization'">
+        <h5>Organization Tree</h5>
+        <!-- ================= DIRECTORS ================= -->
+ 
+        <div class="card bg-white border-0 shadow-sm p-4">
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-4">
+                    <div class="card shadow-sm border-0 p-3">
+                        <div class="org-card org-card-horizontal d-flex align-items-center p-3">
+                            <div class="rounded-circle bg-info text-white d-flex justify-content-center align-items-center"
+                                style="width:60px; height:60px; font-size:20px; font-weight:600;">
+                                Sk
+                            </div>
+ 
+                            <div class="ms-3">
+                                <h6 class="mb-0">Siva Kumar Dondapati</h6>
+                                <small class="text-muted">Associate Consultant</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+ 
+            <div class="connector-line"></div>
+            <div class="connector-horizontal mb-4"></div>
+            <!-- ================= TEAMS ================= -->
+            <div class="row justify-content-center text-center">
+ 
+                <!-- ================= Sudha Rani Team ================= -->
+                <div class="col-md-3 mb-4">
+ 
+                    <!-- Team Lead -->
+                    <div class="org-card org-card-horizontal d-flex align-items-center p-3">
+                        <div class="org-avatar lead-avatar me-3">SR</div>
+                        <div class="text-start">
+                            <h6 class="fw-bold mb-1">Sudha Rani</h6>
+                            <p class="text-muted small mb-1">ABAP / Team Lead</p>
+                            <p class="small mb-0"><strong>Department:</strong> SAP</p>
+                        </div>
+                    </div>
+ 
+                    <div class="connector-line"></div>
+ 
+                    <!-- Team Members -->
+                    <div class="row justify-content-center g-3">
+                        <div class="col-auto">
+                            <div class="org-card org-card-horizontal d-flex align-items-center p-3">
+                                <div class="org-avatar member-avatar me-3">E</div>
+                                <div class="text-start">
+                                    <h6 class="fw-bold mb-1">Eswar</h6>
+                                    <p class="text-muted small mb-1">ABAP</p>
+                                    <p class="small mb-0"><strong>Department:</strong> SAP</p>
+                                </div>
+                            </div>
+                        </div>
+ 
+                        <div class="col-auto">
+                            <div class="org-card org-card-horizontal d-flex align-items-center p-3">
+                                <div class="org-avatar member-avatar me-3">A</div>
+                                <div class="text-start">
+                                    <h6 class="fw-bold mb-1">Ajay</h6>
+                                    <p class="text-muted small mb-1">ABAP</p>
+                                    <p class="small mb-0"><strong>Department:</strong> SAP</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+ 
+                </div>
+ 
+                <!-- ================= Paramesh Team ================= -->
+                <div class="col-md-3 mb-4">
+ 
+                    <!-- Team Lead -->
+                    <div class="org-card org-card-horizontal d-flex align-items-center p-3">
+                        <div class="org-avatar lead-avatar me-3">P</div>
+                        <div class="text-start">
+                            <h6 class="fw-bold mb-1">Paramesh</h6>
+                            <p class="text-muted small mb-1">Frontend / Team Lead</p>
+                            <p class="small mb-0"><strong>Department:</strong> ANGULAR</p>
+                        </div>
+                    </div>
+ 
+                    <div class="connector-line"></div>
+ 
+                    <!-- Team Members -->
+                    <div class="row justify-content-center g-3">
+                        <div class="col-auto">
+                            <div class="org-card org-card-horizontal d-flex align-items-center p-3">
+                                <div class="org-avatar member-avatar me-3">S</div>
+                                <div class="text-start">
+                                    <h6 class="fw-bold mb-1">Satish</h6>
+                                    <p class="text-muted small mb-1">Frontend</p>
+                                    <p class="small mb-0"><strong>Department:</strong> Angular</p>
+                                </div>
+                            </div>
+                        </div>
+ 
+                        <div class="col-auto">
+                            <div class="org-card org-card-horizontal d-flex align-items-center p-3">
+                                <div class="org-avatar member-avatar me-3">K</div>
+                                <div class="text-start">
+                                    <h6 class="fw-bold mb-1">Kusuma</h6>
+                                    <p class="text-muted small mb-1">Frontend</p>
+                                    <p class="small mb-0"><strong>Department:</strong> Angular</p>
+                                </div>
+                            </div>
+                        </div>
+ 
+                        <div class="col-auto">
+                            <div class="org-card org-card-horizontal d-flex align-items-center p-3">
+                                <div class="org-avatar member-avatar me-3">M</div>
+                                <div class="text-start">
+                                    <h6 class="fw-bold mb-1">Meghana</h6>
+                                    <p class="text-muted small mb-1">Frontend</p>
+                                    <p class="small mb-0"><strong>Department:</strong> Angular</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+ 
+                </div>
+ 
+                <!-- ================= Padma Team ================= -->
+                <div class="col-md-3 mb-4">
+ 
+                    <!-- Team Lead -->
+                    <div class="org-card org-card-horizontal d-flex align-items-center p-3">
+                        <div class="org-avatar lead-avatar me-3">P</div>
+                        <div class="text-start">
+                            <h6 class="fw-bold mb-1">Padma</h6>
+                            <p class="text-muted small mb-1">FICO / Team Lead</p>
+                            <p class="small mb-0"><strong>Department:</strong> SAP</p>
+                        </div>
+                    </div>
+ 
+                    <div class="connector-line"></div>
+ 
+                    <!-- Team Members -->
+                    <div class="row justify-content-center g-3">
+                        <div class="col-auto">
+                            <div class="org-card org-card-horizontal d-flex align-items-center p-3">
+                                <div class="org-avatar member-avatar me-3">P</div>
+                                <div class="text-start">
+                                    <h6 class="fw-bold mb-1">Phani</h6>
+                                    <p class="text-muted small mb-1">FICO</p>
+                                    <p class="small mb-0"><strong>Department:</strong> SAP</p>
+                                </div>
+                            </div>
+                        </div>
+ 
+                        <div class="col-auto">
+                            <div class="org-card org-card-horizontal d-flex align-items-center p-3">
+                                <div class="org-avatar member-avatar me-3">G</div>
+                                <div class="text-start">
+                                    <h6 class="fw-bold mb-1">Gopi</h6>
+                                    <p class="text-muted small mb-1">FICO</p>
+                                    <p class="small mb-0"><strong>Department:</strong> SAP</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+ 
+                </div>
+ 
+            </div>
+ 
+        </div>
+ 
+ 
+
+ 
+<div class="mt-2 p-3 " *ngIf="activeTab === 'Salary'">
+        <h5>Salary Information</h5>
+        <div class="card bg-white border-0 shadow-sm p-4">
+            <div class="container mt-4">
+ 
+                <!-- ===== Salary Details ===== -->
+                <h5 class="mb-4">Salary Details</h5>
+ 
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" value="Paramesh Ganavena" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Effective</label>
+ 
+                        <input type="text" class="form-control" bsDatepicker
+                            [bsConfig]="{ dateInputFormat: 'DD-MMM-YYYY' }" placeholder="24-Dec-2025" />
+ 
+                    </div>
+ 
+ 
+ 
+ 
+                </div>
+ 
+                <div class="row mb-4 align-items-end">
+                    <div class="col-md-4">
+                        <label class="form-label">Load Structure *</label>
+                        <select class="form-select">
+                            <option selected>6 - LPA</option>
+                        </select>
+                    </div>
+                    <!-- <div class="col-md-2">
+                        <button class="btn btn-outline-secondary w-100">Apply</button>
+                    </div> -->
+                </div>
+ 
+                <!-- ===== Salary Components ===== -->
+                <div class="text-center my-3">
+                    <span class="fw-semibold">Salary Components</span>
+                    <hr>
+                </div>
+ 
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Basic Salary *</label>
+                        <input type="text" class="form-control" value="15207">
+                    </div>
+                    <!-- <div class="col-md-6">
+                        <label class="form-label">LTA *</label>
+                        <input type="text" class="form-control" value="4423">
+                    </div> -->
+                </div>
+ 
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">House Rent Allowance *</label>
+                        <input type="text" class="form-control" value="7854">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Conveyance Allowance *</label>
+                        <input type="text" class="form-control" value="8830">
+                    </div>
+                </div>
+ 
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label">Medical Allowance *</label>
+                        <input type="text" class="form-control" value="11286">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Special Allowance</label>
+                        <select class="form-select">
+                            <option>Special Allowance</option>
+                        </select>
+                    </div>
+                </div>
+ 
+                <!-- ===== Salary Deductions ===== -->
+                <div class="text-center my-3">
+                    <span class="fw-semibold">Salary Deductions</span>
+                    <hr>
+                </div>
+ 
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Health Insurance Premium *</label>
+                        <input type="text" class="form-control" value="500">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">PF</label>
+                        <select class="form-select">
+                            <option>23456</option>
+                        </select>
+                    </div>
+                </div>
+ 
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label">Miscellaneous *</label>
+                        <input type="text" class="form-control" value="1000">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Performance Pay</label>
+                        <select class="form-select">
+                            <option>pay</option>
+                        </select>
+                    </div>
+                </div>
+ 
+                <!-- ===== Salary Summary ===== -->
+                <div class="row mb-4">
+                    <div class="col-md-6 fw-semibold">
+                        Gross Salary Per Month :
+                    </div>
+                    <div class="col-md-6 fw-semibold">
+                        INR 47,600.00
+                    </div>
+                </div>
+ 
+                <div class="row mb-5">
+                    <div class="col-md-6 fw-semibold">
+                        Net Salary Per Month :
+                    </div>
+                    <div class="col-md-6 fw-semibold">
+                        INR 45,100.00
+                    </div>
+                </div>
+ 
+                <!-- ===== Action Buttons ===== -->
+                <div class="d-flex justify-content-end gap-2">
+                    <button class="btn btn-outline-danger">Close</button>
+                    <button class="btn btn-outline-secondary">Refresh</button>
+                    <button class="btn btn-dark">Submit</button>
+                </div>
+ 
+            </div>
+        </div>
+ 
+ 
+ 
 
 <div>
