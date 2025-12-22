@@ -1,0 +1,196 @@
+<div *ngIf="showHistory" class="resignation-page container-fluid">
+
+  <!-- PAGE TITLE -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <h4 class="page-title">My Resignation Request History</h4>
+    </div>
+  </div>
+
+  <!-- FILTER + ADD BUTTON -->
+  <div class="row align-items-end mb-3">
+
+    <!-- STATUS -->
+    <div class="col-12 col-md-4 col-lg-3 mb-3 mb-md-0">
+      <label class="form-label fw-semibold">Status</label>
+      <select
+        class="form-select"
+        [(ngModel)]="selectedStatus"
+        (change)="filterStatus()">
+        <option value="all">All</option>
+        <option value="pending">Pending</option>
+        <option value="approved">Approved</option>
+        <option value="rejected">Rejected</option>
+      </select>
+    </div>
+
+    <!-- ADD BUTTON -->
+    <div class="col-12 col-md-8 col-lg-9 text-md-end">
+      <button class="add-btn" (click)="openAddDrawer()">
+        <span>+</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- TABLE -->
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive table-wrapper">
+        <table class="table table-bordered align-middle">
+          <thead>
+            <tr>
+              <th>Resignation Reason</th>
+              <th>Requested Resignation Date</th>
+              <th>Actual Notice Period</th>
+              <th>Attachment</th>
+              <th>Status</th>
+              <th>Requested On</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngIf="filteredList.length === 0">
+              <td colspan="7" class="text-center">
+                No Result Found..!
+              </td>
+            </tr>
+
+            <tr
+              *ngFor="let item of filteredList | slice:(page-1)*pageSize:page*pageSize">
+              <td>{{ item.reason }}</td>
+              <td>{{ item.requestDate }}</td>
+              <td>{{ item.noticePeriod }}</td>
+              <td>-</td>
+              <td>{{ item.status }}</td>
+              <td>{{ item.requestedOn }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary">
+                  View
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="row align-items-center mt-3">
+
+    <div class="col-12 col-md-4 mb-2">
+      Items per page:
+      <select
+        class="form-select d-inline-block w-auto ms-2"
+        [(ngModel)]="pageSize"
+        (change)="page=1">
+        <option *ngFor="let size of pageSizes" [value]="size">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-12 col-md-4 text-center mb-2">
+      {{ (filteredList.length === 0) ? 0 : ((page-1)*pageSize + 1) }}
+      -
+      {{ Math.min(page*pageSize, filteredList.length) }}
+      of {{ filteredList.length }}
+    </div>
+
+    <div class="col-12 col-md-4 text-md-end">
+      <button
+        class="btn btn-sm btn-outline-secondary me-1"
+        (click)="prevPage()"
+        [disabled]="page===1">
+        &lt;
+      </button>
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        (click)="nextPage()"
+        [disabled]="page*pageSize>=filteredList.length">
+        &gt;
+      </button>
+    </div>
+
+  </div>
+
+</div>
+<div *ngIf="showApplyForm" class="resignation-form container-fluid">
+
+  <!-- HEADER -->
+  <div class="row align-items-center mb-4">
+    <div class="col-auto">
+      <span class="back" (click)="backToHistory()">‹</span>
+    </div>
+    <div class="col">
+      <h4 class="title mb-0">Resignation Application</h4>
+    </div>
+  </div>
+
+  <!-- FORM BODY -->
+  <div class="row">
+
+    <!-- EXIT REASON -->
+    <div class="col-12 col-md-6 mb-4">
+      <label>Exit Reason <span>*</span></label>
+      <select class="form-select" [(ngModel)]="exitReason">
+        <option value="" disabled>Select Exit Reason</option>
+        <option>Better Opportunity</option>
+        <option>Personal Reason</option>
+        <option>Higher Studies</option>
+      </select>
+    </div>
+
+    <!-- DATE -->
+    <div class="col-12 col-md-6 mb-4">
+      <label>Requested Employee Date <span>*</span></label>
+      <input
+        type="text"
+        class="form-control"
+        bsDatepicker
+        [bsConfig]="bsConfig"
+        placeholder="Select date">
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="col-12 mb-4">
+      <label>Description of the work <span>*</span></label>
+      <ckeditor
+        [editor]="Editor"
+        [(ngModel)]="description"
+        [config]="editorConfig">
+      </ckeditor>
+    </div>
+
+    <!-- COMMENTS -->
+    <div class="col-12 mb-4">
+      <label>Additional Comments</label>
+      <ckeditor
+        [editor]="Editor"
+        [(ngModel)]="comments"
+        [config]="editorConfig">
+      </ckeditor>
+    </div>
+
+    <!-- FILE UPLOAD -->
+    <div class="col-12 mb-4">
+      <label class="upload-label">
+        Upload PNG, JPEG, PDF, DOCX, XLSX etc. *
+      </label>
+      <input type="file" class="form-control">
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="row">
+    <div class="col-12 text-end">
+      <button class="submit-btn" (click)="submit()">
+        Submit
+      </button>
+    </div>
+  </div>
+
+</div>

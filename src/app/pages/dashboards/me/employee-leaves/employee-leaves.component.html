@@ -46,7 +46,7 @@
   </div>
 
   <!-- My Leave Stats -->
-  <h6 class="fw-bold mb-3 text-dark">My Leave Stats</h6>
+  <h6 class="fw-bold mb-3 text-dark section-title">My Leave Stats</h6>
   <div class="row g-3 mb-4">
     
     <!-- Weekly Pattern -->
@@ -105,7 +105,7 @@
   </div>
 
   <!-- Leave Balances -->
-  <h6 class="fw-bold mb-3 text-dark">Leave Balances</h6>
+  <h6 class="fw-bold mb-3 text-dark section-title">Leave Balances</h6>
   <div class="row g-3">
     <div class="col-md-6 col-lg-3" *ngFor="let balance of leaveBalances">
       <div class="card h-100 border-0 shadow-sm rounded-3">
@@ -184,14 +184,25 @@
       <div class="d-flex justify-content-between gap-2 mb-4">
         <div class="date-box">
           <label>From</label>
-          <input type="date" [(ngModel)]="leave.from">
+         <input
+          type="text"
+          class="form-control"
+          bsDatepicker
+          [bsConfig]="bsConfig"
+          placeholder="Select date">
         </div>
 
         <div class="date-days">{{ leave.days }} days</div>
 
         <div class="date-box">
           <label>To</label>
-          <input type="date" [(ngModel)]="leave.to">
+          <!-- <input type="date" [(ngModel)]="leave.to"> -->
+           <input
+          type="text"
+          class="form-control"
+          bsDatepicker
+          [bsConfig]="bsConfig"
+          placeholder="Select date">
         </div>
       </div>
 
@@ -207,6 +218,33 @@
       <!-- Note -->
       <label class="fw-semibold">Note</label>
       <textarea class="form-control mb-3" rows="3" placeholder="Type here" [(ngModel)]="leave.note"></textarea>
+      
+      <!-- Document -->
+ <label class="fw-semibold">Supporting Document</label>
+
+<div class="file-upload-wrapper">
+  <input
+    type="file"
+    class="form-control"
+    #fileInput
+    (change)="onFileSelected($event)"
+  />
+
+  <!-- Cancel icon -->
+  <span
+    *ngIf="selectedFile"
+    class="cancel-icon"
+    (click)="cancelFile(fileInput)"
+  >
+    ×
+  </span>
+</div>
+
+<!-- Show selected file name -->
+<div *ngIf="selectedFile" class="mt-1 text-muted">
+  {{ selectedFile.name }}
+</div>
+
 
       <!-- Notify -->
       <label class="fw-semibold">Notify</label>

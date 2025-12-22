@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PerformanceComponent } from './performance.component';
+import { ResignationComponent } from './resignation.component';
 
-describe('PerformanceComponent', () => {
-  let component: PerformanceComponent;
-  let fixture: ComponentFixture<PerformanceComponent>;
+describe('ResignationComponent', () => {
+  let component: ResignationComponent;
+  let fixture: ComponentFixture<ResignationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PerformanceComponent]
+      imports: [ResignationComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PerformanceComponent);
+    fixture = TestBed.createComponent(ResignationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

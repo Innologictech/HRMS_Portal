@@ -1,0 +1,326 @@
+// leave css
+
+/* 1. Global Variables */
+:root {
+  --primary-custom: #6a1b9a; /* Deep Purple */
+  --teal-custom: #4dd0e1;    /* Cyan/Teal for Gauge */
+  --bg-color: #f2f4f7;      /* Light background */
+  --border-color: #e0e0e0;   /* Visible grey for grid lines */
+}
+
+/* 2. Main Layout */
+.dashboard-container {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  padding-bottom: 50px;
+}
+/* 3. Typography Helpers */
+.x-small {
+  font-size: 0.75rem; /* 12px */
+}
+
+.xx-small {
+  font-size: 0.65rem; /* ~10px */
+  letter-spacing: 0.5px;
+}
+
+.text-primary-custom {
+  color: var(--primary-custom) !important;
+}
+
+/* 4. Buttons */
+.btn-primary-custom {
+  background-color: var(--primary-custom);
+  color: #fff;
+  border: none;
+  font-weight: 500;
+}
+.btn-primary-custom:hover {
+  background-color: #55147d;
+  color: #fff;
+}
+
+/* 5. Cards */
+.card {
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;  /* ADDED */
+}
+
+/* 6. Leave Balances Grid (The Footer Borders) */
+/* These rules force the borders to appear exactly like the screenshot */
+.border-end {
+  border-right: 1px solid var(--border-color) !important;
+}
+
+.border-bottom {
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.border-top {
+  border-top: 1px solid var(--border-color) !important;
+}
+
+/* 7. Gauge Styles */
+.gauge-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  /* This creates the teal ring */
+  background: conic-gradient(
+    var(--teal-custom) calc(var(--percentage) * 1%), 
+    #f0f0f0 0
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gauge-inner {
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 8. Fix for 'Squashed Text' in Stats */
+/* Ensures the days (Mon, Tue...) take up full width */
+.w-100 {
+  width: 100% !important;
+}
+
+.card-body {
+  padding: 16px !important;
+}
+
+.card {
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+
+// leave request
+
+// .drawer-overlay {
+//   position: fixed;
+//   inset: 0;
+//   background: rgba(0,0,0,0.45);
+//   z-index: 1000;
+// }
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: -500px;
+  width: 420px;
+  height: 100vh;
+  background: white;
+  z-index: 1001;
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer.open {
+  right: 0;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 22px;
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.drawer-body {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.drawer-footer {
+  padding: 12px 22px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.date-box {
+  flex: 1;
+}
+
+.date-days {
+  padding: 16px 8px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.file-upload-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.cancel-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: red;
+  cursor: pointer;
+  font-weight: bold;
+}
+/* ===== FIX: Request Leave button visibility ===== */
+
+.request-leave-btn,
+.btn-primary-custom {
+  background-color: var(--primary-custom) !important;
+  color: #ffffff !important;
+}
+
+/* Keep hover only for slight effect */
+.request-leave-btn:hover,
+.btn-primary-custom:hover {
+  background-color: #55147d !important;
+  color: #ffffff !important;
+}
+/* ===== FIX: Request Leave button always visible ===== */
+.btn-primary-custom {
+  background-color: var(--primary-custom) !important;
+  color: #ffffff !important;
+
+  border: none;
+}
+
+/* Hover – only slight change */
+.btn-primary-custom:hover {
+  background-color: #55147d !important;
+  color: #ffffff !important;
+}
+/* ===== FORCE Request Leave button visibility ===== */
+.card .btn-primary-custom,
+.btn-primary-custom {
+
+
+  background-color: var(--primary-custom) !important;
+  color: #ffffff !important;
+}
+
+
+/* Remove invisible overlays on cards */
+.card::before,
+.card::after {
+  display: none !important;
+}
+
+/* Ensure card content is clickable */
+.card {
+  position: relative;
+  z-index: 1;
+}
+
+/* Force button above everything */
+.card .btn,
+.card button {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto !important;
+}
+
+
+
+
+/* ===============================
+   FINAL FIX – FORCE BUTTON VISUALS
+   =============================== */
+
+.btn-primary-custom {
+  background-color: #6a1b9a !important; /* solid purple */
+  color: #ffffff !important;
+
+  border: none !important;
+
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 36px;
+  min-width: 140px;
+}
+
+/* Hover */
+.btn-primary-custom:hover {
+  background-color: #55147d !important;
+  color: #ffffff !important;
+}
+/* ===============================
+   FIX: Bootstrap btn override
+   =============================== */
+
+.btn.btn-primary-custom {
+  --bs-btn-bg: #6a1b9a !important;
+  --bs-btn-color: #ffffff !important;
+  --bs-btn-border-color: #6a1b9a !important;
+
+  background-color: #6a1b9a !important;
+  color: #ffffff !important;
+
+
+}
+
+/* Hover */
+.btn.btn-primary-custom:hover {
+  --bs-btn-bg: #55147d !important;
+  --bs-btn-border-color: #55147d !important;
+
+  background-color: #55147d !important;
+  color: #ffffff !important;
+}
+/* Ensure cards create stacking context */
+.card {
+  position: relative;
+  z-index: 5;
+}
+
+/* Force button always on top */
+.card button,
+.card .btn {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto !important;
+}
+/* Kill invisible hover overlays */
+.card::before,
+.card::after,
+.card-body::before,
+.card-body::after {
+  content: none !important;
+  display: none !important;
+}
+/* Force card content always visible */
+.card,
+.card * {
+  opacity: 1 !important;
+  visibility: visible !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+/* Kill hover-based reveal logic */
+.card:hover,
+.card:hover * {
+  opacity: 1 !important;
+  visibility: visible !important;
+}

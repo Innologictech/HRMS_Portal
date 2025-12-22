@@ -1,0 +1,207 @@
+
+ /* =====================================================
+   RESIGNATION – FINAL CLEAN CSS (SAFE VERSION)
+   ===================================================== */
+
+/* ---------------- ADD BUTTON ---------------- */
+.add-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  font-size: 22px;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+/* ---------------- APPLY FORM CONTAINER ---------------- */
+.resignation-form {
+  min-height: 100vh;
+  // display: flex;
+  // flex-direction: column;
+  background: #ffffff;
+}
+
+/* ---------------- HEADER ---------------- */
+.form-header {
+  height: 56px;
+  // display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-bottom: 1px solid #e5e7eb;
+  position: relative;
+  background: #ffffff;
+}
+
+.form-header {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 🔥 FORCE LEFT */
+  gap: 12px;
+  padding: 0 16px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+/* REMOVE ALL absolute / transform logic */
+.form-header h4,
+.form-header .title {
+  position: static !important;
+  transform: none !important;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+
+
+.back {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* ---------------- FORM BODY ---------------- */
+// .form-body {
+//   padding: 16px 24px;
+// }
+
+/* ---------------- LABELS ---------------- */
+label {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+label span {
+  color: rgb(247, 11, 11);
+}
+
+/* ---------------- INPUTS (UNDERLINE STYLE) ---------------- */
+.form-control,
+.form-select {
+  border: none !important;
+  border-bottom: 1px solid #c7c7c7 !important;
+  border-radius: 0 !important;
+  padding-left: 0;
+  background: transparent;
+  box-shadow: none !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-bottom-color: #000 !important;
+  box-shadow: none !important;
+}
+
+/* ---------------- QUILL EDITOR ---------------- */
+.custom-quill {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.custom-quill .ql-toolbar {
+  border-bottom: 1px solid #d1d5db;
+  padding: 8px;
+}
+
+.custom-quill .ql-container {
+  min-height: 300px;
+  font-size: 14px;
+  background: #ffffff;
+}
+
+/* Smaller editor */
+.custom-quill.small .ql-container {
+  min-height: 220px;
+}
+
+/* 🔥 IMPORTANT: REMOVE BLACK TRIANGLE SAFELY */
+.custom-quill .ql-editor::before,
+.custom-quill .ql-editor::after {
+  content: none !important;
+  display: none !important;
+}
+
+.custom-quill .ql-editor {
+  min-height: 300px;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---------------- ATTACHMENT ---------------- */
+.attachment {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ---------------- FOOTER ---------------- */
+.form-footer {
+  margin-top: auto;
+  padding: 16px 24px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: flex-end;
+  background: #ffffff;
+}
+
+.submit-btn {
+  background: #111827;
+  color: #ffffff;
+  padding: 8px 24px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+:host ::ng-deep .ck-editor__editable {
+  min-height: 250px;
+}
+
+:host ::ng-deep .ck.ck-editor {
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+}
+
+/* ===============================
+   BOOTSTRAP GRID SAFETY FIX
+   =============================== */
+
+.resignation-page,
+.resignation-form,
+.form-body {
+  display: block !important;
+}
+
+.row {
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+}
+
+[class^="col-"],
+[class*=" col-"] {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+ckeditor {
+  display: block;
+  width: 100%;
+}
+.resignation-page,
+.resignation-form,
+.form-body {
+  display: block !important;
+}

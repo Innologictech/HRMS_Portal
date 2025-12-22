@@ -1,0 +1,107 @@
+<div class="assets-page container-fluid" style="cursor: pointer;">
+
+  <!-- ================= MY ASSETS (HEADER + TABLE) ================= -->
+  <div *ngIf="!showRequestForm">
+
+    <!-- HEADER -->
+    <div class="header d-flex justify-content-between align-items-center mb-3">
+      <div class="title">
+        <h4>My Assets</h4>
+      </div>
+      <a class="request-link" (click)="requestAssets()">Request Assets</a>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Category Name</th>
+            <th>Asset Name</th>
+            <th>Asset Item Name</th>
+            <th>Given Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <!-- EMPTY STATE -->
+          <tr *ngIf="assetList.length === 0">
+            <td colspan="5" class="empty-block text-center">
+              <div class="empty-icon"></div>
+              <p>No Result Found..!</p>
+            </td>
+          </tr>
+
+          <!-- ASSET ROWS -->
+          <tr *ngFor="let item of assetList">
+            <td>{{ item.category }}</td>
+            <td>{{ item.assetName }}</td>
+            <td>{{ item.assetItem }}</td>
+            <td>{{ item.givenDate | date:'dd/MM/yyyy hh:mm a' }}</td>
+            <td>
+              <span class="status-badge"
+                    [ngClass]="{
+                      'approved': item.status === 'Approved',
+                      'pending': item.status === 'Pending',
+                      'rejected': item.status === 'Rejected'
+                    }">
+                ● {{ item.status }}
+              </span>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- ================= ASSET REQUEST FORM ================= -->
+  <div *ngIf="showRequestForm" class="asset-container">
+
+    <div class="form-header">
+      <h4>Asset Request Application</h4>
+      <span class="close" (click)="closeForm()">✕</span>
+    </div>
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>Asset Categories *</label>
+        <select>
+          <option value="">Select</option>
+          <option>Laptop</option>
+          <option>Mobile</option>
+          <option>Accessories</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Type of Asset *</label>
+        <select>
+          <option value="">Select</option>
+          <option>New</option>
+          <option>Replacement</option>
+        </select>
+      </div>
+
+      <div class="form-group full-width">
+        <label>Comments *</label>
+       <textarea maxlength="100"
+          [(ngModel)]="comments"
+          placeholder="Enter Comments"></textarea>
+<span class="count">{{ comments?.length || 0 }} / 100</span>
+
+      </div>
+
+    </div>
+
+    <div class="actions">
+      <button class="apply-btn">Submit Request</button>
+    </div>
+
+  </div>
+
+</div>

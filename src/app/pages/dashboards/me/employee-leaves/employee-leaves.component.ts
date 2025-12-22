@@ -2,6 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { BsDatepickerConfig, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 
 
 interface LeaveBalance {
@@ -18,7 +20,7 @@ interface LeaveBalance {
 @Component({
   selector: 'app-employee-leaves',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,BsDatepickerModule],
   templateUrl: './employee-leaves.component.html',
   styleUrl: './employee-leaves.component.scss'
 })
@@ -62,6 +64,7 @@ export class EmployeeLeavesComponent {
       dataPresent: false,
     },
   ];
+bsConfig: Partial<BsDatepickerConfig>|undefined;
 
   constructor() { }
 
@@ -95,14 +98,31 @@ export class EmployeeLeavesComponent {
   }
 
   submitRequest() {
-    // TODO: API
-    console.log("Request Leave:", this.leave);
+   console.log("Request Leave:", this.leave);
     alert("Clicked");
     this.closeRequest();
   }
+
+  selectedFile: File | null = null;
+
+onFileSelected(event: any) {
+  const file = event.target.files[0];
+  this.selectedFile = file;
+  console.log("Selected file:", this.selectedFile);
+
+}
+cancelFile(fileInput: any) {
+  this.selectedFile = null;
+  fileInput.value = '';  // clears file input
+}
 
 
 
 
 }
+
+
+
+
+
 

@@ -1,0 +1,167 @@
+<!-- =====================================================
+     LETTER HISTORY PAGE
+     ===================================================== -->
+<div *ngIf="showHistory" class="letter-page container-fluid">
+
+  <!-- PAGE TITLE -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <h4 class="page-title">My Letter Requests</h4>
+    </div>
+  </div>
+
+  <!-- FILTER + ADD BUTTON -->
+  <div class="row align-items-end mb-3">
+
+    <!-- STATUS -->
+    <div class="col-12 col-md-4 col-lg-3 mb-3 mb-md-0">
+      <label class="form-label fw-semibold">Status</label>
+      <select
+        class="form-select"
+        [(ngModel)]="selectedStatus"
+        (change)="applyFilter()">
+        <option value="all">All</option>
+        <option value="approved">Approved</option>
+        <option value="pending">Pending</option>
+        <option value="rejected">Rejected</option>
+      </select>
+    </div>
+
+    <!-- ADD BUTTON -->
+    <div class="col-12 col-md-8 col-lg-9 text-md-end">
+      <button class="add-btn" (click)="openApplyForm()">+</button>
+    </div>
+
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-wrapper">
+    <table class="table table-bordered align-middle">
+      <thead>
+        <tr>
+          <th>Letter Name</th>
+          <th>Actioned On</th>
+          <th>Status</th>
+          <th>Approver</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- EMPTY STATE -->
+        <tr *ngIf="filteredList.length === 0">
+          <td colspan="4" class="text-center">
+            No Result Found..!
+          </td>
+        </tr>
+
+        <!-- DATA ROWS -->
+        <tr
+          *ngFor="let row of filteredList | slice:(page-1)*pageSize:page*pageSize">
+          <td>{{ row.letterName }}</td>
+          <td>{{ row.actionedOn }}</td>
+          <td>{{ row.status }}</td>
+          <td>{{ row.approver }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="row align-items-center mt-3">
+
+    <div class="col-12 col-md-4 mb-2">
+      Items per page:
+      <select
+        class="form-select d-inline-block w-auto ms-2"
+        [(ngModel)]="pageSize"
+        (change)="page = 1">
+        <option *ngFor="let size of pageSizes" [value]="size">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-12 col-md-4 text-center mb-2">
+      {{ filteredList.length === 0 ? 0 : (page - 1) * pageSize + 1 }}
+      -
+      {{ Math.min(page * pageSize, filteredList.length) }}
+      of {{ filteredList.length }}
+    </div>
+
+    <div class="col-12 col-md-4 text-md-end">
+      <button
+        class="btn btn-sm btn-outline-secondary me-1"
+        (click)="prevPage()"
+        [disabled]="page === 1">
+        &lt;
+      </button>
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        (click)="nextPage()"
+        [disabled]="page * pageSize >= filteredList.length">
+        &gt;
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     LETTER APPLY FORM PAGE
+     ===================================================== -->
+<div *ngIf="showApplyForm" class="letter-form container-fluid">
+
+  <!-- HEADER -->
+  <div class="row align-items-center mb-4">
+    <div class="col-auto">
+      <span class="back" (click)="backToHistory()">‹</span>
+    </div>
+    <div class="col">
+      <h4 class="title mb-0">Letter Request</h4>
+    </div>
+  </div>
+
+  <!-- FORM BODY -->
+  <div class="row">
+
+    <div class="col-12 col-md-6 mb-4">
+      <label>Letter <span>*</span></label>
+
+      <div class="dropdown-wrapper" (click)="toggleLetterDropdown()">
+        <input
+          type="text"
+          placeholder="Select Letter"
+          [(ngModel)]="letterSearch"
+          readonly />
+        <span class="icon">🔍</span>
+      </div>
+
+      <!-- DROPDOWN -->
+      <div class="dropdown" *ngIf="showLetterDropdown">
+        <input
+          class="search-input"
+          placeholder="Search"
+          [(ngModel)]="letterSearch"
+          (input)="filterLetters()" />
+
+        <div
+          class="dropdown-item"
+          *ngFor="let l of filteredLetters"
+          (click)="selectLetter(l)">
+          {{ l }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="row">
+    <div class="col-12 text-end">
+      <button class="submit-btn">Submit</button>
+    </div>
+  </div>
+
+</div>

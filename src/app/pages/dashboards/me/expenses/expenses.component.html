@@ -1,1 +1,199 @@
-<p>expenses works!</p>
+<div class="expenses-page container-fluid">
+  <ng-container *ngIf="!showAddExpenseForm">
+  <!-- HEADER -->
+  <div class="row mb-3" >
+    <div class="col-12">
+      <div class="page-header">
+        <div class="left">
+          <span class="back">‹</span>
+          <h4>Expenses Requests</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- FILTER + TABLE -->
+  <!-- <div *ngIf="!showAddExpenseForm"> -->
+
+    <!-- FILTER ROW -->
+    <div class="row align-items-end g-3 mb-3">
+
+      <div class="col-12 col-md-3">
+        <label>Status</label>
+        <select class="form-select" [(ngModel)]="selectedStatus">
+          <option value="All">All</option>
+          <option value="Approved">Approved</option>
+          <option value="Pending">Pending</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-3">
+        <label>Expenses</label>
+        <select class="form-select" [(ngModel)]="selectedExpense">
+          <option value="">Select Expense</option>
+          <option *ngFor="let exp of expenseOptions">{{ exp }}</option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-6 d-flex justify-content-md-end gap-2">
+
+        <div class="search-box">
+          <input
+            type="text"
+            placeholder="Search"
+            [(ngModel)]="searchText">
+          <span class="search-icon"></span>
+        </div>
+
+        <button class="icon-btn" (click)="openAddExpense()">+</button>
+
+      </div>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="row">
+      <div class="col-12">
+      <div class="table-wrapper table-responsive">
+  <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>Expense Type</th>
+                <th>Amount</th>
+                <th>Requested On</th>
+                <th>Status</th>
+                <th>Approver</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let exp of filteredExpenses">
+                <td>{{ exp.type }}</td>
+                <td>INR {{ exp.amount }}</td>
+                <td>{{ exp.requestedOn }}</td>
+                <td>
+                  <span
+                    class="status-dot"
+                    [ngClass]="exp.status.toLowerCase()">
+                  </span>
+                </td>
+                <td>{{ exp.approver }}</td>
+                <td>
+                  <button
+                    class="outline-btn"
+                    (click)="viewDetails(exp)">
+                    View Details
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+</ng-container>
+  <!-- </div> -->
+
+    <!-- ================= ADD EXPENSE FORM ================= -->
+  <div *ngIf="showAddExpenseForm" class="asset-container">
+
+    <!-- HEADER -->
+    <div class="row mb-4 align-items-center">
+      <div class="col">
+        <h4 class="mb-0">Add Expense Request</h4>
+      </div>
+      <div class="col-auto">
+        <span class="close" (click)="closeAddExpense()">✕</span>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="row g-4">
+
+      <div class="col-12 col-md-6">
+        <label>Expense Type *</label>
+        <select class="form-select">
+          <option value="">Select Expense</option>
+          <option *ngFor="let exp of expenseOptions">{{ exp }}</option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label>Expense Amount *</label>
+        <input type="number" class="form-control" placeholder="Enter Amount">
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label>Miscellaneous Amount</label>
+        <input type="number" class="form-control" placeholder="Enter Amount">
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label>Date of Expense *</label>
+        <input
+          type="text"
+          class="form-control"
+          bsDatepicker
+          [bsConfig]="bsConfig"
+          placeholder="Select date">
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label>Payment Method</label>
+        <select class="form-select">
+          <option value="">Select</option>
+          <option>Cash</option>
+          <option>UPI</option>
+          <option>Card</option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label>Description*</label>
+        <input type="text" class="form-control" placeholder="Enter the Remarks">
+      </div>
+
+      <!-- UPLOAD -->
+      <div class="col-12">
+        <label class="upload-label">
+          Upload PNG, JPEG, PDF, DOCX, XLSX etc. *
+        </label>
+        <input type="file" class="form-control">
+      </div>
+
+    </div>
+
+    <!-- CONFIRM -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="confirm-box">
+          <input
+            type="checkbox"
+            id="confirm"
+            [(ngModel)]="isConfirmed">
+          <label for="confirm">
+            I confirm that all of the data entered above is accurate and legitimate.
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="row mt-4">
+      <div class="col-12 text-end">
+        <button
+          class="apply-btn"
+          [disabled]="!isConfirmed"
+          (click)="submitExpense()">
+          Submit
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

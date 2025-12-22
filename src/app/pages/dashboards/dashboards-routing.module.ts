@@ -20,14 +20,19 @@ import { EmployeesComponent } from './home/dashboard/org/employees/employees.com
 import { DocumentsComponent } from './home/dashboard/org/documents/documents.component';
 import { EngageComponent } from './home/dashboard/org/engage/engage.component';
 import { InboxComponent } from './inbox/inbox.component';
-import { TakeactionsComponent } from './inbox/takeactions/takeactions.component';
-import { NotificationsComponent } from './inbox/notifications/notifications.component';
-import { ArchiveComponent } from './inbox/archive/archive.component';
+// import { TakeactionsComponent } from './inbox/takeactions/takeactions.component';
+// import { NotificationsComponent } from './inbox/notifications/notifications.component';
+// import { ArchiveComponent } from './inbox/archive/archive.component';
 import { AttendanceComponent } from './me/attendance/attendance.component';
 import { AppsComponent } from './me/apps/apps.component';
 import { ExpensesComponent } from './me/expenses/expenses.component';
 import { PerformanceComponent } from './me/performance/performance.component';
 import { EmployeeLeavesComponent } from './me/employee-leaves/employee-leaves.component';
+import { onErrorResumeNextWith } from 'rxjs';
+import { ExitComponent } from './home/dashboard/org/exit/exit.component';
+import { AssetComponent } from './me/asset/asset.component';
+import { ResignationComponent } from './me/resignation/resignation.component';
+import { MyLettersComponent } from './me/my-letters/my-letters.component';
 
 
 
@@ -93,14 +98,23 @@ const routes: Routes = [
     path: 'documents',
     component: DocumentsComponent
   },
+   {
+    path: 'myLetters',
+    component: MyLettersComponent
+  },
+{
+path:'exit',
+component:ExitComponent
+},
   {
     path: 'engage',
     component: EngageComponent
   },
   { path: 'inbox', component: InboxComponent },
-  { path: 'takeactions', component: TakeactionsComponent },
-  { path: 'notifications', component: NotificationsComponent },
-  { path: 'archive', component: ArchiveComponent },
+  // { path: 'takeactions', component: TakeactionsComponent },
+  // { path: 'notifications', component: NotificationsComponent },
+  // { path: 'archive', component: ArchiveComponent },
+
 
 
   
@@ -108,8 +122,9 @@ const routes: Routes = [
   { path: 'performance', component:PerformanceComponent },
   { path: 'leave1', component:EmployeeLeavesComponent },
   {path:'expenses',component:ExpensesComponent},
-  {path:'apps',component:AppsComponent}
-
+  // {path:'apps',component:AppsComponent},
+  {path:'asset',component:AssetComponent},
+  {path:'resignation',component:ResignationComponent},
 
  
 

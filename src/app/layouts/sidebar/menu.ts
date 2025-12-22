@@ -1,3 +1,4 @@
+import { primitivesAreNotAllowedInProps } from "@ngrx/store/src/models";
 import { MenuItem } from "./menu.model";
 
 export const MENU: MenuItem[] = [
@@ -154,6 +155,13 @@ export const MENU: MenuItem[] = [
                 parentId: 19
             },
             {
+                id:8,
+                label:'Exit',
+                link:'/exit',
+                parentId:19
+
+            },
+            {
                 id: 8,
                 label: 'HelpDesk',
                 link: '/helpDesk',
@@ -175,7 +183,24 @@ export const MENU: MenuItem[] = [
             { id: 11, label: 'Employee Leaves', link: '/leave1', parentId: 9 },
             { id: 12, label: 'Performance', link: '/performance', parentId: 9 },
             { id: 13, label: 'Expenses', link: '/expenses', parentId: 9 },
-            { id: 14, label: 'Apps', link: '/apps', parentId: 9 },
+            // { id: 14, label: 'Apps', link: '/apps', parentId: 9 },
+
+            {id:15,
+                label:'Assets',
+                link:'/asset',
+                parentId:9},
+            
+            {id:16,
+                label:'Resignation',
+                link:'/resignation',
+                parentId:9
+            },
+             {id:17,
+                label:'MyLetters',
+                link:'/myLetters',
+                parentId:9
+            },
+           
 
         ]
     },
@@ -184,20 +209,20 @@ export const MENU: MenuItem[] = [
         label: 'Inbox',
         icon: 'bx bx-envelope',
         link: '/inbox',
-        subItems: [
-            {
-                label: 'takeactions',
-                link: '/takeactions'
-            },
-            {
-                label: 'notifications',
-                link: '/notifications'
-            },
-            {
-                label: 'archive',
-                link: '/archive'
-            }
-        ]
+        // subItems: [
+        //     {
+        //         label: 'takeactions',
+        //         link: '/takeactions'
+        //     },
+        //     {
+        //         label: 'notifications',
+        //         link: '/notifications'
+        //     },
+        //     {
+        //         label: 'archive',
+        //         link: '/archive'
+        //     }
+        // ]
 
     }
 

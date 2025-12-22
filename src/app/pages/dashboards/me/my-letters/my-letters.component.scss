@@ -1,0 +1,182 @@
+
+// my latters
+
+.letter-page {
+  background: #f7f8fc;
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.filter-item label {
+  font-weight: 600;
+}
+
+.reset-btn {
+  border: none;
+  background: #eef3ff;
+  color: #6682ff;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.search-box input {
+  padding: 6px 14px;
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  width: 200px;
+}
+
+.add-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #dcdcdc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.table-wrapper {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.empty-block {
+  padding: 40px;
+}
+
+.empty-icon {
+  width: 120px;
+  height: 120px;
+  background: url('/assets/empty-state.svg') no-repeat center/contain;
+  margin: auto;
+}
+
+.pagination-bar {
+  font-size: 14px;
+}
+
+.page-dropdown {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background: transparent;
+}
+
+.nav-btn {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+
+// my latters request
+/* Drawer *//* =====================================================
+   LETTER REQUEST (APPLY FORM)
+   ===================================================== */
+
+.letter-form {
+  background: #ffffff;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Header */
+.drawer-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.back {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Labels */
+.letter-form label {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+.letter-form label span {
+  color: #ef4444;
+}
+
+/* Dropdown input */
+.dropdown-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.dropdown-wrapper input {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #ef4444;
+  padding: 8px 28px 8px 0;
+  font-size: 14px;
+  background: transparent;
+}
+
+.dropdown-wrapper .icon {
+  position: absolute;
+  right: 0;
+  bottom: 8px;
+  font-size: 14px;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+/* Dropdown list */
+.dropdown {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  margin-top: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+  background: #ffffff;
+}
+
+.dropdown-item {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: #f2f2f2;
+}
+
+/* Submit */
+.submit-btn {
+  background: #1f2937;
+  color: #ffffff;
+  padding: 10px 24px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}

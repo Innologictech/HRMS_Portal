@@ -42,7 +42,7 @@ export class AttendanceComponent {
   };
 
   // timings/clock – demo values
-  todayTiming = 'Today (9:30 AM – 6:30 PM)';
+  todayTiming = 'Today (9:00 AM – 6:00 PM)';
   duration = 'Duration: 9h 0m';
   clockTime = '04:36:21 PM';
   lastLogin = '6h:34m since last login';
@@ -122,7 +122,7 @@ prevMonth() {
   if (this.selectedMonth === 0) {
     this.selectedMonth = 11;
     this.selectedYear--;
-  } else {
+  } else { 
     this.selectedMonth--;
   }
   this.buildCalendar(this.selectedYear, this.selectedMonth);
@@ -169,7 +169,7 @@ private buildCalendar(year: number, month: number) {
       date: d,
       isToday,
       isOff,
-      timing: isOff ? null : '9:30 AM - 6:30 PM'
+      timing: isOff ? null : '9:00 AM - 6:00 PM'
     });
   }
 

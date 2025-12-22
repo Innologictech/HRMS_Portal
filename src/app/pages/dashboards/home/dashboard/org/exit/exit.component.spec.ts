@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LeaveComponent } from './leave.component';
+import { ExitComponent } from './exit.component';
 
-describe('LeaveComponent', () => {
-  let component: LeaveComponent;
-  let fixture: ComponentFixture<LeaveComponent>;
+describe('ExitComponent', () => {
+  let component: ExitComponent;
+  let fixture: ComponentFixture<ExitComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LeaveComponent]
+      imports: [ExitComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LeaveComponent);
+    fixture = TestBed.createComponent(ExitComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
