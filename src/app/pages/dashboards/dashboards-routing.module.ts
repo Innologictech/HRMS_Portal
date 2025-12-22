@@ -33,6 +33,7 @@ import { ExitComponent } from './home/dashboard/org/exit/exit.component';
 import { AssetComponent } from './me/asset/asset.component';
 import { ResignationComponent } from './me/resignation/resignation.component';
 import { MyLettersComponent } from './me/my-letters/my-letters.component';
+import { OnBoardingComponent } from './home/dashboard/org/on-boarding/on-boarding/on-boarding.component';
 
 
 
@@ -93,6 +94,10 @@ const routes: Routes = [
   {
     path: 'employee',
     component: EmployeesComponent
+  },
+   {
+    path: 'onBoarding',
+    component: OnBoardingComponent
   },
   {
     path: 'documents',

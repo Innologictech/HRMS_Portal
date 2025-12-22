@@ -131,7 +131,7 @@ export const MENU: MenuItem[] = [
     },
     {
         id: 10,
-        label: 'Org',
+        label: 'Organization',
         link: '/org',
         parentId: 2,
         icon: 'ph-buildings',
@@ -165,6 +165,12 @@ export const MENU: MenuItem[] = [
                 id: 8,
                 label: 'HelpDesk',
                 link: '/helpDesk',
+                parentId: 19
+            },
+                {
+                id: 8,
+                label: 'OnBoarding',
+                link: '/onBoarding',
                 parentId: 19
             },
 

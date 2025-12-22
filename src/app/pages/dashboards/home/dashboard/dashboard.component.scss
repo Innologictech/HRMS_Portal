@@ -1,0 +1,24 @@
+.profile-header {
+  width: 100%;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    #c2185b 0%,
+    #e53935 30%,
+    #f48fb1 60%,
+    #cfefff 100%
+  );
+}
+
+.profile-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #4dd0e1;
+  color: #fff;
+  font-weight: 600;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
