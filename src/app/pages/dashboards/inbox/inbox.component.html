@@ -1,7 +1,2484 @@
-<div class="p-3">
-  <h4 class="mb-3">Inbox</h4>
-  <hr>
+<div class="container-fluid mt-3" style="cursor:pointer">
 
-  <!-- CHILD COMPONENTS RENDER HERE -->
-  <router-outlet></router-outlet>
+  <!-- TOP MAIN BAR -->
+  <div class="border-bottom bg-white">
+    <ul class="nav nav-tabs px-3 py-2 gap-4">
+
+      <li class="nav-item">
+        <a class="nav-link" 
+           [class.active]="activeTopTab === 'attendance'"
+           (click)="activeTopTab = 'attendance'; leaveActionScreen=false; takeActionScreen=false">
+           ATTENDANCE
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link"
+           [class.active]="activeTopTab === 'finance'"
+           (click)="activeTopTab = 'finance'">
+           FINANCE
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link"
+           [class.active]="activeTopTab === 'employeeRequests'"
+           (click)="activeTopTab = 'employeeRequests'; takeActionScreen=false">
+           EMPLOYEE REQUESTS
+        </a>
+      </li>
+
+    </ul>
+  </div>
+
+
+  
+
+  <!-- ===================================================== -->
+  <!-- =============== ATTENDANCE SCREEN ==================== -->
+  <!-- ===================================================== -->
+  <div *ngIf="activeTopTab === 'attendance'">
+<div *ngIf="!leaveActionScreen && !viewLeaveDetails">
+   <ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <a class="nav-link" 
+       [class.active]="attendanceTab === 'leave'"
+       (click)="attendanceTab = 'leave'">
+       Leave Requests
+    </a>
+  </li>
+
+  <!-- <li class="nav-item">
+    <a class="nav-link" 
+       [class.active]="attendanceTab === 'missedPunch'"
+       (click)="attendanceTab = 'missedPunch'">
+       Missed Punch Requests
+    </a>
+  </li> -->
+  <li class="nav-item">
+    <a class="nav-link" 
+       [class.active]="attendanceTab === 'compOff'"
+       (click)="attendanceTab = 'compOff'">
+       Comp-Off Requests
+    </a>
+  </li>
+ <li class="nav-item">
+    <a class="nav-link" 
+       [class.active]="attendanceTab === 'overtime'"
+       (click)="attendanceTab = 'overtime'">
+       Overtime Requests
+    </a>
+  </li>
+   <li class="nav-item">
+    <a class="nav-link" 
+       [class.active]="attendanceTab === 'WFH'"
+       (click)="attendanceTab = 'WFH'">
+      WFH Requests
+    </a>
+  </li>
+    <!-- <li class="nav-item">
+    <a class="nav-link" 
+       [class.active]="attendanceTab === 'Optional'"
+       (click)="attendanceTab = 'Optional'">
+      Optional Holiday Requests
+    </a>
+  </li> -->
+  <!-- <li class="nav-item"><a class="nav-link">Comp-Off Requests</a></li> -->
+  <!-- <li class="nav-item"><a class="nav-link">Overtime Requests</a></li> -->
+  <!-- <li class="nav-item"><a class="nav-link">WFH Requests</a></li> -->
+  <!-- <li class="nav-item"><a class="nav-link">Optional Holiday Requests</a></li> -->
+</ul>
+
+
+<!-- ===================================================== -->
+    <!-- ================ LEAVE REQUESTS SCREEN =============== -->
+    <!-- ===================================================== -->
+    <div *ngIf="attendanceTab === 'leave'">
+
+      <div class="card p-4">
+
+        <h5 class="mb-4">Leave Requests</h5>
+
+        <!-- Filters -->
+        <div class="row g-3 align-items-end mb-4">
+          <div class="col-12 col-md-3">
+            <label class="form-label">Leave Types</label>
+            <select class="form-select" [(ngModel)]="selectedLeaveType">
+              <option>All</option>
+              <option>Casual Leave</option>
+              <option>Sick Leave</option>
+            </select>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <label class="form-label" >Status</label>
+            <select class="form-select" [(ngModel)]="selectedLeaveStatus">
+              <option>All</option>
+              <option>Pending</option>
+              <option>Approved</option>
+              <option>Rejected</option>
+            </select>
+          </div>
+
+          <div class="col-12 col-md-2">
+            <button class="btn btn-outline-secondary w-100" (click)="resetFilters()">Reset</button>
+          </div>
+
+          <!-- <div class="col-md-4 text-end">
+            <button class="btn btn-light border rounded-pill px-4" (click)="toggleSearchbar()">
+              <i class="bi bi-search" ></i> Search
+            </button>
+          </div>
+          <div *ngIf="showSearchBar" class="mt-3">
+  <input type="text" class="form-control" placeholder="Search here..." />
+</div> -->
+<div class="col-12 col-md-4 text-md-end">
+  <div class="btn btn-light border rounded-pill px-4" [class.open]="showSearchBar" (click)="toggleSearchbar()">
+    
+    <i class="bi bi-search"></i>
+
+    <input 
+      *ngIf="showSearchBar"
+      type="text"
+      class="search-input"
+      placeholder="Search..."
+      (click)="$event.stopPropagation()"
+    />
+  </div>
 </div>
+
+        </div>
+
+        <!-- Leave Requests Table -->
+         <div class="table-responsive"> 
+        <table  class="table align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Request Type</th>
+              <th>Applied By</th>
+              <th>Status</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><strong>Casual Leave</strong><br><small>No. of Days: 1</small></td>
+              <td>Paramesh Ganavena <br><small>26/08/2024</small></td>
+              <td><span class="badge bg-danger-subtle text-danger rounded-pill">● Rejected</span></td>
+              <td class="text-end"><button class="btn btn-outline-dark btn-sm" (click)="openViewDetails()">View Details</button></td>
+            </tr>
+
+            <tr>
+              <td><strong>Casual Leave</strong><br><small>No. of Days: 1</small></td>
+              <td>Paramesh Ganavena <br><small>27/08/2024</small></td>
+              <td><span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span></td>
+              <td class="text-end"><button class="btn btn-dark btn-sm" (click)="openLeaveAction()">Take Action</button></td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+</div>
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- =========== MISSED PUNCH REQUESTS SCREEN ============ -->
+    <!-- ===================================================== -->
+<!-- <div *ngIf="attendanceTab === 'missedPunch'">
+
+  =========================
+  SHOW TABLE WHEN SCREEN IS NOT OPEN
+  =========================
+  <div *ngIf="!missedScreen" class="card p-4">
+
+    <h5 class="mb-4">Missed Punch Requests</h5>
+
+    Filters
+    <div class="row mb-4 align-items-end">
+      <div class="col-md-3">
+        <label class="form-label">Punch Type</label>
+        <select class="form-select">
+          <option>All</option>
+          <option>In Punch Missing</option>
+          <option>Out Punch Missing</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Status</label>
+        <select class="form-select">
+          <option>All</option>
+          <option>Pending</option>
+          <option>Approved</option>
+          <option>Rejected</option>
+        </select>
+      </div>
+
+      <div class="col-md-2">
+        <button class="btn btn-outline-secondary w-100">Reset</button>
+      </div>
+
+      <div class="col-md-4 text-end">
+        <button class="btn btn-light border rounded-pill px-4">
+          <i class="bi bi-search"></i> Search
+        </button>
+      </div>
+    </div>
+
+    TABLE
+    <table class="table align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Punch Type</th>
+          <th>Applied By</th>
+          <th>Status</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><strong>In Punch Missing</strong><br><small>Date: 23/08/2024</small></td>
+          <td>Paramesh Ganavena <br><small>Applied: 24/08/2024</small></td>
+          <td><span class="badge bg-danger-subtle text-danger rounded-pill">● Rejected</span></td>
+          <td class="text-end">
+            <button class="btn btn-outline-dark btn-sm">
+              View Details
+            </button>
+          </td>
+        </tr>
+
+        <tr>
+          <td><strong>Out Punch Missing</strong><br><small>Date: 27/08/2024</small></td>
+          <td>Paramesh Ganavena <br><small>Applied: 28/08/2024</small></td>
+          <td><span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span></td>
+          <td class="text-end">
+            <button class="btn btn-dark btn-sm" (click)="openmissedScreen()">
+              Take Action
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  =========================
+  SHOW TAKE ACTION SCREEN
+  =========================
+  <div *ngIf="missedScreen" class="container-fluid mt-4">
+
+    <div class="card p-4 mb-4">
+      <div class="row">
+
+        <div class="col-md-4">
+          <h6>Paramesh Ganavena</h6>
+          <small>EMP-20240425-001</small>
+        </div>
+
+        <div class="col-md-4">
+          <p><strong>Punch Type:</strong> Out Punch Missing</p>
+          <p><strong>Date:</strong> 27/08/2024</p>
+        </div>
+
+        <div class="col-md-4">
+          <p><strong>Status:</strong>
+            <span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span>
+          </p>
+        </div>
+
+      </div>
+      <p class="mt-3"><strong>Applied on:</strong> 28/08/2024</p>
+    </div>
+
+    <h5>Review Details</h5>
+
+    <div class="card p-4">
+      <label class="form-label">Comments *</label>
+      <textarea class="form-control mb-4" rows="3" placeholder="Enter Comments"></textarea>
+
+      <div class="text-end">
+        <button class="btn btn-outline-secondary me-2" (click)="closemissedScreen()">Back</button>
+        <button class="btn btn-outline-danger me-2">Reject</button>
+        <button class="btn btn-primary">Approve</button>
+      </div>
+    </div>
+
+  </div>
+
+</div> -->
+
+
+
+    <div *ngIf="attendanceTab === 'compOff'">
+<div *ngIf="!compOffView && !compOffAction" >
+      <div class="card p-4">
+
+        <h5 class="mb-4">Comp-Off Requests</h5>
+
+        <!-- Filters -->
+        <div class="row g-3 align-items-end mb-4">
+
+          <div class="col-12 col-md-3">
+            <label class="form-label">Request Type</label>
+            <select class="form-select" [(ngModel)]="selectedLeaveType">
+              <option>All</option>
+              <option>Full Day</option>
+              <option>Half Day</option>
+            </select>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <label class="form-label"  >Status</label>
+            <select class="form-select" [(ngModel)]="selectedLeaveStatus">
+              <option>All</option>
+              <option>Pending</option>
+              <option>Approved</option>
+              <option>Rejected</option>
+            </select>
+          </div>
+
+          <div class="col-12 col-md-2">
+            <button class="btn btn-outline-secondary w-100" (click)="resetFilters()">Reset</button>
+          </div>
+
+          <!-- <div class="col-md-4 text-end">
+            <button class="btn btn-light border rounded-pill px-4">
+              <i class="bi bi-search"></i> Search
+            </button>
+          </div> -->
+          <div class="col-12 col-md-4 text-md-end">
+  <div class="btn btn-light border rounded-pill px-4" [class.open]="showSearchBar" (click)="toggleSearchbar()">
+    
+    <i class="bi bi-search"></i>
+
+    <input 
+      *ngIf="showSearchBar"
+      type="text"
+      class="search-input"
+      placeholder="Search..."
+      (click)="$event.stopPropagation()"
+    />
+  </div>
+</div>
+
+        </div>
+        
+
+        <!-- Requests Table -->
+         <div class="table-responsive">
+        <table  class= "table align-table-middle" >
+          <thead class="table-light">
+            <tr>
+              <th>Request Type</th>
+              <th>Applied By</th>
+              <th>Status</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><strong>Full Day</strong><br><small>Date: 23/08/2024</small></td>
+              <td>Paramesh Ganavena <br><small>Applied: 24/08/2024</small></td>
+              <td><span class="badge bg-danger-subtle text-danger rounded-pill">● Rejected</span></td>
+              <td class="text-end"><button class="btn btn-outline-dark btn-sm" (click)="openCompOffView()">View Details</button></td>
+            </tr>
+
+            <tr>
+              <td><strong>Full Day</strong><br><small>Date: 27/08/2024</small></td>
+              <td>Paramesh Ganavena <br><small>Applied: 28/08/2024</small></td>
+              <td><span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span></td>
+              <td class="text-end"><button class="btn btn-dark btn-sm" (click)="openCompOffAction()">Take Action</button></td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+
+
+
+    </div>
+</div>
+
+    <!-- ===================== VIEW DETAILS SCREEN ===================== -->
+<div *ngIf="compOffView" class="row mt-3 compoff-card">
+  <div class="col-12">
+    <div class="card p-4">
+  <h5 class="mb-3">CompOff Request Approval</h5>
+
+  <div class="row mb-4 mt-3">
+
+    <div class="col-md-4">
+      <h6>Paramesh Ganavena</h6>
+      <small>EMP-20240425-001</small>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Comp-off Type:</strong> Full Day</p>
+      <p><strong>Requested Comp-off Date:</strong> 14/08/2024</p>
+      <p><strong>Comp-off Worked Date:</strong> -</p>
+      <p><strong>Reason:</strong> -</p>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Status:</strong>
+        <span class="badge bg-success-subtle text-success rounded-pill">● Approved</span>
+      </p>
+      <p><strong>Attachment:</strong> -</p>
+      <p><strong>Applied On:</strong> 28/08/2024 04:40 AM</p>
+    </div>
+
+  </div>
+
+  <h5 class="mb-3">Approvals</h5>
+
+  <div class="card p-3 approval-box">
+    <div class="d-flex justify-content-between">
+      <div>
+        <strong>Paramesh Ganavena</strong><br>
+        <small>Level 1</small><br>
+        <small>Reviewed On 28/08/2024 04:40 AM</small>
+      </div>
+
+      <span class="badge bg-success-subtle text-success rounded-pill">Approved</span>
+    </div>
+  </div>
+
+  <div class="text-end mt-3">
+    <button class="btn btn-outline-secondary" (click)="closeCompOffScreens()">Back</button>
+  </div>
+
+</div>
+</div>
+</div>
+<!-- ===================== TAKE ACTION SCREEN ===================== -->
+<div *ngIf="compOffAction" class="row mt-3 compoff-card">
+  <div class="col-12">
+    <div class="card p-4">
+
+  <h5 class="mb-3">CompOff Request Approval</h5>
+
+  <div class="row mb-4 mt-3">
+
+    <div class="col-md-4">
+      <h6>Paramesh Ganavena</h6>
+      <small>EMP-20240425-001</small>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Comp-off Type:</strong> Full Day</p>
+      <p><strong>Requested Comp-off Date:</strong> 28/08/2024</p>
+      <p><strong>Comp-off Worked Date:</strong> -</p>
+      <p><strong>Reason:</strong> -</p>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Status:</strong>
+        <span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span>
+      </p>
+      <p><strong>Attachment:</strong> -</p>
+      <p><strong>Applied On:</strong> 28/08/2024 04:40 AM</p>
+    </div>
+
+  </div>
+
+  <h5 class="mb-3">Review Details</h5>
+
+  <div class="card p-4">
+    <label class="form-label">Comments *</label>
+    <textarea class="form-control mb-3" rows="3" placeholder="Enter Comments"></textarea>
+
+    <div class="text-end">
+      <button class="btn btn-outline-secondary me-2" (click)="closeCompOffScreens()">Back</button>
+      <button class="btn btn-outline-danger me-2">Reject</button>
+      <button class="btn btn-primary">Approve</button>
+    </div>
+  </div>
+
+</div>
+
+</div>
+</div>
+</div>
+    
+    
+
+        <div *ngIf="attendanceTab === 'overtime'">
+<div *ngIf="!overtimeViewDetails && !overtimeAction">
+      <div class="card p-4">
+
+        <h5 class="mb-4">Overtime Requests</h5>
+
+        Filters
+        <div class="row g-3 align-items-end mb-4">
+
+            <div class="col-12 col-md-3">
+            <label class="form-label">Overtime</label>
+            <select class="form-select" [(ngModel)]="selectedOvertimeType">
+              <option>All</option>
+              <option>ExtendedEffort Excellence</option>
+            </select>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <label class="form-label">Status</label>
+            <select class="form-select" [(ngModel)]="selectedOvertimeStatus">
+              <option>All</option>
+              <option>Pending</option>
+              <option>Approved</option>
+              <option>Rejected</option>
+            </select>
+          </div>
+
+          <div class="col-12 col-md-2">
+            <button class="btn btn-outline-secondary w-100" (click)="resetFilters()">Reset</button>
+          </div>
+
+          <!-- <div class="col-md-4 text-end">
+            <button class="btn btn-light border rounded-pill px-4">
+              <i class="bi bi-search"></i> Search
+            </button>
+          </div> -->
+
+          <div class="col-12 col-md-4 text-md-end">
+  <div class="btn btn-light border rounded-pill px-4" [class.open]="showSearchBar" (click)="toggleSearchbar()">
+    
+    <i class="bi bi-search"></i>
+
+    <input 
+      *ngIf="showSearchBar"
+      type="text"
+      class="search-input"
+      placeholder="Search..."
+      (click)="$event.stopPropagation()"
+    />
+  </div>
+</div>
+
+        </div>
+
+        <!-- Missed Punch Table -->
+        <div class="table-responsive">
+        <table class="table table-align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Punch Type</th>
+              <th>Applied By</th>
+              <th>Status</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              
+              <td><strong>ExtendedEffort Excellence</strong><br><small>Date: 23/08/2024</small><br><small>Employee Requested Hours:
+1</small></td>
+              <td>Paramesh Ganavena <br><small>Applied: 24/08/2024</small></td>
+              <td><span class="badge bg-danger-subtle text-danger rounded-pill">● Rejected</span></td>
+              <td class="text-end"><button class="btn btn-outline-dark btn-sm"  (click)="openOvertimeViewDetails()">View Details</button></td>
+            </tr>
+
+            <tr>
+             <td><strong>ExtendedEffort Excellence</strong><br><small>Date: 23/08/2024</small><br><small>Employee Requested Hours:
+1</small></td>
+              <td>Paramesh Ganavena <br><small>Applied: 24/08/2024</small></td>
+              <td><span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span></td>
+              <td class="text-end"><button class="btn btn-dark btn-sm" (click)="openOvertimeAction()">Take Action</button></td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+
+</div>
+</div>
+
+
+
+      <!-- OVERTIME VIEW DETAILS SCREEN -->
+<div *ngIf="overtimeViewDetails" class="card p-4 mt-4">
+
+  <h5>Overtime Request Details</h5>
+
+  <p><strong>Employee:</strong> Paramesh Ganavena</p>
+  <p><strong>Overtime Type:</strong> ExtendedEffort Excellence</p>
+  <p><strong>Date:</strong> 23/08/2024</p>
+  <p><strong>Requested Hours:</strong> 1</p>
+  <p><strong>Status:</strong> Rejected</p>
+
+  <div class="text-end">
+    <button class="btn btn-outline-secondary" (click)="closeOvertimeScreens()">Back</button>
+  </div>
+
+</div>
+<!-- OVERTIME TAKE ACTION SCREEN -->
+<div *ngIf="overtimeAction" class="card p-4 mt-4">
+
+  <h5>Review Overtime Request</h5>
+
+  <p><strong>Employee:</strong> Paramesh Ganavena</p>
+  <p><strong>Overtime Type:</strong> ExtendedEffort Excellence</p>
+  <p><strong>Date:</strong> 23/08/2024</p>
+  <p><strong>Requested Hours:</strong> 1</p>
+
+  <label class="form-label">Comments *</label>
+  <textarea class="form-control mb-3" rows="3"></textarea>
+
+  <div class="text-end">
+    <button class="btn btn-outline-secondary me-2" (click)="closeOvertimeScreens()">Back</button>
+    <button class="btn btn-outline-danger me-2">Reject</button>
+    <button class="btn btn-primary">Approve</button>
+  </div>
+
+</div>
+</div>
+
+    
+
+
+       <div *ngIf="attendanceTab === 'WFH'">
+<div *ngIf="!wfhView && !wfhAction" class="card p-4">
+      <div class="card p-4">
+
+        <h5 class="mb-4">WFH Requests</h5>
+
+        <!-- Filters -->
+        <div class="row g-3 align-items-end mb-4">
+
+          <!-- <div class="col-12 col-md-3">
+            <label class="form-label">Overtime</label>
+            <select class="form-select">
+              <option>All</option>
+              <option>ExtendedEffort Excellence</option>
+            </select>
+          </div> -->
+
+          <div class="col-12 col-md-3">
+            <label class="form-label">Status</label>
+            <select class="form-select" [(ngModel)]="selectedWfhStatus">
+              <option>All</option>
+              <option>Pending</option>
+              <option>Approved</option>
+              <option>Rejected</option>
+            </select>
+          </div>
+
+          <div class="col-12 col-md-2">
+            <button class="btn btn-outline-secondary w-100" (click)="resetFilters()">Reset</button>
+          </div>
+
+          <!-- <div class="col-md-4 text-end">
+            <button class="btn btn-light border rounded-pill px-4">
+              <i class="bi bi-search"></i> Search
+            </button>
+          </div> -->
+
+          <div class="col-12 col-md-4 text-md-end">
+  <div class="btn btn-light border rounded-pill px-4" [class.open]="showSearchBar" (click)="toggleSearchbar()">
+    
+    <i class="bi bi-search"></i>
+
+    <input 
+      *ngIf="showSearchBar"
+      type="text"
+      class="search-input"
+      placeholder="Search..."
+      (click)="$event.stopPropagation()"
+    />
+  </div>
+</div>
+
+        </div>
+
+        <!-- Missed Punch Table -->
+         <div class="table-responsive">
+        <table class="table table-align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Punch Type</th>
+              <th>Applied By</th>
+              <th>Status</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              
+             <td><strong>WFH Peroid:</strong><br><small>Date: 23/08/2024 - 27/08/2024</small></td>
+              <td>Paramesh Ganavena <br><small>Applied: 24/08/2024</small></td>
+              <td><span class="badge bg-danger-subtle text-danger rounded-pill">● Rejected</span></td>
+              <td class="text-end"><button class="btn btn-outline-dark btn-sm" (click)="openWfhView()">View Details</button></td>
+            </tr>
+
+            <tr>
+             <td><strong>WFH Peroid:</strong><br><small>Date: 23/08/2024 - 27/08/2024</small></td>
+              <td>Paramesh Ganavena <br><small>Applied: 24/08/2024</small></td>
+              <td><span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span></td>
+              <td class="text-end"><button class="btn btn-dark btn-sm" (click)="openWfhAction()">Take Action</button></td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+</div>
+    </div>
+
+    <!-- ===================== WFH VIEW DETAILS SCREEN ===================== -->
+<div *ngIf="wfhView" class="row mt-3 compoff-card">
+   <div class="col-12">
+    <div class="card p-4">
+
+  <h5 class="mb-3">WFH Request Approval</h5>
+
+  <div class="row mb-4 mt-3">
+
+    <div class="col-md-4">
+      <h6>Paramesh Ganavena</h6>
+      <small>EMP-20240425-001</small>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>WFH Period:</strong> 23/08/2024 - 27/08/2024</p>
+      <p><strong>Reason:</strong> Personal Work</p>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Status:</strong>
+        <span class="badge bg-danger-subtle text-danger rounded-pill">● Rejected</span>
+      </p>
+      <p><strong>Attachment:</strong> -</p>
+      <p><strong>Applied On:</strong> 24/08/2024 04:40 AM</p>
+    </div>
+
+  </div>
+
+  <h5 class="mb-3">Approvals</h5>
+
+  <div class="card p-3 approval-box">
+    <div class="d-flex justify-content-between">
+      <div>
+        <strong>Paramesh Ganavena</strong><br>
+        <small>Level 1</small><br>
+        <small>Reviewed On 28/08/2024 04:40 AM</small>
+      </div>
+
+      <span class="badge bg-danger-subtle text-danger rounded-pill">Rejected</span>
+    </div>
+  </div>
+
+  <div class="text-end mt-3">
+    <button class="btn btn-outline-secondary" (click)="closeWfhScreens()">Back</button>
+  </div>
+
+</div>
+</div>
+</div>
+<!-- ===================== WFH TAKE ACTION SCREEN ===================== -->
+<div *ngIf="wfhAction" class="row mt-3 compoff-card">
+  <div class="col-12">
+    <div class="card p-4">
+  <h5 class="mb-3">WFH Request Approval</h5>
+
+  <div class="row mb-4 mt-3">
+
+    <div class="col-md-4">
+      <h6>Paramesh Ganavena</h6>
+      <small>EMP-20240425-001</small>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>WFH Period:</strong> 23/08/2024 - 27/08/2024</p>
+      <p><strong>Reason:</strong> Personal Work</p>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Status:</strong>
+        <span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span>
+      </p>
+      <p><strong>Attachment:</strong> -</p>
+      <p><strong>Applied On:</strong> 24/08/2024 04:40 AM</p>
+    </div>
+
+  </div>
+
+  <h5 class="mb-3">Review Details</h5>
+
+  <div class="card p-4">
+    <label class="form-label">Comments *</label>
+    <textarea class="form-control mb-3" rows="3" placeholder="Enter Comments"></textarea>
+
+    <div class="text-end">
+      <button class="btn btn-outline-secondary me-2" (click)="closeWfhScreens()">Back</button>
+      <button class="btn btn-outline-danger me-2">Reject</button>
+      <button class="btn btn-primary">Approve</button>
+    </div>
+  </div>
+
+</div>
+
+</div>
+</div>
+</div>
+
+           <div *ngIf="attendanceTab === 'Optional'">
+<div *ngIf="!optionalView && !optionalAction" class="card p-4">
+      <div class="card p-4">
+
+        <h5 class="mb-4">Optional Holidays Requests</h5>
+
+        <!-- Filters -->
+        <div class="ow g-3 align-items-end mb-4">
+
+          <div class="col-12 col-md-3">
+            <label class="form-label">Holiday</label>
+            <select class="form-select">
+              <option>All</option>
+              <option></option>
+            </select>
+          </div>
+
+          <div class="col-12col-md-3">
+            <label class="form-label">Status</label>
+            <select class="form-select">
+              <option>All</option>
+              <option>Pending</option>
+              <option>Approved</option>
+              <option>Rejected</option>
+            </select>
+          </div>
+
+          <div class="col-12col-md-2">
+            <button class="btn btn-outline-secondary w-100">Reset</button>
+          </div>
+
+          <!-- <div class="col-md-4 text-end">
+            <button class="btn btn-light border rounded-pill px-4">
+              <i class="bi bi-search"></i> Search
+            </button>
+          </div> -->
+          <div class="col-12 col-md-4 text-md-end">
+  <div class="btn btn-light border rounded-pill px-4" [class.open]="showSearchBar" (click)="toggleSearchbar()">
+    
+    <i class="bi bi-search"></i>
+
+    <input 
+      *ngIf="showSearchBar"
+      type="text"
+      class="search-input"
+      placeholder="Search..."
+      (click)="$event.stopPropagation()"
+    />
+  </div>
+</div>
+
+        </div>
+
+        <!-- Missed Punch Table -->
+        
+        <table class="table-align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Punch Type</th>
+              <th>Applied By</th>
+              <th>Status</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              
+             <td><strong>Optional Holiday Peroid:</strong><br><small>Date: 23/08/2024 - 27/08/2024</small></td>
+              <td>Paramesh Ganavena <br><small>Applied: 24/08/2024</small></td>
+              <td><span class="badge bg-danger-subtle text-danger rounded-pill">● Rejected</span></td>
+              <td class="text-end"><button class="btn btn-outline-dark btn-sm" (click)="openOptionalView()">View Details</button></td>
+            </tr>
+
+            <tr>
+             <td><strong>Optional Holiday Peroid:</strong><br><small>Date: 23/08/2024 - 27/08/2024</small></td>
+              <td>Paramesh Ganavena <br><small>Applied: 24/08/2024</small></td>
+              <td><span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span></td>
+              <td class="text-end"><button class="btn btn-dark btn-sm" (click)="openOptionalAction()">Take Action</button></td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+
+      </div>
+    </div>
+
+
+
+  <!-- ================= OPTIONAL HOLIDAY VIEW DETAILS ================ -->
+<div *ngIf="optionalView" class="row mt-3">
+<div class="col-12">
+    <div class="card p-4">
+  <h5 class="mb-3">Optional Holiday Request Details</h5>
+
+  <div class="row mb-4 mt-3">
+
+    <div class="col-md-4">
+      <h6>Paramesh Ganavena</h6>
+      <small>EMP-20240425-001</small>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Holiday Name:</strong> Raksha Bandhan</p>
+      <p><strong>Optional Holiday Date:</strong> 23/08/2024</p>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Status:</strong>
+        <span class="badge bg-danger-subtle text-danger rounded-pill">● Rejected</span>
+      </p>
+      <p><strong>Applied On:</strong> 24/08/2024 04:40 AM</p>
+      <p><strong>Attachment:</strong> -</p>
+    </div>
+
+  </div>
+
+  <h5 class="mb-3">Approvals</h5>
+
+  <div class="card p-3 approval-card">
+    <div class="d-flex justify-content-between">
+      <div>
+        <strong>Paramesh Ganavena</strong><br>
+        <small>Level 1</small><br>
+        <small>Reviewed On 28/08/2024 04:40 AM</small>
+      </div>
+
+      <span class="badge bg-danger-subtle text-danger rounded-pill">Rejected</span>
+    </div>
+  </div>
+
+  <div class="text-end mt-3">
+    <button class="btn btn-outline-secondary" (click)="closeOptionalScreens()">Back</button>
+  </div>
+
+</div>
+</div>
+</div>
+<!-- ================== OPTIONAL HOLIDAY TAKE ACTION ================== -->
+<div *ngIf="optionalAction" class="row mt-3">
+  <div class="col-12">
+    <div class="card p-4">
+
+  <h5 class="mb-3">Optional Holiday Request Approval</h5>
+
+  <div class="row mb-4 mt-3">
+
+    <div class="col-md-4">
+      <h6>Paramesh Ganavena</h6>
+      <small>EMP-20240425-001</small>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Holiday Name:</strong> Raksha Bandhan</p>
+      <p><strong>Optional Holiday Date:</strong> 23/08/2024</p>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Status:</strong>
+        <span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span>
+      </p>
+      <p><strong>Applied On:</strong> 24/08/2024 04:40 AM</p>
+      <p><strong>Attachment:</strong> -</p>
+    </div>
+
+  </div>
+
+  <h5 class="mb-3">Review Details</h5>
+
+  <div class="card p-4">
+    <label class="form-label">Comments *</label>
+    <textarea class="form-control mb-3" rows="3" placeholder="Enter Comments"></textarea>
+
+    <div class="text-end">
+      <button class="btn btn-outline-secondary me-2" (click)="closeOptionalScreens()">Back</button>
+      <button class="btn btn-outline-danger me-2">Reject</button>
+      <button class="btn btn-primary">Approve</button>
+    </div>
+  </div>
+
+</div>
+
+</div>
+ </div>
+ </div>   
+
+    
+
+
+<!-- ===================================================== -->
+  <!-- =============== VIEW DETAILS SCREEN ================= -->
+  <!-- ===================================================== -->
+
+  <div *ngIf="viewLeaveDetails" class="mt-4">
+
+    <div class="card p-4 mb-4">
+      <div class="row">
+        
+        <div class="col-md-4">
+          <h6>Paramesh Ganavena</h6>
+          <small>EMP-20240425-001</small>
+        </div>
+
+        <div class="col-md-4">
+          <p><strong>Leave Name:</strong> Casual Leave</p>
+          <p><strong>Leave Request Type:</strong> 1 FullDay(s)</p>
+          <p><strong>Reason for Leave:</strong> -</p>
+        </div>
+
+        <div class="col-md-4">
+          <p><strong>From Date:</strong> 27/08/2024</p>
+          <p><strong>To Date:</strong> 27/08/2024</p>
+          <p><strong>Status:</strong>
+            <span class="badge bg-danger-subtle text-danger rounded-pill">● Rejected</span>
+          </p>
+          <p><strong>Attachment:</strong> -</p>
+        </div>
+
+      </div>
+
+      <p class="mt-3"><strong>Applied on:</strong> 28/08/2024 04:40 AM</p>
+    </div>
+
+    <h5>Approvals</h5>
+
+    <div class="card p-4 mt-2">
+      <div class="d-flex justify-content-between align-items-center">
+
+        <div>
+          <strong>Paramesh Ganavena</strong><br>
+          <small>Level 1</small><br>
+          <small>Reviewed On -</small>
+        </div>
+
+        <!-- Example Rejected -->
+        <span class="badge bg-danger-subtle text-danger rounded-pill">Rejected</span>
+
+      </div>
+    </div>
+
+    <div class="text-end mt-3">
+      <button class="btn btn-outline-secondary" (click)="closeViewDetails()">Back</button>
+    </div>
+
+  </div>
+
+
+
+
+
+  
+ <!-- TAKE ACTION SCREEN (SHOW ONLY AFTER CLICKING BUTTON) -->
+  <div *ngIf="leaveActionScreen" class="container-fluid mt-4">
+
+    <div class="card p-4 mb-4">
+      <div class="row">
+        <div class="col-md-4">
+          <h6>Paramesh Ganavena</h6>
+          <small>EMP-20240425-001</small>
+        </div>
+
+        <div class="col-md-4">
+          <p><strong>Leave Name:</strong> Casual Leave</p>
+          <p><strong>Leave Request Type:</strong> 1 FullDay(s)</p>
+          <p><strong>Reason for Leave:</strong> -</p>
+        </div>
+
+        <div class="col-md-4">
+          <p><strong>From Date:</strong> 27/08/2024</p>
+          <p><strong>To Date:</strong> 27/08/2024</p>
+          <p><strong>Status:</strong>
+            <span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span>
+          </p>
+          <p><strong>Attachment:</strong> -</p>
+        </div>
+      </div>
+
+      <p class="mt-3"><strong>Applied on:</strong> 28/08/2024 04:40 AM</p>
+    </div>
+
+    <h5>Review Details</h5>
+
+    <div class="card p-4">
+      <label class="form-label">Comments *</label>
+      <textarea class="form-control mb-4" rows="3" placeholder="Enter Comments"></textarea>
+
+      <div class="text-end">
+        <button class="btn btn-outline-secondary me-2" (click)="closeLeaveAction()">Back</button>
+        <button class="btn btn-outline-danger me-2">Reject</button>
+        <button class="btn btn-primary">Approve</button>
+      </div>
+    </div>
+
+    <h5 class="mt-4">Approvals</h5>
+
+    <div class="card p-4 mt-2">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <strong>Level 1</strong><br>
+          <small>Reviewed On -</small>
+        </div>
+
+        <span class="badge bg-warning-subtle text-warning rounded-pill">Pending</span>
+      </div>
+  </div>
+  </div>
+
+
+
+
+
+
+
+    <!-- <div *ngIf="missedScreen" class="container-fluid mt-4">
+
+    <div class="card p-4 mb-4">
+      <div class="row">
+        <div class="col-md-4">
+          <h6>Paramesh Ganavena</h6>
+          <small>EMP-20240425-001</small>
+        </div>
+
+        <div class="col-md-4">
+          <p><strong>Leave Name:</strong> Casual Leave</p>
+          <p><strong>Leave Request Type:</strong> 1 FullDay(s)</p>
+          <p><strong>Reason for Leave:</strong> -</p>
+        </div>
+
+        <div class="col-md-4">
+          <p><strong>From Date:</strong> 27/08/2024</p>
+          <p><strong>To Date:</strong> 27/08/2024</p>
+          <p><strong>Status:</strong>
+            <span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span>
+          </p>
+          <p><strong>Attachment:</strong> -</p>
+        </div>
+      </div>
+
+      <p class="mt-3"><strong>Applied on:</strong> 28/08/2024 04:40 AM</p>
+    </div>
+
+    <h5>Review Details</h5>
+
+    <div class="card p-4">
+      <label class="form-label">Comments *</label>
+      <textarea class="form-control mb-4" rows="3" placeholder="Enter Comments"></textarea>
+
+      <div class="text-end">
+        <button class="btn btn-outline-secondary me-2" (click)="closeLeaveAction()">Back</button>
+        <button class="btn btn-outline-danger me-2">Reject</button>
+        <button class="btn btn-primary">Approve</button>
+      </div>
+    </div>
+
+    <h5 class="mt-4">Approvals</h5>
+
+    <div class="card p-4 mt-2">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <strong>Level 1</strong><br>
+          <small>Reviewed On -</small>
+        </div>
+
+        <span class="badge bg-warning-subtle text-warning rounded-pill">Pending</span>
+      </div>
+  </div>
+  </div> -->
+  
+</div>
+
+  <!-- ===================================================== -->
+  <!-- ============ EMPLOYEE REQUESTS SCREEN =============== -->
+  <!-- ===================================================== -->
+  <div *ngIf="activeTopTab === 'employeeRequests'">
+
+    <!-- SECOND TAB BAR -->
+    <ul class="nav nav-tabs mb-3">
+      <li class="nav-item"><a class="nav-link" [class.active]="activeTab==='letters'" (click)="activeTab='letters'">Letter Requests</a></li>
+      <li class="nav-item"><a class="nav-link" [class.active]="activeTab==='resignation'" (click)="activeTab='resignation'">Resignation Requests</a></li>
+      <!-- <li class="nav-item"><a class="nav-link" [class.active]="activeTab==='taskEmp'" (click)="activeTab='taskEmp'">Resignation Task Employees</a></li> -->
+      <li class="nav-item"><a class="nav-link" [class.active]="activeTab==='assetReq'" (click)="activeTab='assetReq'">Asset Requests</a></li>
+      <!-- <li class="nav-item"><a class="nav-link" [class.active]="activeTab==='assetShip'" (click)="activeTab='assetShip'">Asset Shipment Requests</a></li> -->
+      <!-- <li class="nav-item"><a class="nav-link" [class.active]="activeTab==='assetRepair'" (click)="activeTab='assetRepair'">Asset Repair Requests</a></li> -->
+    </ul>
+
+    <!-- ========== ASSET REQUESTS LIST SCREEN ========== -->
+    <div *ngIf="activeTab === 'assetReq' && !takeActionScreen">
+
+      <h5 class="mb-3">Asset Requests</h5>
+
+      <div class="row mb-4 g-3">
+        <div class="col-12col-md-3">
+          <label class="form-label">Asset Category</label>
+          <select class="form-select"><option>Select Category</option></select>
+        </div>
+
+        <div class="col-12 col-md-3">
+          <label class="form-label">Asset</label>
+          <select class="form-select"><option>Select Asset</option></select>
+        </div>
+
+        <div class="col-12col-md-3">
+          <label class="form-label">Status</label>
+          <select class="form-select">
+            <option>Pending</option>
+            <option>Approved</option>
+            <option>Rejected</option>
+          </select>
+        </div>
+
+        <div class="col-12col-md-3 d-flex align-items-end justify-content-between">
+          <button class="btn btn-outline-secondary">Reset</button>
+          <button class="btn btn-light border rounded-pill"><i class="bi bi-search"></i> Search</button>
+        </div>
+      </div>
+
+      <!-- TABLE -->
+
+      <table class="table table-align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Request Type</th>
+            <th>Applied By</th>
+            <th>Status</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Asset:</strong> Design Software</td>
+            <td>Paramesh Ganavena <br><small>28/08/2024 04:40 AM</small></td>
+            <td><span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span></td>
+            <td class="text-end">
+              <button class="btn btn-dark btn-sm" (click)="openTakeAction()">Take Action</button> 
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <!-- ========== LETTER REQUESTS LIST SCREEN ========== -->
+
+
+     <div *ngIf="activeTab === 'letters' && !takeActionScreen">
+
+      <h5 class="mb-3">Letters Requests</h5>
+
+      <div class="row mb-4 g-3">
+        <!-- <div class="col-md-3">
+          <label class="form-label">Asset Category</label>
+          <select class="form-select"><option>Select Category</option></select>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Asset</label>
+          <select class="form-select"><option>Select Asset</option></select>
+        </div> -->
+
+        <div class="col-12 col-md-3">
+          <label class="form-label">Status</label>
+          <select class="form-select">
+            <input type="text" class="form-control mb-2" placeholder="Search..." />
+            <option>Pending</option>
+            <option>Approved</option>
+            <option>Rejected</option>
+          </select>
+        </div>
+
+        <div class="col-12 col-md-3 d-flex align-items-end justify-content-between">
+          <button class="btn btn-outline-secondary">Reset</button>
+          <button class="btn btn-light border rounded-pill"><i class="bi bi-search"></i> Search</button>
+        </div>
+      </div>
+
+      <!-- TABLE -->
+     <div calss="table-responsive">
+      <table class="table table-align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Request Type</th>
+            <th>Applied By</th>
+            <th>Status</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+              <!-- <td><strong>Asset:</strong> Design Software</td>
+              <td>Paramesh Ganavena <br><small>28/08/2024 04:40 AM</small></td>
+              <td><span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span></td>
+              <td class="text-end">
+                <button class="btn btn-dark btn-sm" (click)="openTakeAction()">Take Action</button> 
+              </td> -->
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+</div>
+    <!-- ========== RESIGNATION REQUESTS LIST SCREEN ========== -->
+
+         <div *ngIf="activeTab === 'resignation' && !takeActionScreen">
+
+      <h5 class="mb-3">Resignation Requests</h5>
+
+      <div class="row mb-4 g-3">
+        <!-- <div class="col-md-3">
+          <label class="form-label">Asset Category</label>
+          <select class="form-select"><option>Select Category</option></select>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Asset</label>
+          <select class="form-select"><option>Select Asset</option></select>
+        </div> -->
+
+        <div class="col-12 col-md-3">
+          <label class="form-label">Status</label>
+          <select class="form-select">
+            <option>Pending</option>
+            <option>Approved</option>
+            <option>Rejected</option>
+          </select>
+        </div>
+
+        <div class="col-12 col-md-3 d-flex align-items-end justify-content-between">
+          <button class="btn btn-outline-secondary">Reset</button>
+          <button class="btn btn-light border rounded-pill"><i class="bi bi-search"></i> Search</button>
+        </div>
+      </div>
+
+      <!-- TABLE -->
+       <div class="table-responsive">
+      <table class="table table-align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Request Type</th>
+            <th>Applied By</th>
+            <th>Status</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+              <!-- <td><strong>Asset:</strong> Design Software</td>
+              <td>Paramesh Ganavena <br><small>28/08/2024 04:40 AM</small></td>
+              <td><span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span></td>
+              <td class="text-end">
+                <button class="btn btn-dark btn-sm" (click)="openTakeAction()">Take Action</button> 
+              </td> -->
+          </tr>
+        </tbody>
+      </table>
+</div>
+</div>
+
+
+
+        <!-- <div *ngIf="activeTab === 'assetShip' && !takeActionScreen">
+
+      <h5 class="mb-3">Asset Requests</h5>
+
+      <div class="row mb-4 g-3">
+        <div class="col-md-3">
+          <label class="form-label">Asset Category</label>
+          <select class="form-select"><option>Select Category</option></select>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Asset</label>
+          <select class="form-select"><option>Select Asset</option></select>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Status</label>
+          <select class="form-select">
+            <option>Pending</option>
+            <option>Approved</option>
+            <option>Rejected</option>
+          </select>
+        </div>
+
+        <div class="col-md-3 d-flex align-items-end justify-content-between">
+          <button class="btn btn-outline-secondary">Reset</button>
+          <button class="btn btn-light border rounded-pill"><i class="bi bi-search"></i> Search</button>
+        </div>
+      </div>
+
+      TABLE
+      <table class="table align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Request Type</th>
+            <th>Applied By</th>
+            <th>Status</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Asset:</strong> Design Software</td>
+            <td>Paramesh Ganavena <br><small>28/08/2024 04:40 AM</small></td>
+            <td><span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span></td>
+            <td class="text-end">
+              <button class="btn btn-dark btn-sm" (click)="openTakeAction()">Take Action</button> 
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div> -->
+
+            <!-- <div *ngIf="activeTab === 'assetRepair' && !takeActionScreen">
+
+      <h5 class="mb-3">Asset Requests</h5>
+
+      <div class="row mb-4 g-3">
+        <div class="col-md-3">
+          <label class="form-label">Asset Category</label>
+          <select class="form-select"><option>Select Category</option></select>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Asset</label>
+          <select class="form-select"><option>Select Asset</option></select>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Status</label>
+          <select class="form-select">
+            <option>Pending</option>
+            <option>Approved</option>
+            <option>Rejected</option>
+          </select>
+        </div>
+
+        <div class="col-md-3 d-flex align-items-end justify-content-between">
+          <button class="btn btn-outline-secondary">Reset</button>
+          <button class="btn btn-light border rounded-pill"><i class="bi bi-search"></i> Search</button>
+        </div>
+      </div>
+
+      TABLE
+      <table class="table align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Request Type</th>
+            <th>Applied By</th>
+            <th>Status</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Asset:</strong> Design Software</td>
+            <td>Paramesh Ganavena <br><small>28/08/2024 04:40 AM</small></td>
+            <td><span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span></td>
+            <td class="text-end">
+              <button class="btn btn-dark btn-sm" (click)="openTakeAction()">Take Action</button> 
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div> -->
+
+    <!-- ========== TAKE ACTION SCREEN ========== -->
+    <div *ngIf="activeTab === 'assetReq' && takeActionScreen" class="mt-4">
+
+      <div class="card p-4 mb-4">
+        <div class="row">
+          <div class="col-md-4">
+            <h6>Paramesh Ganavena</h6>
+            <small>EMP-20240425-001</small>
+          </div>
+
+          <div class="col-md-4">
+            <p><strong>Asset Category:</strong> Software</p>
+            <p><strong>Asset Type:</strong> Design Software</p>
+          </div>
+
+          <div class="col-md-4">
+            <p><strong>Status:</strong> <span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span></p>
+            <p><strong>Applied On:</strong> 28/08/2024 04:40 AM</p>
+          </div>
+        </div>
+      </div>
+
+      <h5>Review Details</h5>
+
+      <div class="card p-4">
+
+        <label class="form-label">Asset Items</label>
+        <select class="form-select mb-3"></select>
+
+        <div class="alert alert-info">
+          <strong>i</strong> No asset items available for this asset.
+        </div>
+
+        <label class="form-label">Comments *</label>
+        <textarea class="form-control mb-4" rows="3"></textarea>
+
+        <div class="text-end">
+          <button class="btn btn-outline-secondary me-2">Reject</button>
+          <button class="btn btn-primary">Approve</button>
+        </div>
+      </div>
+
+      <h5 class="mt-4">Approvals</h5>
+
+      <div class="card p-4 mt-2">
+        <div class="d-flex justify-content-between">
+          <div>
+            <strong>Paramesh Ganavena</strong><br>
+            <small>Level 1</small><br>
+            <small>Reviewed On -</small>
+          </div>
+
+          <span class="badge bg-warning-subtle text-warning rounded-pill">Pending</span>
+        </div>
+      </div>
+    </div>
+
+
+    
+  </div>
+
+
+
+
+
+
+<!-- ===================================================== -->
+<!-- ================= FINANCE SCREEN ==================== -->
+<!-- ===================================================== -->
+<div *ngIf="activeTopTab === 'finance'" class="mt-1">
+
+  <!-- SECOND TOP NAV BAR -->
+  <ul class="nav nav-tabs mb-3 px-2">
+
+    <li class="nav-item">
+      <a class="nav-link"
+         [class.active]="financeTab === 'reimbursement'"
+         (click)="financeTab = 'reimbursement'">
+        Reimbursement Requests
+      </a>
+    </li>
+
+    <!-- <li class="nav-item">
+      <a class="nav-link"
+         [class.active]="financeTab === 'loan'"
+         (click)="financeTab = 'loan'">
+        Loan Requests
+      </a>
+    </li> -->
+
+    <!-- <li class="nav-item">
+      <a class="nav-link"
+         [class.active]="financeTab === 'loanRepay'"
+         (click)="financeTab = 'loanRepay'">
+        Loan Repayment Requests
+      </a>
+    </li> -->
+
+    <li class="nav-item">
+      <a class="nav-link"
+         [class.active]="financeTab === 'salaryAdvance'"
+         (click)="financeTab = 'salaryAdvance'">
+        Salary Advance Requests
+      </a>
+    </li>
+
+    <!-- <li class="nav-item">
+      <a class="nav-link"
+         [class.active]="financeTab === 'salaryRepay'"
+         (click)="financeTab = 'salaryRepay'">
+        Salary Advance Repayments Requests
+      </a>
+    </li> -->
+
+  </ul>
+
+<!-- ====================== LOAN REPAYMENT REQUESTS TABLE ====================== -->
+
+
+<!-- <div *ngIf="financeTab === 'loanRepay'">
+
+  <h5 class="mb-4">Loan Requests</h5>
+
+  <div class="row mb-4 align-items-end g-3">
+<div class="col-md-3">
+      <label class="form-label">Loan Types</label>
+
+      <div class="dropdown w-100">
+        <button class="form-select text-start" data-bs-toggle="dropdown">
+          Select Loan Type
+        </button>
+
+        <div class="dropdown-menu p-2" style="width: 100%;">
+          <input type="text" class="form-control mb-2" placeholder="Search..." />
+
+          <button class="dropdown-item">Home Loan</button>
+          <button class="dropdown-item">Vehicle Loan</button>
+          <button class="dropdown-item">Personal Loan</button>
+        </div>
+      </div>
+    </div>
+
+
+<div class="col-md-3">
+      <label class="form-label">status</label>
+
+      <div class="dropdown w-100">
+        <button class="form-select text-start" data-bs-toggle="dropdown">
+          Select Status 
+        </button>
+
+        <div class="dropdown-menu p-2" style="width: 100%;">
+          <input type="text" class="form-control mb-2" placeholder="Search..." />
+
+          <button class="dropdown-item">All</button>
+          <button class="dropdown-item">Pending</button>
+          <button class="dropdown-item">Rejected</button>
+          <button class="dropdown-item">Approved</button>
+        </div>
+      </div>
+    </div>
+
+
+    
+    <div class="col-md-auto">
+      <button class="btn btn-outline-secondary w-100">Reset</button>
+    </div>
+
+    
+    <div class="col-md-auto">
+      <button class="btn btn-light border rounded-pill px-4">
+        <i class="bi bi-search"></i> Search
+      </button>
+    </div>
+
+  </div>
+
+  
+  <table class="table align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Request Type</th>
+        <th>Applied By</th>
+        <th>Status</th>
+        <th class="text-end">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let repay of loanRepaymentRequests">
+
+        <td>
+          <strong>{{ repay.type }}</strong><br>
+          <small>Amount: {{ repay.amount }}</small>
+        </td>
+
+        <td>
+          {{ repay.name }} <br>
+          <small>{{ repay.appliedOn }}</small>
+        </td>
+
+        <td>
+          <span class="badge rounded-pill"
+            [ngClass]="{
+              'bg-warning-subtle text-warning': repay.status === 'Pending',
+              'bg-success-subtle text-success': repay.status === 'Approved',
+              'bg-danger-subtle text-danger': repay.status === 'Rejected'
+            }">
+            ● {{ repay.status }}
+          </span>
+        </td>
+
+        <td class="text-end">
+          <button class="btn btn-dark btn-sm">Take Action</button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+
+</div> -->
+
+
+
+<!-- ====================== LOAN REQUESTS TABLE ====================== -->
+
+<!-- <div *ngIf="financeTab === 'loan'">
+
+  <h5 class="mb-4">Loan Requests</h5>
+
+  <div class="row mb-4 align-items-end g-3">
+<div class="col-md-3">
+      <label class="form-label">Loan Types</label>
+
+      <div class="dropdown w-100">
+        <button class="form-select text-start" data-bs-toggle="dropdown">
+          Select Loan Type
+        </button>
+
+        <div class="dropdown-menu p-2" style="width: 100%;">
+          <input type="text" class="form-control mb-2" placeholder="Search..." />
+
+          <button class="dropdown-item">Home Loan</button>
+          <button class="dropdown-item">Vehicle Loan</button>
+          <button class="dropdown-item">Personal Loan</button>
+        </div>
+      </div>
+    </div>
+
+
+<div class="col-md-3">
+      <label class="form-label">status</label>
+
+      <div class="dropdown w-100">
+        <button class="form-select text-start" data-bs-toggle="dropdown">
+          Select Status 
+        </button>
+
+        <div class="dropdown-menu p-2" style="width: 100%;">
+          <input type="text" class="form-control mb-2" placeholder="Search..." />
+
+          <button class="dropdown-item">All</button>
+          <button class="dropdown-item">Pending</button>
+          <button class="dropdown-item">Rejected</button>
+          <button class="dropdown-item">Approved</button>
+        </div>
+      </div>
+    </div>
+
+
+    Reset
+    <div class="col-md-auto">
+      <button class="btn btn-outline-secondary w-100">Reset</button>
+    </div>
+
+    Search Button
+    <div class="col-md-auto">
+      <button class="btn btn-light border rounded-pill px-4">
+        <i class="bi bi-search"></i> Search
+      </button>
+    </div>
+
+  </div>
+
+  TABLE
+  <table class="table align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Request Type</th>
+        <th>Applied By</th>
+        <th>Status</th>
+        <th class="text-end">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let loan of loanRequests">
+
+        Request Type
+        <td>
+          <strong>{{ loan.type }}</strong> <br>
+          <small>Sanctioned Amount: {{ loan.amount }}</small>
+        </td>
+
+        Applied By
+        <td>
+          {{ loan.name }} <br>
+          <small>{{ loan.appliedOn }}</small>
+        </td>
+
+        Status
+        <td>
+          <span 
+            class="badge rounded-pill"
+            [ngClass]="{
+              'bg-warning-subtle text-warning': loan.status === 'Pending',
+              'bg-success-subtle text-success': loan.status === 'Approved',
+              'bg-danger-subtle text-danger': loan.status === 'Rejected'
+            }"
+          >
+            ● {{ loan.status }}
+          </span>
+        </td>
+
+        Actions
+        <td class="text-end">
+          <button class="btn btn-dark btn-sm">Take Action</button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+
+</div> -->
+
+<!-- ====================== SALARY ADVANCE REQUESTS TABLE ====================== -->
+<div *ngIf="financeTab === 'salaryAdvance'">
+<div *ngIf="!salaryAdvanceView && !salaryAdvanceAction" class="mb-4">
+  <h5 class="mb-4">salaryAdvance Requests</h5>
+
+  <div class="row g-3 align-items-end mb-4">
+<div class="col-12 col-md-3">
+      <label class="form-label">Policy</label>
+
+      <div class="dropdown w-100">
+        <button class="form-select text-start" data-bs-toggle="dropdown">
+          Select policy Type
+        </button>
+
+        <div class="dropdown-menu p-2" style="width: 100%;">
+          <input type="text" class="form-control mb-2" placeholder="Search..." />
+
+          <!-- <button class="dropdown-item">Home Loan</button>
+          <button class="dropdown-item">Vehicle Loan</button>
+          <button class="dropdown-item">Personal Loan</button> -->
+        </div>
+      </div>
+    </div>
+
+
+<div class="col-12 col-md-3">
+      <label class="form-label">status</label>
+
+      <div class="dropdown w-100">
+        <button class="form-select text-start" data-bs-toggle="dropdown">
+          Select Status 
+        </button>
+
+        <div class="dropdown-menu p-2" style="width: 100%;">
+          <input type="text" class="form-control mb-2" placeholder="Search..." />
+
+          <button class="dropdown-item">All</button>
+          <button class="dropdown-item">Pending</button>
+          <button class="dropdown-item">Rejected</button>
+          <button class="dropdown-item">Approved</button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="col-md-auto">
+      <button class="btn btn-outline-secondary w-100">Reset</button>
+    </div>
+
+
+    <!-- <div class="col-md-auto">
+      <button class="btn btn-light border rounded-pill px-4">
+        <i class="bi bi-search"></i> Search
+      </button>
+    </div> -->
+    <div class="col-12 col-md-4 text-md-end">
+  <div class="btn btn-light border rounded-pill px-4" [class.open]="showSearchBar" (click)="toggleSearchbar()">
+    
+    <i class="bi bi-search"></i>
+
+    <input 
+      *ngIf="showSearchBar"
+      type="text"
+      class="search-input"
+      placeholder="Search..."
+      (click)="$event.stopPropagation()"
+    />
+  </div>
+</div>
+
+  </div>
+
+  <!-- TABLE -->
+   <div class="table-responsive">
+<table class="table table-align-middle">
+  <thead class="table-light">
+    <tr>
+      <th>Request Type</th>
+      <th>Applied By</th>
+      <th>Status</th>
+      <th class="text-end">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <!-- STATIC VIEW DETAILS ROW -->
+    <tr>
+      <td>
+        <strong>Salary Advance</strong><br>
+        <small>Amount: ₹15,000</small>
+      </td>
+
+      <td>
+        Paramesh Ganavena <br>
+        <small>28/08/2024 04:40 AM</small>
+      </td>
+
+      <td>
+        <span class="badge bg-success-subtle text-success rounded-pill">● Approved</span>
+      </td>
+
+      <td class="text-end">
+        <button class="btn btn-dark btn-sm" (click)="openSalaryAdvanceView()">View Details</button>
+      </td>
+    </tr>
+
+    <!-- STATIC TAKE ACTION ROW -->
+    <tr>
+      <td>
+        <strong>Salary Advance</strong><br>
+        <small>Amount: ₹12,000</small>
+      </td>
+
+      <td>
+        Paramesh Ganavena <br>
+        <small>28/08/2024 04:40 AM</small>
+      </td>
+
+      <td>
+        <span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span>
+      </td>
+
+      <td class="text-end">
+        <button class="btn btn-dark btn-sm" (click)="openSalaryAdvanceAction()">Take Action</button>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+</div>
+</div>
+<!-- ================= VIEW DETAILS ================= -->
+<div *ngIf="salaryAdvanceView" class="card p-4 mt-4">
+
+  <h5>Salary Advance Request Details</h5>
+
+  <div class="row mt-3">
+
+    <div class="col-md-4">
+      <h6>Paramesh Ganavena</h6>
+      <small>EMP-20240425-001</small>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Advance Amount:</strong> ₹15,000</p>
+      <p><strong>Reason:</strong> Home Expenses</p>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Status:</strong>
+        <span class="badge bg-success-subtle text-success rounded-pill">● Approved</span>
+      </p>
+      <p><strong>Applied On:</strong> 28/08/2024 04:40 AM</p>
+    </div>
+
+  </div>
+
+  <h5 class="mt-4">Approvals</h5>
+
+  <div class="card p-3 mt-2">
+    <div class="d-flex justify-content-between">
+      <div>
+        <strong>Paramesh Ganavena</strong><br>
+        <small>Level 1</small><br>
+        <small>Reviewed On 28/08/2024 04:40 AM</small>
+      </div>
+
+      <span class="badge bg-success-subtle text-success rounded-pill">Approved</span>
+    </div>
+  </div>
+
+  <div class="text-end mt-3">
+    <button class="btn btn-outline-secondary" (click)="closeSalaryAdvanceScreens()">Back</button>
+  </div>
+
+</div>
+<!-- ================= TAKE ACTION ================= -->
+<div *ngIf="salaryAdvanceAction" class="card p-4 mt-4">
+
+  <h5>Review Salary Advance Request</h5>
+
+  <div class="row mt-3">
+
+    <div class="col-md-4">
+      <h6>Paramesh Ganavena</h6>
+      <small>EMP-20240425-001</small>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Advance Amount:</strong> ₹12,000</p>
+      <p><strong>Reason:</strong> Emergency</p>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Status:</strong>
+        <span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span>
+      </p>
+      <p><strong>Applied On:</strong> 28/08/2024 04:40 AM</p>
+    </div>
+
+  </div>
+
+  <h5 class="mt-4">Review Details</h5>
+
+  <div class="card p-4 mt-2">
+    <label class="form-label">Comments *</label>
+    <textarea class="form-control mb-4" rows="3" placeholder="Enter Comments"></textarea>
+
+    <div class="text-end">
+      <button class="btn btn-outline-secondary me-2" (click)="closeSalaryAdvanceScreens()">Back</button>
+      <button class="btn btn-outline-danger me-2">Reject</button>
+      <button class="btn btn-primary">Approve</button>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+<div *ngIf="financeTab === 'salaryRepay'">
+
+  <h5 class="mb-4">Loan Requests</h5>
+
+  <div class="row mb-4 align-items-end g-3">
+<div class="col-12 col-md-3">
+      <label class="form-label">policy</label>
+
+      <div class="dropdown w-100">
+        <button class="form-select text-start" data-bs-toggle="dropdown">
+          Select policy Type
+        </button>
+
+        <div class="dropdown-menu p-2" style="width: 100%;">
+          <input type="text" class="form-control mb-2" placeholder="Search..." />
+
+          <!-- <button class="dropdown-item">Home Loan</button>
+          <button class="dropdown-item">Vehicle Loan</button>
+          <button class="dropdown-item">Personal Loan</button> -->
+        </div>
+      </div>
+    </div>
+
+
+<div class="col-12 col-md-3">
+      <label class="form-label">status</label>
+
+      <div class="dropdown w-100">
+        <button class="form-select text-start" data-bs-toggle="dropdown">
+          Select Status 
+        </button>
+
+        <div class="dropdown-menu p-2" style="width: 100%;">
+          <input type="text" class="form-control mb-2" placeholder="Search..." />
+
+          <button class="dropdown-item">All</button>
+          <button class="dropdown-item">Pending</button>
+          <button class="dropdown-item">Rejected</button>
+          <button class="dropdown-item">Approved</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Reset -->
+    <div class="col-md-auto">
+      <button class="btn btn-outline-secondary w-100">Reset</button>
+    </div>
+
+    <!-- Search Button -->
+    <!-- <div class="col-md-auto">
+      <button class="btn btn-light border rounded-pill px-4">
+        <i class="bi bi-search"></i> Search
+      </button>
+    </div> -->
+    <div class="col-12 col-md-4 text-md-end">
+  <div class="btn btn-light border rounded-pill px-4" [class.open]="showSearchBar" (click)="toggleSearchbar()">
+    
+    <i class="bi bi-search"></i>
+
+    <input 
+      *ngIf="showSearchBar"
+      type="text"
+      class="search-input"
+      placeholder="Search..."
+      (click)="$event.stopPropagation()"
+    />
+  </div>
+</div>
+
+  </div>
+
+  <!-- TABLE -->
+   <div class="table-responsive">
+  <table class="table table-align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Request Type</th>
+        <th>Applied By</th>
+        <th>Status</th>
+        <th class="text-end">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let repay of salaryAdvanceRepayRequests">
+
+        <td>
+          <strong>{{ repay.type }}</strong><br>
+          <small>Amount: {{ repay.amount }}</small>
+        </td>
+
+        <td>
+          {{ repay.name }} <br>
+          <small>{{ repay.appliedOn }}</small>
+        </td>
+
+        <td>
+          <span class="badge rounded-pill"
+            [ngClass]="{
+              'bg-warning-subtle text-warning': repay.status === 'Pending',
+              'bg-success-subtle text-success': repay.status === 'Approved',
+              'bg-danger-subtle text-danger': repay.status === 'Rejected'
+            }">
+            ● {{ repay.status }}
+          </span>
+        </td>
+
+        <td class="text-end">
+          <button class="btn btn-dark btn-sm">Take Action</button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>
+
+</div>
+
+
+
+<div *ngIf="financeTab === 'reimbursement'">
+  <div *ngIf="!reimView && !reimAction">
+
+  <h5 class="mb-4">Reimbursement Requests</h5>
+
+  <div class="row mb-4 align-items-end g-3">
+
+    <!-- Status Filter -->
+    <div class="col-12 col-md-3">
+      <label class="form-label">Status</label>
+      <select class="form-select" [(ngModel)]="selectedReimStatus">
+        <option>All</option>
+        <option>Pending</option>
+        <option>Approved</option>
+        <option>Rejected</option>
+      </select>
+    </div>
+
+    <!-- Legal Entity -->
+    <div class="col-12 col-md-3">
+      <label class="form-label">Legal Entity</label>
+      <select class="form-select" [(ngModel)]="selectedReimEntity">
+        <option>Select Entity</option>
+        <option>Entity-India</option>
+        <option>Entity-UAE</option>
+        <option>Entity-USA</option>
+        <option>Entity-UK</option>
+      </select>
+    </div>
+
+    <!-- Reimbursement Dropdown with Search -->
+    <div class="col-12 col-md-3">
+      <label class="form-label">Reimbursement Type</label>
+
+      <div class="dropdown w-100">
+        <button class="form-select text-start" data-bs-toggle="dropdown">
+          Select Reimbursement Type
+        </button>
+
+        <div class="dropdown-menu p-2" style="width: 100%;">
+          <input type="text" class="form-control mb-2" placeholder="Search..."   />
+
+          <button class="dropdown-item">Travel Reimbursement</button>
+          <button class="dropdown-item">Food Reimbursement</button>
+          <button class="dropdown-item">Medical Reimbursement</button>
+          <button class="dropdown-item">Office Expenses</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reset -->
+    <div class="col-md-auto">
+      <button class="btn btn-outline-secondary w-100" (click)="resetFilters()">Reset</button>
+    </div>
+
+    <!-- Search Button -->
+    <!-- <div class="col-md-auto">
+      <button class="btn btn-light border rounded-pill px-4">
+        <i class="bi bi-search"></i> Search
+      </button>
+    </div> -->
+    <div class="col-md-auto">
+  <div class="btn btn-light border rounded-pill px-4" [class.open]="showSearchBar" (click)="toggleSearchbar()">
+    
+    <i class="bi bi-search"></i>
+
+    <input 
+      *ngIf="showSearchBar"
+      type="text"
+      class="search-input"
+      placeholder="Search..."
+      (click)="$event.stopPropagation()"
+    />
+  </div>
+</div>
+
+  </div>
+
+  <!-- TABLE -->
+   <div calss="table-responsive">
+  <table class="table table-align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Request Type</th>
+        <th>Applied By</th>
+        <th>Status</th>
+        <th class="text-end">Actions</th>
+      </tr>
+    </thead>
+
+    <!-- <tbody>
+<tr *ngFor="let item of reimbursementRequests">
+
+        <td>
+          <strong>{{ item.type }}</strong><br>
+          <small>{{ item.subType }}</small><br>
+          <small>Amount: {{ item.amount }}</small>
+        </td>
+
+        <td>
+          {{ item.name }} <br>
+          <small>{{ item.appliedOn }}</small>
+        </td>
+
+        <td>
+          <span class="badge rounded-pill"
+            [ngClass]="{
+              'bg-warning-subtle text-warning': item.status === 'Pending',
+              'bg-success-subtle text-success': item.status === 'Approved',
+              'bg-danger-subtle text-danger': item.status === 'Rejected'
+            }">● {{ item.status }}</span>
+        </td>
+
+        <td class="text-end">
+          <button class="btn btn-dark btn-sm">View Details</button>
+        </td>
+      </tr>
+
+
+      <tr *ngFor="let item of reimbursementRequests">
+
+        <td>
+          <strong>{{ item.type }}</strong><br>
+          <small>{{ item.subType }}</small><br>
+          <small>Amount: {{ item.amount }}</small>
+        </td>
+
+        <td>
+          {{ item.name }} <br>
+          <small>{{ item.appliedOn }}</small>
+        </td>
+
+        <td>
+          <span class="badge rounded-pill"
+            [ngClass]="{
+              'bg-warning-subtle text-warning': item.status === 'Pending',
+              'bg-success-subtle text-success': item.status === 'Approved',
+              'bg-danger-subtle text-danger': item.status === 'Rejected'
+            }">● {{ item.status }}</span>
+        </td>
+
+        <td class="text-end">
+          <button class="btn btn-dark btn-sm">Take Action</button>
+        </td>
+      </tr>
+    </tbody> -->
+    <tbody>
+  <!-- STATIC VIEW DETAILS ROW -->
+  <tr>
+    <td>
+      <strong>Travel Reimbursement</strong><br>
+      <small>Flight Ticket</small><br>
+      <small>Amount: ₹3500</small>
+    </td>
+
+    <td>
+      Paramesh Ganavena <br>
+      <small>28/08/2024 04:40 AM</small>
+    </td>
+
+    <td>
+      <span class="badge bg-success-subtle text-success rounded-pill">● Approved</span>
+    </td>
+
+    <td class="text-end">
+      <button class="btn btn-dark btn-sm" (click)="openReimView()">View Details</button>
+    </td>
+  </tr>
+
+  <!-- STATIC TAKE ACTION ROW -->
+  <tr>
+    <td>
+      <strong>Food Reimbursement</strong><br>
+      <small>Client Lunch</small><br>
+      <small>Amount: ₹650</small>
+    </td>
+
+    <td>
+      Paramesh Ganavena <br>
+      <small>28/08/2024 04:40 AM</small>
+    </td>
+
+    <td>
+      <span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span>
+    </td>
+
+    <td class="text-end">
+      <button class="btn btn-dark btn-sm" (click)="openReimAction()">Take Action</button>
+    </td>
+  </tr>
+</tbody>
+
+
+  </table>
+
+</div>
+</div>
+
+<!-- ================= REIMBURSEMENT VIEW DETAILS ================= -->
+<div *ngIf="reimView" class="row mt-3">
+
+  <h5 class="mb-3">Reimbursement Details</h5>
+
+  <div class="row mt-3 mb-4">
+
+    <div class="col-md-4">
+      <h6>Paramesh Ganavena</h6>
+      <small>EMP-20240425-001</small>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Type:</strong> Travel Reimbursement</p>
+      <p><strong>Subtype:</strong> Flight Ticket</p>
+      <p><strong>Amount:</strong> ₹3500</p>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Status:</strong>
+        <span class="badge bg-success-subtle text-success rounded-pill">● Approved</span>
+      </p>
+      <p><strong>Applied On:</strong> 28/08/2024 04:40 AM</p>
+      <p><strong>Attachment:</strong> -</p>
+    </div>
+
+  </div>
+
+  <h5 class="mb-3">Approvals</h5>
+
+  <div class="card p-3">
+    <div class="d-flex justify-content-between">
+      <div>
+        <strong>Paramesh Ganavena</strong><br>
+        <small>Level 1</small><br>
+        <small>Reviewed On 28/08/2024 04:40 AM</small>
+      </div>
+
+      <span class="badge bg-success-subtle text-success rounded-pill">Approved</span>
+    </div>
+  </div>
+
+  <div class="text-end mt-3">
+    <button class="btn btn-outline-secondary" (click)="closeReimScreens()">Back</button>
+  </div>
+
+</div>
+
+<!-- ================= REIMBURSEMENT TAKE ACTION ================= -->
+<div *ngIf="reimAction" class="row mt-3">
+  <div class="col-12">
+    <div class="card p-4">
+
+  <h5 class="mb-3">Reimbursement Approval</h5>
+
+  <div class="row mt-3 mb-4">
+
+    <div class="col-md-4">
+      <h6>Paramesh Ganavena</h6>
+      <small>EMP-20240425-001</small>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Type:</strong> Food Reimbursement</p>
+      <p><strong>Subtype:</strong> Client Lunch</p>
+      <p><strong>Amount:</strong> ₹650</p>
+    </div>
+
+    <div class="col-md-4">
+      <p><strong>Status:</strong>
+        <span class="badge bg-warning-subtle text-warning rounded-pill">● Pending</span>
+      </p>
+      <p><strong>Applied On:</strong> 28/08/2024 04:40 AM</p>
+      <p><strong>Attachment:</strong> -</p>
+    </div>
+
+  </div>
+
+  <h5 class="mb-3">Review Details</h5>
+
+  <div class="card p-4">
+    <label class="form-label">Comments *</label>
+    <textarea class="form-control mb-4" rows="3" placeholder="Enter Comments"></textarea>
+
+    <div class="text-end">
+      <button class="btn btn-outline-secondary me-2" (click)="closeReimScreens()">Back</button>
+      <button class="btn btn-outline-danger me-2">Reject</button>
+      <button class="btn btn-primary">Approve</button>
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+</div>
+
+
+
+</div>
+
